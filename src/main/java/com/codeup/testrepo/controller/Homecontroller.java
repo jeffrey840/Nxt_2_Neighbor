@@ -11,6 +11,6 @@ public class Homecontroller {
     @GetMapping("/")
     @ResponseBody
     public String hello() {
-        return "test repo";
+        return "test repo + testing";
     }
 }
