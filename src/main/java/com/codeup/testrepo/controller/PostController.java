@@ -1,11 +1,10 @@
 package com.codeup.testrepo.controller;
 
-
-import com.codeup.springinitializer.models.Post;
-import com.codeup.springinitializer.models.User;
-import com.codeup.springinitializer.repositories.PostRepository;
-import com.codeup.springinitializer.repositories.UserRepository;
-import com.codeup.springinitializer.services.EmailService;
+import com.codeup.testrepo.models.Post;
+import com.codeup.testrepo.models.User;
+import com.codeup.testrepo.repositories.PostRepository;
+import com.codeup.testrepo.repositories.UserRepository;
+import com.codeup.testrepo.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +18,7 @@ public class PostController {
 
     private final EmailService emailService;
 
-    public PostController(PostRepository postDao,UserRepository userDao, EmailService emailService){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
         this.userDao = userDao;
         this.postDao = postDao;
         this.emailService = emailService;
