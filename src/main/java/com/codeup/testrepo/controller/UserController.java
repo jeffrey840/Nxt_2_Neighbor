@@ -1,6 +1,4 @@
 package com.codeup.testrepo.controller;
-
-
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
