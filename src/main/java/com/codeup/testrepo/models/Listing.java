@@ -53,7 +53,4 @@ public class Listing {
         this.location = location;
     }
 
-
-
-
 }

@@ -1,6 +1,4 @@
 package com.codeup.testrepo.controller;
-
-
 import com.codeup.testrepo.models.Post;
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.PostRepository;
@@ -19,7 +17,7 @@ public class PostController {
 
     private final EmailService emailService;
 
-    public PostController(PostRepository postDao,UserRepository userDao, EmailService emailService){
+    public PostController(PostRepository postDao, UserRepository userDao, EmailService emailService){
         this.userDao = userDao;
         this.postDao = postDao;
         this.emailService = emailService;
