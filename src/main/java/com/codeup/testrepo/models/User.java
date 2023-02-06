@@ -10,20 +10,23 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(unique = true, length = 100)
+    @Column(unique = true, length = 50, nullable = false)
     private String username;
 
-    @Column(unique = true, length = 100)
+    @Column(unique = true, length = 50, nullable = false)
     private String email;
 
-    @Column(length = 100)
+    @Column(length = 50, nullable = false)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Post> blogPost;
+    private List<Listings> homeListings;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Categories> categories;
 
     public User() {
     }
@@ -75,11 +78,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Post> getPosts() {
-        return blogPost;
+    public List<Listings> getListings() {
+        return homeListings;
     }
 
-    public void setPosts(List<Post> posts) {
-        this.blogPost = posts;
+    public void setPosts(List<Listings> listings) {
+        this.homeListings = homeListings;
     }
 }

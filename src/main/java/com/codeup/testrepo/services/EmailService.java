@@ -1,7 +1,11 @@
 package com.codeup.testrepo.services;
 
 
+<<<<<<< HEAD
 import com.codeup.testrepo.models.Post;
+=======
+import com.codeup.testrepo.models.Listings;
+>>>>>>> main
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
@@ -19,10 +23,10 @@ public class EmailService {
     @Value("${spring.mail.from}")
     private String from;
 
-    public void prepareAndSend(Post post, String subject, String body) {
+    public void prepareAndSend(Listings listing, String subject, String body) {
         SimpleMailMessage msg = new SimpleMailMessage();//class
         msg.setFrom(from);//setFrom method
-        msg.setTo(post.getUser().getEmail());
+        msg.setTo(listing.getUser().getEmail());
         msg.setSubject(subject);
         msg.setText(body);
 
