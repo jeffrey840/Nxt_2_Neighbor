@@ -3,23 +3,37 @@ package com.codeup.testrepo.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "listings")
+public class Listings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true, length = 100)
+    @Column(length = 100)
+    private Long location;
+    @Column(unique = true, length = 50, nullable = false)
     private String title;
 
     @Column(nullable = false, length = 1000)
     private String body;
 
+    @Column(length = 100)
+    private Long price;
+
     @ManyToOne
     @JoinColumn (name = "user_id")
     private User user;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "listings_categories",
+            joinColumns ={@JoinColumn(name="category_id")}
+    )
+    private List<Categories> categories;
 
 
     public String getTitle() {

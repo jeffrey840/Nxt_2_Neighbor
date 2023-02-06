@@ -9,20 +9,20 @@
 <div th:replace="partials/header.html :: header"></div>
 
 
-<form name="create" action="/posts/create" method="get">
+<form name="create" action="/listings/create" method="get">
 	<button type="submit">Create New Post</button>
 </form>
 
-<div th:each="post : ${posts}">
+<div th:each="post : ${listings}">
 	<h2 th:text="${post.getTitle()}"></h2>
-		<form name="view" th:action="${'/posts/' + post.getId()}" method="get">
+		<form name="view" th:action="${'/listings/' + post.getId()}" method="get">
 			<button type="submit">View</button>
 		</form>
-		<form name="edit" th:action="${'/posts/' + post.getId() + '/edit'}" method="get">
+		<form name="edit" th:action="${'/listings/' + post.getId() + '/edit'}" method="get">
 			<button type="submit">Edit</button>
 		</form>
 
-	<form name="delete" th:action="${'/posts/' + post.getId() + '/delete'}" method="get">
+	<form name="delete" th:action="${'/listings/' + post.getId() + '/delete'}" method="get">
 		<button type="submit" class="btn ">Delete</button>
 	</form>
 </div>

@@ -6,7 +6,7 @@
 <body>
 <div th:replace="partials/header.html :: header"></div>
 <h1 class="text-center">Create New Post</h1>
-  <form  th:action="@{/posts/create}" th:method="post" th:object="${post}">
+  <form  th:action="@{/listings/create}" th:method="post" th:object="${post}">
     <label for="postTitle" >Title:</label>
     <input type="text" th:field="*{title}" id="postTitle">
 
