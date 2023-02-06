@@ -31,50 +31,16 @@ public class ListingController {
     //MAPPING FOR VIEWING LISTINGS BY ID
     @GetMapping(path = "/listings/{id}")
     public String viewListings(@PathVariable long id, Model model){
-        model.addAttribute("title", "Individual Post");
+        model.addAttribute("title", "Individual Listing");
         model.addAttribute("listing", listDao.findById(id));
         Listings listing = (Listings) listDao.getReferenceById(id);
         User user = userDao.getReferenceById(listing.getUser().getId());
-        model.addAttribute("postTitle", listing.getTitle());
-        model.addAttribute("postBody", listing.getDescription());
-        model.addAttribute("postID", listing.getId());
+        model.addAttribute("listingTitle", listing.getTitle());
+        model.addAttribute("listingBody", listing.getDescription());
+        model.addAttribute("listingID", listing.getId());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("user", user);
         return "listings/home-logged-in";
-    }
-
-    @GetMapping(path = "/posts/{id}/edit")
-    public String getEdit(@PathVariable long id, Model model){
-        model.addAttribute("title", "Edit Post");
-        Listings listing = (Listings) listDao.getReferenceById(id);
-        model.addAttribute("listing", listing);
-        return "posts/edit";
-    }
-
-    @PostMapping(path = "/posts/{id}/edit")
-    public String postEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-        Listings listing = (Listings) listDao.getReferenceById(id);
-        listing.setTitle(title);
-        listing.setDescription(body);
-        listDao.save(listing);
-        return "redirect:/posts";
-    }
-
-
-    @GetMapping(path = "/posts/create")
-    public String getCreate(Model model){
-        model.addAttribute("post", new Listings());
-        return "posts/create";
-    }
-
-
-    @PostMapping(path = "/posts/create")
-    public String postCreate(@ModelAttribute Listings createdListing){
-    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    createdListing.setUser(user);
-        emailService.prepareAndSend(createdListing, "Your latest blog post: " + createdListing.getTitle(), "This is the body of your post!" + createdListing.getDescription());
-        listDao.save(createdListing);
-        return "redirect:/posts";
     }
 
     @GetMapping(path="/posts/{id}/delete")
