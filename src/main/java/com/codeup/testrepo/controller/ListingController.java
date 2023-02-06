@@ -1,25 +1,24 @@
 package com.codeup.testrepo.controller;
 
-
-import com.codeup.springinitializer.models.Post;
-import com.codeup.springinitializer.models.User;
-import com.codeup.springinitializer.repositories.PostRepository;
-import com.codeup.springinitializer.repositories.UserRepository;
-import com.codeup.springinitializer.services.EmailService;
+import com.codeup.testrepo.models.Listings;
+import com.codeup.testrepo.repositories.UserRepository;
+import com.codeup.testrepo.services.EmailService;
+import com.codeup.testrepo.models.User;
+import com.codeup.testrepo.repositories.PostRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class PostController {
+public class ListingController {
 
     private final UserRepository userDao;
     private final PostRepository postDao;
 
     private final EmailService emailService;
 
-    public PostController(PostRepository postDao,UserRepository userDao, EmailService emailService){
+    public ListingController(PostRepository postDao,UserRepository userDao, EmailService emailService){
         this.userDao = userDao;
         this.postDao = postDao;
         this.emailService = emailService;
@@ -38,11 +37,11 @@ public class PostController {
     public String viewPost(@PathVariable long id, Model model){
         model.addAttribute("title", "Individual Post");
         model.addAttribute("post", postDao.findById(id));
-        Post post = postDao.getReferenceById(id);
-        User user = userDao.getReferenceById(post.getUser().getId());
-        model.addAttribute("postTitle", post.getTitle());
-        model.addAttribute("postBody", post.getBody());
-        model.addAttribute("postID", post.getId());
+        Listings listing = postDao.getReferenceById(id);
+        User user = userDao.getReferenceById(listing.getUser().getId());
+        model.addAttribute("postTitle", listing.getTitle());
+        model.addAttribute("postBody", listing.getBody());
+        model.addAttribute("postID", listing.getId());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("user", user);
         return "posts/show";
@@ -51,17 +50,17 @@ public class PostController {
     @GetMapping(path = "/posts/{id}/edit")
     public String getEdit(@PathVariable long id, Model model){
         model.addAttribute("title", "Edit Post");
-        Post post = postDao.getReferenceById(id);
-        model.addAttribute("post", post);
+        Listings listing = listingDao.getReferenceById(id);
+        model.addAttribute("listing", listing);
         return "posts/edit";
     }
 
     @PostMapping(path = "/posts/{id}/edit")
     public String postEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-        Post post = postDao.getReferenceById(id);
-        post.setTitle(title);
-        post.setBody(body);
-        postDao.save(post);
+        Listings listing = listingDao.getReferenceById(id);
+        listing.setTitle(title);
+        listing.setBody(body);
+        listingDao.save(listing);
         return "redirect:/posts";
     }
 
@@ -74,11 +73,11 @@ public class PostController {
 
 
     @PostMapping(path = "/posts/create")
-    public String postCreate(@ModelAttribute Post createdPost){
+    public String postCreate(@ModelAttribute Listings createdListing){
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    createdPost.setUser(user);
-        emailService.prepareAndSend(createdPost, "Your latest blog post: " + createdPost.getTitle(), "This is the body of your post!" + createdPost.getBody());
-        postDao.save(createdPost);
+    createdListing.setUser(user);
+        emailService.prepareAndSend(createdListing, "Your latest blog post: " + createdListing.getTitle(), "This is the body of your post!" + createdPost.getBody());
+        lsitingDao.save(createdListing);
         return "redirect:/posts";
     }
 

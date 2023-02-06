@@ -3,7 +3,7 @@
 <body>
 <div th:replace="partials/header.html :: header"></div>
 
-<form th:action="'/posts/' + ${post.getId()} + '/edit'" method="post">
+<form th:action="'/listings/' + ${post.getId()} + '/edit'" method="post">
 
   <label>Post Title:</label>
   <input name="title" type="text" th:value="${post.getTitle()}">
