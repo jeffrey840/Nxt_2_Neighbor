@@ -1,6 +1,6 @@
 package com.codeup.testrepo;
 
-import com.codeup.springinitializer.services.UserDetailsLoader;
+import com.codeup.testrepo.services.UserDetailsLoader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

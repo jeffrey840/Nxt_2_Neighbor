@@ -29,9 +29,13 @@
   <button class=" btn">sign-up</button>
 </form>
 
-<!--forgot password button-->
-<a th:href="@{/forgetPassword.html}"
-   th:text="#{message.resetPassword}">reset</a>
+<form th:action="@{/forgotPassword}">
+  <button class=" btn">forgot password</button>
+</form>
+
+
+<!-- find user in database, confirm that the user exists, if exists redirect to update password html,->
+
 
 </body>
 </html>
