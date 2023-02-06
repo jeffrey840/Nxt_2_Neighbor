@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dice game</title>
+</head>
+
+<header th:fragment="header">
+  <div th:insert="partials/navbar.html :: navbar"></div>
+  <h1>dice roll</h1>
+</header>
+<body>
+
+<p>choose a number 1-6</p>
+
+
+<form action="/roll-dice/results" method="post">
+
+  <select name="n" id="n">
+    <option value="none" selected disabled hidden>Select a number:</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+  </select>
+
+  <button type="submit">Roll</button>
+</form>
+
+<h3>You chose number <span th:text="${n}"></span>.</h3>
+<h3>You rolled a <span th:text="${random}"></span>.</h3>
+<p>DO the numbers match? <span th:text="${guess}"></span>!</p>
+
+</body>
+<div th:insert="partials/footer.html :: footer"></div>
+</html>
