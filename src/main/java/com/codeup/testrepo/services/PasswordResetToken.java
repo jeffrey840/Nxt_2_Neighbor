@@ -1,6 +1,6 @@
 package com.codeup.testrepo.services;
 
-import com.codeup.springinitializer.models.User;
+import com.codeup.testrepo.models.User;
 import jakarta.persistence.*;
 
 import java.util.Date;
