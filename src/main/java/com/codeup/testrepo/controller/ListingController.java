@@ -124,14 +124,14 @@ public class ListingController {
     //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
     @GetMapping(path = "listings/seller-profile")
     public String sellerCreate(Model model){
-        model.addAttribute("list", new Object());//OBJECT WILL BE CHANGED TO LISTING
+        model.addAttribute("list", new Listings());
         return "listings/seller-profile";
     }
 
     //MAPPING ON NEIGHBOR PAGE TO CREATE A BIO SECTION ON PROFILE
     @GetMapping(path = "listings/neighbor-profile")
     public String neighborCreate(Model model){
-        model.addAttribute("list", new Object());//OBJECT WILL BE CHANGED TO LISTING
+        model.addAttribute("list", new Listings());
         return "listings/neighbor-profile";
     }
 
