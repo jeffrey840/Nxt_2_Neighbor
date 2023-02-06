@@ -1,8 +1,8 @@
 package com.codeup.testrepo.services;
 
-import com.codeup.springinitializer.models.User;
-import com.codeup.springinitializer.models.UserWithRoles;
-import com.codeup.springinitializer.repositories.UserRepository;
+import com.codeup.testrepo.models.User;
+import com.codeup.testrepo.models.UserWithRoles;
+import com.codeup.testrepo.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
