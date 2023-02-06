@@ -7,6 +7,12 @@
 <body>
 
 <h1>Create an account</h1>
+
+<label for="login">already a user?</label>
+<form  id="login" th:action="@{/login}">
+	<input value="login" type="submit" />
+</form>
+
 <form th:action="@{/sign-up}" method="POST" th:object="${user}">
   <label for="username">Username</label>
   <input id="username" th:field="*{username}" />
@@ -26,8 +32,18 @@
     <input value="Seller" type="submit" />
     <input value="Neighbor" type="submit" />
     <br>
+
+	<label for="role">Choose a role:</label>
+	<select name="role" id="role">
+		<option value="option">option</option>
+		<option value="neighbor">neighbor</option>
+		<option value="buyer">buyer</option>
+		<option value="seller">seller</option>
+	</select>
   <input value="Sign me up!" type="submit" />
 </form>
+
+
 
 </body>
 </html>

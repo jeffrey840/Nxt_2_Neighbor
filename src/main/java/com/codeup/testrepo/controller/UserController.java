@@ -1,15 +1,17 @@
 package com.codeup.testrepo.controller;
+
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -48,21 +50,6 @@ public class UserController {
         return "redirect:/login";
     }
 
-//    @PostMapping("/user/resetPassword")
-//    public GenericResponse resetPassword(HttpServletRequest request,
-//    @RequestParam("email") String userEmail) {
-//        User user = userService.findUserByEmail(userEmail);
-//        if (user == null) {
-//            throw new UserNotFoundException();
-//        }
-//        String token = UUID.randomUUID().toString();
-//        userService.createPasswordResetTokenForUser(user, token);
-//        mailSender.send(constructResetTokenEmail(getAppUrl(request),
-//                request.getLocale(), token, user));
-//        return new GenericResponse(
-//                messages.getMessage("message.resetPasswordEmail", null,
-//                        request.getLocale()));
-//    }
 
 }
 

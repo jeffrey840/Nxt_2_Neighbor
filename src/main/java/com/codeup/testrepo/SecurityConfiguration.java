@@ -1,6 +1,9 @@
 package com.codeup.testrepo;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> main
 import com.codeup.testrepo.services.UserDetailsLoader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
