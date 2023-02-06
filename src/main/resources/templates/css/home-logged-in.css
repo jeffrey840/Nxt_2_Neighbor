@@ -1,0 +1,9 @@
+.header-block-color{
+    background-color: #003333;
+    box-sizing: border-box;
+    height: 700px;
+    position: relative;
+}
+.nav{
+    position: relative;
+}
