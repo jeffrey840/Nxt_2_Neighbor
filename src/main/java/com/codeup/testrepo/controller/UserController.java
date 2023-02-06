@@ -1,7 +1,6 @@
 package com.codeup.testrepo.controller;
-
-import com.codeup.springinitializer.models.User;
-import com.codeup.springinitializer.repositories.UserRepository;
+import com.codeup.testrepo.models.User;
+import com.codeup.testrepo.repositories.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
