@@ -2,7 +2,6 @@ package com.codeup.testrepo.models;
 
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 
@@ -13,13 +12,13 @@ public class Listings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
-    private Long location;
+    @Column(length = 200)
+    private String address;
     @Column(unique = true, length = 50, nullable = false)
     private String title;
 
     @Column(nullable = false, length = 1000)
-    private String body;
+    private String description;
 
     @Column(length = 100)
     private Long price;
@@ -36,6 +35,13 @@ public class Listings {
     private List<Categories> categories;
 
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getTitle() {
         return title;
     }
@@ -44,20 +50,12 @@ public class Listings {
         this.title = title;
     }
 
-    public Long getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public User getUser() {
@@ -68,5 +66,19 @@ public class Listings {
         this.user = user;
     }
 
+    public long getPrice(){
+        return price;
+    }
+    public void setPrice(long price){
+        this.price = price;
+    }
+
+    public String getLocation(){
+        return address;
+    }
+
+    public void setLocation(String location){
+        this.address = address;
+    }
 
 }

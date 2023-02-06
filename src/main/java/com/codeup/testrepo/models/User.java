@@ -78,11 +78,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Listings> getPosts() {
-        return blogListings;
+    public List<Listings> getListings() {
+        return homeListings;
     }
 
     public void setPosts(List<Listings> listings) {
-        this.blogListings = listings;
+        this.homeListings = homeListings;
     }
 }

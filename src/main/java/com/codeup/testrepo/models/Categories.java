@@ -23,7 +23,7 @@ public class Categories {
     @JoinColumn (name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categories")
     private List<Interests> interests;
 }
 

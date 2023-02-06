@@ -3,7 +3,6 @@ import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.repositories.UserRepository;
 import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
-import com.codeup.testrepo.models.Listing;
 import com.codeup.testrepo.repositories.ListingRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class ListingController {
     public String homeNotLogged(Model model){
         model.addAttribute("listings", listDao);
         model.addAttribute("title", "Home");
-        return "/home-not-logged";
+        return "/listings/home-not-logged";
     }
 
     //MAPPING FOR VIEWING LISTINGS BY ID
@@ -34,7 +33,7 @@ public class ListingController {
     public String viewListings(@PathVariable long id, Model model){
         model.addAttribute("title", "Individual Post");
         model.addAttribute("listing", listDao.findById(id));
-        Listing listing = (Listing) listDao.getReferenceById(id);
+        Listings listing = (Listings) listDao.getReferenceById(id);
         User user = userDao.getReferenceById(listing.getUser().getId());
         model.addAttribute("postTitle", listing.getTitle());
         model.addAttribute("postBody", listing.getDescription());
@@ -56,7 +55,7 @@ public class ListingController {
     public String postEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
         Listings listing = (Listings) listDao.getReferenceById(id);
         listing.setTitle(title);
-        listing.setBody(body);
+        listing.setDescription(body);
         listDao.save(listing);
         return "redirect:/posts";
     }
@@ -64,7 +63,7 @@ public class ListingController {
 
     @GetMapping(path = "/posts/create")
     public String getCreate(Model model){
-        model.addAttribute("post", new Listing());
+        model.addAttribute("post", new Listings());
         return "posts/create";
     }
 
@@ -73,7 +72,7 @@ public class ListingController {
     public String postCreate(@ModelAttribute Listings createdListing){
     User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     createdListing.setUser(user);
-        emailService.prepareAndSend(createdListing, "Your latest blog post: " + createdListing.getTitle(), "This is the body of your post!" + createdPost.getBody());
+        emailService.prepareAndSend(createdListing, "Your latest blog post: " + createdListing.getTitle(), "This is the body of your post!" + createdListing.getDescription());
         listDao.save(createdListing);
         return "redirect:/posts";
     }
@@ -88,7 +87,7 @@ public class ListingController {
     @GetMapping(path = "/listings/{id}/seller-profile")
     public String getEditSeller(@PathVariable long id, Model model){
         model.addAttribute("title", "Edit Post");
-        Listing listing = (Listing) listDao.getReferenceById(id);
+        Listings listing = (Listings) listDao.getReferenceById(id);
         model.addAttribute("list", listing);
         return "listings/seller-profile";
     }
@@ -97,7 +96,7 @@ public class ListingController {
     @GetMapping(path = "/listings/{id}/neighbor-profile")
     public String getEditNeighbor(@PathVariable long id, Model model){
         model.addAttribute("title", "Edit Post");
-        Listing listing = (Listing) listDao.getReferenceById(id);
+        Listings listing = (Listings) listDao.getReferenceById(id);
         model.addAttribute("list", listing);
         return "listings/neighbor-profile";
     }
@@ -105,7 +104,7 @@ public class ListingController {
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
     @PostMapping(path = "/listings/{id}/seller-profile")
     public String sellerEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-        Listing listing = (Listing) listDao.getReferenceById(id);
+        Listings listing = (Listings) listDao.getReferenceById(id);
         listing.setTitle(title);
         listing.setDescription(body);
         listDao.save(listing);
@@ -115,7 +114,7 @@ public class ListingController {
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON NEIGHBOR PAGE
     @PostMapping(path = "/listings/{id}/neighbor-profile")
     public String neighborEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-        Listing listing = (Listing) listDao.getReferenceById(id);
+        Listings listing = (Listings) listDao.getReferenceById(id);
         listing.setTitle(title);
         listing.setDescription(body);
         listDao.save(listing);
@@ -138,10 +137,10 @@ public class ListingController {
 
     //EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
     @PostMapping(path = "listings/seller-profile")
-    public String sellerCreate(@ModelAttribute Listing createdListing){
+    public String sellerCreate(@ModelAttribute Listings createdListing){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         createdListing.setUser(user);
-            emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getBody());
+            emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
             listDao.save(createdListing);
             return "redirect:/listings/seller-profile";
     }
