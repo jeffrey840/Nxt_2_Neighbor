@@ -82,7 +82,7 @@ public class User {
         return blogListings;
     }
 
-    public void setPosts(List<Listings> listings) {
+    public void setListings(List<Listings> listings) {
         this.blogListings = listings;
     }
 }

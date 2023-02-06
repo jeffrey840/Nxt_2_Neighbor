@@ -52,11 +52,11 @@ public class Listings {
         this.id = id;
     }
 
-    public String getBody() {
+    public String getDescription() {
         return body;
     }
 
-    public void setBody(String body) {
+    public void setDescription(String body) {
         this.body = body;
     }
 
