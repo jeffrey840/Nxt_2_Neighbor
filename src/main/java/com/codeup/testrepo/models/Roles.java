@@ -1,7 +1,6 @@
 package com.codeup.testrepo.models;
-
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
+
 
 @Entity
 @Table(name="roles")
@@ -18,4 +17,27 @@ public class Roles {
 
     @OneToOne
     private User users;
+
+    public Long getId(){
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+    public String getRole() {
+        return user_role;
+    }
+
+    public void setUser_role(String user_role) {
+        this.user_role = user_role;
+    }
+
+    public User getUsers() {
+        return users;
+    }
+
+    public void setUsers(User users) {
+        this.users = users;
+    }
 }
