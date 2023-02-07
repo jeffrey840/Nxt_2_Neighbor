@@ -43,7 +43,7 @@ public class ListingController {
         return "listings/home-logged-in";
     }
 
-    @GetMapping(path="/posts/{id}/delete")
+    @GetMapping(path="/listings/{id}/delete")
     public String postDelete(@PathVariable long id){
         listDao.deleteById(id);
         return "listings/home-logged-in";

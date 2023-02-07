@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -49,7 +48,13 @@ public class UserController {
         userDao.save(user);
         return "redirect:/login";
     }
+    @RequestMapping(value = "/interest-form", method = RequestMethod.POST)
+    public String interestForm(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttributes){
+        if(result.hasErrors()){
+            return "users/sign-up";
+        }
 
+    }
 
 }
 
