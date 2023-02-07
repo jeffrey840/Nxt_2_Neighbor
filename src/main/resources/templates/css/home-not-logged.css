@@ -1,75 +1,32 @@
-.listing-display{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    padding: 30px;
-    z-index: 1;
-    margin-top: 100px;
+*{
+    font-family: monospace;
+    color: #CCCC66;
+}
+body{
     width: 100%;
-    background-color: #CCFFCC;
+    height: 100vh;
+    background: linear-gradient(
+            to top,
+            #CCFFCC 0%,
+            #CCFFCC 50%,
+            #003333 50%,
+            #003333 100%
+    );
 }
-.join{
-    background-color: #FF6699;
-    color: #003333;
-    text-align: center;
-    width: 250px;
-    height: 60px;
-    border-radius: 30px;
-    margin-left: 20px;
-    border: none;
-    letter-spacing: 10px;
+.nav-align{
+    margin: 30px;
 }
-.feature-home{
-    float: left;!important;
-}
-.abstract-img{
-    bottom: 250px;
+.background-img{
     position: absolute;
-    right: 30px;
+    top: -30%;
+    z-index: -1;
+    width: 80%;
+    height: 100%;
+    min-height: 100%;
 }
-.neighbor-card{
-    border-radius: 100px;
-    align-items: center;
-    padding: 30px;
-    background-color: #CCFFCC;
-    box-shadow: 2px 2px 25px 2px rgb(0, 51, 51);
-
-}
-.card-title{
-    z-index: 2;
-}
-.text-center{
-    text-align: center; !important;
-    color: #CCCC66;
-}
-.slogan{
-    text-align: center;
-    color: #CCCC66;
-    float: left; !important;
-    z-index: 1;
-}
-#logoTxt{
-    float: left;
-}
-.logo-area{
-    margin-top: 100px;
-}
-.logo-align{
+.align-bottom{
+    margin-top: 50px;
     display: flex;
-    flex-wrap: wrap;
-}
-.logo{
-    height: 50px;
-}
-.upper-color{
-    background-color: #003333;
-    height: 650px;
-}
-#home-btn{
-    margin-top: 10px;
-    background-color: #CCFFCC;
-    color: #003333;
-    text-align: center;
-    width: 150px;
-    border-radius: 30px;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
