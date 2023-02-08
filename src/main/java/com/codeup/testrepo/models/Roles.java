@@ -3,6 +3,8 @@ package com.codeup.testrepo.models;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Primary;
 
+import java.util.List;
+
 @Entity
 @Table(name="roles")
 public class Roles {
@@ -16,6 +18,7 @@ public class Roles {
     @Column(nullable = false)
     private String user_role;
 
-    @OneToOne
-    private User users;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+    private List<User> users;
+
 }

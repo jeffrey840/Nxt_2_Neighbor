@@ -2,7 +2,6 @@ package com.codeup.testrepo.controller;
 
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.UUID;
 
 @Controller
 public class UserController {
@@ -25,7 +22,7 @@ public class UserController {
 
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new User(1, "theloudhouse", "loud@mail.com", 123456));
         return "users/sign-up";
     }
 

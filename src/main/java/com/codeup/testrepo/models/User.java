@@ -22,13 +22,17 @@ public class User {
     @Column(length = 50, nullable = false)
     private String password;
 
+    @ManyToOne
+    @JoinColumn (name = "role_id")
+    private Roles role;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Listings> homeListings;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Categories> categories;
 
-    public User() {
+    public User(int id, String theloudhouse, String email, int i) {
     }
 
 //    only sets the authentication things we need from the user
@@ -44,6 +48,9 @@ public class User {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User() {
     }
 
     public Long getId() {
