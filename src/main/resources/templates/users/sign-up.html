@@ -23,12 +23,24 @@
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
-<!--    <form th:action="@{/sign-up}" method="POST" th:object="${role}">-->
-	<label for="user_role">Choose a role:</label>
-	<select name="user_role" th:field="*{roles}" id="user_role">
-		<option th:text="Neighbor" th:value="4L"></option>
-		<option th:text="Buyer" th:value="2L"></option>
-		<option th:text="Seller" th:value="3L"></option>
+
+    <label for="password">Confirm Password</label>
+    <input id="password-confirm" type="password" th:field="*{password}" />
+
+    <h1>WELCOME</h1>
+    <p>COMPLETE THE SIGN UP PROCESS, ARE YOU A</p>
+    <input value="Buyer" type="submit" />
+    <input value="Seller" type="submit" />
+    <input value="Neighbor" type="submit" />
+    <br>
+
+	<label for="role">Choose a role:</label>
+	<select name="role" id="role">
+		<option value="option">option</option>
+		<option value="neighbor">neighbor</option>
+		<option value="buyer">buyer</option>
+		<option value="seller">seller</option>
+    
 	</select>
 	<button type="submit">Sign up</button>
 </form>

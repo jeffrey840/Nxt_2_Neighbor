@@ -34,20 +34,20 @@ public class ListingController {
 //        model.addAttribute("listing", listDao.findById(id));
         Listings listing = listDao.getReferenceById(id);
         User user = userDao.getReferenceById(listing.getUser().getId());
-        model.addAttribute("postTitle", listing.getTitle());
-        model.addAttribute("postBody", listing.getDescription());
-        model.addAttribute("postID", listing.getId());
+        model.addAttribute("listingTitle", listing.getTitle());
+        model.addAttribute("listingBody", listing.getDescription());
+        model.addAttribute("listingID", listing.getId());
         model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("user", user);
         return "listings/home-logged-in";
     }
 
+    @GetMapping(path="/listings/{id}/delete")
+    public String postDelete(@PathVariable long id){
+        listDao.deleteById(id);
+        return "listings/home-logged-in";
+    }
 
-//    @GetMapping(path="/listings/{id}/delete")
-//    public String postDelete(@PathVariable long id){
-//        listDao.deleteById(id);
-//        return "listings/home-logged-in";
-//    }
 
     //MAPPING FOR EDIT POSTS ON SELLER PAGE
 //    @GetMapping(path = "/listings/{id}/seller-profile")

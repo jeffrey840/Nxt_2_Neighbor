@@ -1,7 +1,6 @@
 package com.codeup.testrepo.models;
-
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
+
 
 import java.util.List;
 
@@ -17,6 +16,7 @@ public class Roles {
 
     @Column(nullable = false)
     private String user_role;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")
     private List<User> user;
@@ -44,6 +44,7 @@ public class Roles {
     }
 
     public String getUser_role() {
+
         return user_role;
     }
 
@@ -58,5 +59,6 @@ public class Roles {
     public void setUser(List<User> user) {
         this.user = user;
     }
+
 
 }

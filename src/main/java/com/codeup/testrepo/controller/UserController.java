@@ -15,10 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-
-
-import java.util.UUID;
-
 @Controller
 public class UserController {
     private UserRepository userDao;
@@ -62,12 +58,7 @@ public class UserController {
         userDao.save(user);
         return "redirect:/login";
     }
-
-//    @PostMapping("/sign-up")
-//    public String saveUser(@ModelAttribute Roles roles){
-//        rolesDao.save(roles);
-//        return "redirect:/login";
-//    }
+    
 
 
 }
