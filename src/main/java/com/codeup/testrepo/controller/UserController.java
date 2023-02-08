@@ -2,8 +2,10 @@ package com.codeup.testrepo.controller;
 
 import com.codeup.testrepo.models.Roles;
 import com.codeup.testrepo.models.User;
+import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,22 +36,23 @@ public class UserController {
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("buyer", new Roles());
-        return "users/sign-up";
-    }
+//        model.addAttribute("role", new Roles());
+        return "users/sign-up";}
+
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
-        if (result.hasErrors()) {
-            return "users/sign-up";
-        }
-        // Save account ...
-        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
+//        if (result.hasErrors()) {
+//            return "users/sign-up";
+//        }
+//         Save account ...
+//        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
         String hash = passwordEncoder.encode(user.getPassword());
+        roles.setUser_role("buyer");
         user.setPassword(hash);
-//        Roles role;
-//        user.setRole(roles);
         userDao.save(user);
+
+
         return "redirect:/login";
     }
 
@@ -85,6 +88,22 @@ public class UserController {
 //        String hash = passwordEncoder.encode(user.getPassword());
 //        user.setPassword(hash);
 ////        user.setRole(roles);
+//        userDao.save(user);
+//        return "redirect:/login";
+//    }
+
+//    @PostMapping("/register")zq
+//    public String registerUser(HttpServletRequest request) {
+//        String username = request.getParameter("username");
+//        String password = request.getParameter("password");
+//        String email = request.getParameter("email");
+//        String roleId = request.getParameter("role");
+//        // Use the values to create a User object and save it to the database
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        Roles role = RolesRepository.findByName();
+//        user.setRole(role);
 //        userDao.save(user);
 //        return "redirect:/login";
 //    }

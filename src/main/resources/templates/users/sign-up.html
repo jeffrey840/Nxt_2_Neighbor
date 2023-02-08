@@ -15,61 +15,77 @@
 	<input value="login" type="submit" />
 </form>
 
-<form th:action="@{/sign-up}" method="POST" th:object="${user}">
-  <label for="username">Username</label>
-  <input id="username" th:field="*{username}" />
+<!--<form th:action="@{/sign-up}" method="POST" th:object="${user}">-->
+<!--  <label for="username">Username</label>-->
+<!--  <input id="username" th:field="*{username}" />-->
 
-  <label for="email">Email</label>
-  <input id="email" th:field="*{email}" />
+<!--  <label for="email">Email</label>-->
+<!--  <input id="email" th:field="*{email}" />-->
 
-  <label for="password">Password</label>
-  <input id="password" type="password" th:field="*{password}" />
+<!--  <label for="password">Password</label>-->
+<!--  <input id="password" type="password" th:field="*{password}" />-->
 
+<!--	🟩🟩🟩 verifies password-->
 <!--use javascript to verify password-->
-    <label for="password-confirmation">Confirm Password</label>
-    <input id="password-confirmation" type="password"  />
-
-<!--    <h1>WELCOME</h1>-->
-<!--    <p>COMPLETE THE SIGN UP PROCESS, ARE YOU A</p>-->
+<!--    <label for="password-confirmation">Confirm Password</label>-->
+<!--    <input id="password-confirmation" type="password"  />-->
+<!--	🟩🟩🟩-->
 
 
 
-	<label >choose role</label>
 
-			<div th:object="${role}" >
+<!--</form>-->
 
-			<input value="1" name="neighbor" type="radio"/>
-				<label >neighbor</label>
+<!--<form action="/sign-up" method="post">-->
+<!--	<label>username</label>-->
+<!--	<input name="username">-->
 
-			<input value="2" type="radio"   name="buyer"/>
-				<label >buyer</label>
+<!--	<label>email</label>-->
+<!--	<input name="email">-->
 
-			<input   value="3" type="radio" name="seller"/>
-				<label >seller</label>
+<!--	<label>password</label>-->
+<!--	<input name="password">-->
 
-			<button type="submit">Sign up</button>
+<!--	<label>role</label>-->
+<!--	<input name="role">-->
 
-			</div>
+<!--</form>-->
 
-
-	<div>
-		<input type="radio" id="huey" name="role" value="huey"
-		       checked>
-		<label for="huey">Huey</label>
+<form th:action="@{/sign-up}" th:object="${user}" method="post">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" name="username" th:field="*{username}"/>
 	</div>
 
-	<div>
-		<input type="radio" id="dewey" name="role" value="dewey">
-		<label for="dewey">Dewey</label>
+	<div class="form-group">
+		<label for="username">email:</label>
+		<input type="text" class="form-control" id="email" name="username" th:field="*{email}"/>
 	</div>
 
-	<div>
-		<input type="radio" id="louie" name="role" value="louie">
-		<label for="louie">Louie</label>
+	<div class="form-group">
+		<label for="password">Password:</label>
+		<input type="password" class="form-control" id="password" name="password" th:field="*{password}"/>
 	</div>
+	<div class="form-group">
+		<label>choose role</label>
 
+		<div>
+			<input type="radio" id="seller" name="role" value="1" checked th:field="*{role}">
+			<label for="seller">seller</label>
+		</div>
 
+		<div>
+			<input type="radio" id="buyer" name="role" value="2" th:field="*{role}">
+			<label for="buyer">buyer</label>
+		</div>
 
+		<div>
+			<input type="radio" id="neighbor" name="role" value="3" th:field="*{role}">
+			<label for="neighbor">neighbor</label>
+		</div>
+
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 </body>
