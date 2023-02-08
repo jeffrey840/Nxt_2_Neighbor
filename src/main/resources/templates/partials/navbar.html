@@ -1,41 +1,41 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <nav th:fragment="navbar">
-	<div>
-		<div class="nav-item col-3">
-			<a class="active navLinks" aria-current="page" href="/">Home</a>
+	<nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/">Home</a>
+<!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="/listings">Listings</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Roles
+						</a>
+						<ul class="dropdown-menu">
+							<li><a class="dropdown-item" href="#">Buyer</a></li>
+							<li><a class="dropdown-item" href="#">Seller</a></li>
+							<li><a class="dropdown-item" href="#">Admin</a></li>
+							<li><hr class="dropdown-divider"></li>
+							<li><a class="dropdown-item" href="#">Admin</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Contact Us</a>
+					</li>
+				</ul>
+				<form class="d-flex" role="search">
+					<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-success" type="submit">Search</button>
+				</form>
+				<form th:action="@{/logout}" th:method="post">
+						<button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center" style="margin-top: 8px">Logout</button>
+				</form>
+			</div>
 		</div>
-		<div class="nav-item col-3">
-			<a class="navLinks" href="/login">Login</a>
-		</div>
-		<div class="nav-item col-3">
-			<a class="navLinks" href="/sign-up" tabindex="-1" >Sign Up!</a>
-		</div>
-		<div class="nav-item col-3">
-			<a class="navLinks" href="/contact">Contact Us</a>
-		</div>
-	</div>
+	</nav>
 
-
-
-	<div sec:authorize="isAuthenticated()">
-		This content is only shown to authenticated users.
-		User ID: <span th:text="${#authentication.principal.id}"/>
-		Username: <span th:text="${#authentication.principal.username}"/>
-		Email: <span th:text="${#authentication.principal.email}"/>
-	</div>
-
-	<div sec:authorize="!isAuthenticated()">
-		This content is only shown to authenticated users who are not authenticated.
-		<form th:action="@{/login}">
-			<button class="btn">login</button>
-		</form>
-	</div>
-
-	<div sec:authorize="isAuthenticated()">
-		<form th:action="@{/logout}" th:method="POST">
-			<button class="btn">Logout</button>
-		</form>
-	</div>
 
 </nav>
