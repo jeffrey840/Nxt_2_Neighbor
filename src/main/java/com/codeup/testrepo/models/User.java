@@ -10,23 +10,29 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, length = 50)
     private String username;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, length = 50)
     private String email;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 100)
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "roles")
+    private Long role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Listings> homeListings;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Categories> categories;
+
+
 
     public User() {
     }
@@ -37,13 +43,15 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        role = copy.role;
     }
 
-    public User(long id, String username, String email, String password) {
+    public User(long id, String username, String email, String password, Roles role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Long getId() {
@@ -76,6 +84,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
     }
 
     public List<Listings> getListings() {

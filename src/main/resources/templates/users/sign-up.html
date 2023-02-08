@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
 	<title>Sign up</title>
@@ -25,10 +25,10 @@
 
 	<label for="role">Choose a role:</label>
 	<select name="role" id="role">
-		<option value="option">option</option>
-		<option value="neighbor">neighbor</option>
-		<option value="buyer">buyer</option>
-		<option value="seller">seller</option>
+		<option value="">option</option>
+		<option value="1" th:object="${role}">neighbor</option>
+		<option value="2" th:object="${role}">buyer</option>
+		<option value="3" th:object="${role}">seller</option>
 	</select>
   <input value="Sign me up!" type="submit" />
 </form>

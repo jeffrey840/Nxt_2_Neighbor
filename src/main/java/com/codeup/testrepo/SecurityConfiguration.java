@@ -1,9 +1,5 @@
 package com.codeup.testrepo;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 import com.codeup.testrepo.services.UserDetailsLoader;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -30,13 +26,10 @@ public class SecurityConfiguration {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -53,7 +46,8 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
+//                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
@@ -71,11 +65,7 @@ public class SecurityConfiguration {
                         "/neighbor-profile/{id}/delete",
                         "/listings/{id}"
                 )
-                .authenticated()
-        ;
+                .authenticated();
         return http.build();
-
     }
-
-
 }

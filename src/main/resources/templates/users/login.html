@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
   <title>Log In</title>
@@ -29,13 +29,11 @@
   <button class=" btn">sign-up</button>
 </form>
 
-<form th:action="@{/forgotPassword}">
+<form th:action="@{/forgotMyPassword}">
   <button class=" btn">forgot password</button>
 </form>
 
-
-<!-- find user in database, confirm that the user exists, if exists redirect to update password html,->
-
-
 </body>
 </html>
+
+<!--find user in database, confirm that the user exists, if exists redirect to update password html-->
