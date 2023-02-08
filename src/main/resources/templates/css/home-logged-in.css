@@ -1,6 +1,6 @@
-.listing-display{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.results{
+    display: flex;!important;
+    flex-wrap: wrap;!important;
+    justify-content: space-between;
     margin: 30px;
 }
