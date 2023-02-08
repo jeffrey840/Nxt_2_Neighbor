@@ -44,6 +44,7 @@ public class ListingController {
 //        return "listings/home-logged-in";
 //    }
 
+
     //MAPPING FOR EDIT POSTS ON SELLER PAGE
 //    @GetMapping(path = "/listings/{id}/seller-profile")
 //    public String getEditSeller(@PathVariable long id, Model model){
@@ -52,6 +53,7 @@ public class ListingController {
 //        model.addAttribute("list", listing);
 //        return "listings/seller-profile";
 //    }
+
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
     @PostMapping(path = "/listings/{id}/seller-profile")
@@ -73,40 +75,50 @@ public class ListingController {
 //    }
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON NEIGHBOR PAGE
-    @PostMapping(path = "/listings/{id}/neighbor-profile")
-    public String neighborEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-        Listings listing = (Listings) listDao.getReferenceById(id);
-        listing.setTitle(title);
-        listing.setDescription(body);
-        listDao.save(listing);
-        return "redirect:/listings/neighbor-profile";
-    }
+//    @PostMapping(path = "/listings/{id}/neighbor-profile")
+//    public String neighborEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
+//        Listings listing = (Listings) listDao.getReferenceById(id);
+//        listing.setTitle(title);
+//        listing.setDescription(body);
+//        listDao.save(listing);
+//        return "redirect:/listings/neighbor-profile";
+//    }
+
+
+    //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
+//    @GetMapping(path = "listings/seller-profile")
+//    public String sellerCreate(Model model){
+//        model.addAttribute("list", new Listings());
+//        return "listings/seller-profile";
+//    }
 
     //MAPPING ON NEIGHBOR PAGE TO CREATE A BIO SECTION ON PROFILE
-    @GetMapping(path = "listings/neighbor-profile")
-    public String neighborCreate(Model model){
-        model.addAttribute("list", new Listings());
-        return "listings/neighbor-profile";
-    }
+//    @GetMapping(path = "listings/neighbor-profile")
+//    public String neighborCreate(Model model){
+//        model.addAttribute("list", new Listings());
+//        return "listings/neighbor-profile";
+//    }
 
-    //EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
-    @PostMapping(path = "listings/seller-profile")
-    public String sellerCreate(@ModelAttribute Listings createdListing){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        createdListing.setUser(user);
-        emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
-        listDao.save(createdListing);
-        return "redirect:/listings/seller-profile";
-    }
+//    EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
+//    @PostMapping(path = "listings/seller-profile")
+//    public String sellerCreate(@ModelAttribute Listings createdListing){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        createdListing.setUser(user);
+//            emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
+//            listDao.save(createdListing);
+//            return "redirect:/listings/seller-profile";
+//    }
+
 
     //DELETE MAPPING FOR SELLER
-    @GetMapping(path = "/listings/{id}/seller-profile")
-    public String sellerDelete(@PathVariable long id) {
-        listDao.deleteById(id);
-        return "redirect:/listings/seller-profile";
-    }
+//    @GetMapping(path = "/listings/{id}/seller-profile")
+//    public String sellerDelete(@PathVariable long id) {
+//        listDao.deleteById(id);
+//        return "redirect:/listings/seller-profile";
+//    }
 
     // DELETE MAPPING FOR BUYER
+
     @GetMapping(path = "/listings/{id}/buyer-profile")
     public String buyerDelete(@PathVariable long id) {
         listDao.deleteById(id);
@@ -127,12 +139,13 @@ public class ListingController {
         return "redirect:/listings/neighbor-profile";
     }
 
+
     //DELETE MAPPING FOR ADMIN
 //    @GetMapping(path = "/listings/{id}")
 //    public String adminDelete(@PathVariable long id) {
 //        listDao.deleteById(id);
-//        return "redirect:/listings";
-//    }
 
+//        return "redirect:/listings/seller-profile";
+//    }
 
 }

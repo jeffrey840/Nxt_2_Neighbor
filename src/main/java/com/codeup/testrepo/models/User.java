@@ -86,7 +86,7 @@ public class User {
         this.password = password;
     }
 
-    public Long getRole() {
+    public Roles getRole() {
         return role;
     }
 

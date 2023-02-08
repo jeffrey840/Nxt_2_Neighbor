@@ -73,11 +73,11 @@ public class Listings {
         this.price = price;
     }
 
-    public String getLocation(){
+    public String getAddress(){
         return address;
     }
 
-    public void setLocation(String location){
+    public void setAddress(String address){
         this.address = address;
     }
 
