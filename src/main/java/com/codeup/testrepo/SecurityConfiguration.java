@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
-    private UserDetailsLoader usersLoader;
+    protected UserDetailsLoader usersLoader;
 
     public SecurityConfiguration(UserDetailsLoader usersLoader) {
         this.usersLoader = usersLoader;
@@ -49,22 +49,18 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/listings", "/sign-up") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-                        "/listings/seller-profile",
-                        "/listings/{id}/seller-profile",// only authenticated users can create ads
-//                        "/posts/{id}"
-                        "/seller-profile/{id}/delete",
-                        "/listings/{id}",
-//                        "/logout"
-                        "/listings/neighbor-profile",
-                        "/listings/{id}/neighbor-profile",// only authenticated users can create ads
-//                        "/posts/{id}"
-                        "/neighbor-profile/{id}/delete",
+//                        "/listings/seller-profile",
+//                        "/listings/{id}/seller-profile",// only authenticated users can create ads
+//                        "/seller-profile/{id}/delete",
+//                        "/listings/neighbor-profile",
+//                        "/listings/{id}/neighbor-profile",// only authenticated users can create ads
+//                        "/listings/{id}/delete",
                         "/listings/{id}"
                 )
                 .authenticated()

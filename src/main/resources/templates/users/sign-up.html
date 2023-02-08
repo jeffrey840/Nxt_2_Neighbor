@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Sign up</title>
@@ -23,6 +23,7 @@
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
+
     <label for="password">Confirm Password</label>
     <input id="password-confirm" type="password" th:field="*{password}" />
 
@@ -39,11 +40,10 @@
 		<option value="neighbor">neighbor</option>
 		<option value="buyer">buyer</option>
 		<option value="seller">seller</option>
+    
 	</select>
-  <input value="Sign me up!" type="submit" />
+	<button type="submit">Sign up</button>
 </form>
-
-
 
 </body>
 </html>
