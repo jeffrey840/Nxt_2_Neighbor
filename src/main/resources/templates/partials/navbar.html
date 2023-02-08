@@ -2,10 +2,18 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <nav th:fragment="navbar">
 	<div>
-		<a href="/home">home</a>
-		<a href="/hello">hello</a>
-		<a href="/about">about</a>
-		<a href="/contact">contact</a>
+		<div class="nav-item col-3">
+			<a class="active navLinks" aria-current="page" href="/">Home</a>
+		</div>
+		<div class="nav-item col-3">
+			<a class="navLinks" href="/login">Login</a>
+		</div>
+		<div class="nav-item col-3">
+			<a class="navLinks" href="/sign-up" tabindex="-1" >Sign Up!</a>
+		</div>
+		<div class="nav-item col-3">
+			<a class="navLinks" href="/contact">Contact Us</a>
+		</div>
 	</div>
 
 

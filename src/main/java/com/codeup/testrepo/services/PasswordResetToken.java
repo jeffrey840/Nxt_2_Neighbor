@@ -1,8 +1,5 @@
 package com.codeup.testrepo.services;
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 import com.codeup.testrepo.models.User;
 import jakarta.persistence.*;
 

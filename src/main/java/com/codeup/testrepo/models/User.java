@@ -16,10 +16,10 @@ public class User {
     @Column(unique = true, length = 50, nullable = false)
     private String username;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, length = 100, nullable = false)
     private String email;
 
-    @Column(length = 50, nullable = false)
+    @Column(length = 100, nullable = false)
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -27,6 +27,10 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Categories> categories;
+
+    @ManyToOne
+    @JoinColumn (name = "roles")
+    private Roles roles ;
 
     public User() {
     }
@@ -39,11 +43,12 @@ public class User {
         password = copy.password;
     }
 
-    public User(long id, String username, String email, String password) {
+    public User(long id, String username, String email, String password, Roles roles) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.roles =  roles;
     }
 
     public Long getId() {
@@ -84,5 +89,29 @@ public class User {
 
     public void setPosts(List<Listings> listings) {
         this.homeListings = homeListings;
+    }
+
+    public Roles getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Roles roles) {
+        this.roles = roles;
+    }
+
+    public List<Listings> getHomeListings() {
+        return homeListings;
+    }
+
+    public void setHomeListings(List<Listings> homeListings) {
+        this.homeListings = homeListings;
+    }
+
+    public List<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categories> categories) {
+        this.categories = categories;
     }
 }

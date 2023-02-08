@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>Sign up</title>
@@ -23,17 +23,15 @@
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
-	<label for="role">Choose a role:</label>
-	<select name="role" id="role">
-		<option value="option">option</option>
-		<option value="neighbor">neighbor</option>
-		<option value="buyer">buyer</option>
-		<option value="seller">seller</option>
+<!--    <form th:action="@{/sign-up}" method="POST" th:object="${role}">-->
+	<label for="user_role">Choose a role:</label>
+	<select name="user_role" th:field="*{roles}" id="user_role">
+		<option th:text="Neighbor" th:value="4L"></option>
+		<option th:text="Buyer" th:value="2L"></option>
+		<option th:text="Seller" th:value="3L"></option>
 	</select>
-  <input value="Sign me up!" type="submit" />
+	<button type="submit">Sign up</button>
 </form>
-
-
 
 </body>
 </html>

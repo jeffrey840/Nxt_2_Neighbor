@@ -1,11 +1,6 @@
 package com.codeup.testrepo.services;
-
-
-<<<<<<< HEAD
-import com.codeup.testrepo.models.Post;
-=======
 import com.codeup.testrepo.models.Listings;
->>>>>>> main
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
