@@ -10,17 +10,21 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
     private Long id;
 
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, length = 50)
     private String username;
 
-    @Column(unique = true, length = 100, nullable = false)
+    @Column(unique = true, length = 50)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 100)
     private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "roles")
+    private Long role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Listings> homeListings;
@@ -28,9 +32,7 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Categories> categories;
 
-    @ManyToOne
-    @JoinColumn (name = "roles")
-    private Roles roles ;
+
 
     public User() {
     }
@@ -41,14 +43,15 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
+        role = copy.role;
     }
 
-    public User(long id, String username, String email, String password, Roles roles) {
+    public User(long id, String username, String email, String password, Roles role) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
-        this.roles =  roles;
+        this.role = role;
     }
 
     public Long getId() {
@@ -83,35 +86,19 @@ public class User {
         this.password = password;
     }
 
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
+    }
+
     public List<Listings> getListings() {
         return homeListings;
     }
 
     public void setPosts(List<Listings> listings) {
         this.homeListings = homeListings;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
-
-    public List<Listings> getHomeListings() {
-        return homeListings;
-    }
-
-    public void setHomeListings(List<Listings> homeListings) {
-        this.homeListings = homeListings;
-    }
-
-    public List<Categories> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Categories> categories) {
-        this.categories = categories;
     }
 }

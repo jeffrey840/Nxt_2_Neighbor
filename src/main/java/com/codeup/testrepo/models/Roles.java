@@ -8,6 +8,7 @@ import java.util.List;
 @Table(name="roles")
 public class Roles {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
@@ -16,6 +17,7 @@ public class Roles {
 
     @Column(nullable = false)
     private String user_role;
+
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roles")

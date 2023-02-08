@@ -2,12 +2,8 @@ package com.codeup.testrepo.controller;
 
 import com.codeup.testrepo.models.Roles;
 import com.codeup.testrepo.models.User;
-//import com.codeup.testrepo.repositories.RolesRepository;
-//import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
-import jakarta.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,27 +11,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.management.relation.Role;
+
 @Controller
 public class UserController {
     private UserRepository userDao;
-
-//    private RolesRepository rolesDao;
-
     private PasswordEncoder passwordEncoder;
-    @Autowired
+
     public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
-//        this.rolesDao = rolesDao;
     }
 
-    @GetMapping("/sign-up")
-    public String showSignupForm(Model model){
-        model.addAttribute("user", new User());
-//        model.addAttribute("role", new Roles());
-        return "users/sign-up";
-    }
-//
 //    @PostMapping("/sign-up")
 //    public String saveUser(@ModelAttribute User user){
 //        String hash = passwordEncoder.encode(user.getPassword());
@@ -44,21 +31,65 @@ public class UserController {
 //        return "redirect:/login";
 //    }
 
-    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-    public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs) {
-        System.out.println("end point hit");
-        System.out.println(user.getRoles().getUser_role());
-//        if (result.hasErrors()) {
-//            return "users/sign-up";
-//        }
-        // Save account ...
-        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
+    @GetMapping("/sign-up")
+    public String showSignupForm(Model model){
+        model.addAttribute("user", new User());
+        model.addAttribute("role", new Roles());
+        return "users/sign-up";
+    }
+
+//    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+//    public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
+////        if (result.hasErrors()) {
+////            return "users/sign-up";
+////        }
+//        // Save account ...
+////        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
+//
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+//        userDao.save(user);
+//        return "redirect:/login";
+//    }
+
+//🟩🟩🟩🟩🟩🟩🟩🟩 Extra feature recover password
+//
+//    @GetMapping("/forgotMyPassword")
+//    public String showForgotPasswordForm(){
+//        return "users/forgotPassword";
+//    }
+//    @RequestMapping(value = "/forgotMyPassword", method = RequestMethod.POST)
+//    public String verify() {
+////        is user gets these two questions correct redirect to update password
+////        if() {
+////            return "redirect:/updatePassword";
+////        } else {
+////            "redirect:/forgotPassword"
+////        }
+//       return  "redirect:/updatePassword";
+//    }
+//    @RequestMapping(value = "/updatePassword", method = RequestMethod.POST)
+//    public String verifyCredentials(@ModelAttribute User user) {
+//        String username = user.getUsername();
+//
+//
+//        return "redirect:/login";
+//    }
+
+//🟩🟩🟩🟩🟩🟩🟩🟩
+
+    @PostMapping("/sign-up")
+    public String handle(
+            @ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles
+    ) {
+        Long role = Long.valueOf(String.valueOf(roles.getUser_role()));
         String hash = passwordEncoder.encode(user.getPassword());
         user.setPassword(hash);
+        user.setRole(role);
         userDao.save(user);
         return "redirect:/login";
     }
-    
+
 
 
 }

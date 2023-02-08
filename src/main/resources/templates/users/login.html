@@ -14,11 +14,6 @@
   You have been logged out.
 </div>
 
-<div class="container text-center" th:each="post : ${listings}">
-  <p th:text="${post.getTitle()}" />
-  <p th:text="${post.getDescription()}" />
-</div>
-
 <div th:if="${message}" th:text="${message}" th:class="${alertClass}" th:value="${alertClass}"></div>
 <form th:action="@{/login}" method="POST">
   <label for="username">Username</label>
@@ -31,16 +26,12 @@
 </form>
 
 <form th:action="@{/sign-up}">
-  <button class=" btn">login</button>
+  <button class=" btn">sign-up</button>
 </form>
 
-<form th:action="@{/forgotPassword}">
-  <button class=" btn">forgot password</button>
-</form>
-
-
-<!--&lt;!&ndash; find user in database, confirm that the user exists, if exists redirect to update password html,->-->
-
+<!--forgot password button-->
+<a th:href="@{/forgetPassword.html}"
+   th:text="#{message.resetPassword}">reset</a>
 
 </body>
 </html>
