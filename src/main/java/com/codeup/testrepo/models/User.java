@@ -2,6 +2,7 @@ package com.codeup.testrepo.models;
 
 import jakarta.persistence.*;
 
+import javax.management.relation.Role;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "roles")
-    private Long role;
+    private Roles role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Listings> homeListings;
@@ -43,7 +44,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
-        role = copy.role;
+//        role = copy.role;
     }
 
     public User(long id, String username, String email, String password, Roles role) {
@@ -90,7 +91,7 @@ public class User {
         return role;
     }
 
-    public void setRole(Long role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 

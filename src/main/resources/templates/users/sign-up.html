@@ -25,27 +25,51 @@
   <label for="password">Password</label>
   <input id="password" type="password" th:field="*{password}" />
 
+<!--use javascript to verify password-->
+    <label for="password-confirmation">Confirm Password</label>
+    <input id="password-confirmation" type="password"  />
 
-    <label for="password">Confirm Password</label>
-    <input id="password-confirm" type="password" th:field="*{password}" />
+<!--    <h1>WELCOME</h1>-->
+<!--    <p>COMPLETE THE SIGN UP PROCESS, ARE YOU A</p>-->
 
-    <h1>WELCOME</h1>
-    <p>COMPLETE THE SIGN UP PROCESS, ARE YOU A</p>
-    <input value="Buyer" type="submit" />
-    <input value="Seller" type="submit" />
-    <input value="Neighbor" type="submit" />
-    <br>
 
-	<label for="role">Choose a role:</label>
-	<select name="role" id="role">
 
-		<option value="option">option</option>
-		<option value="neighbor">neighbor</option>
-		<option value="buyer">buyer</option>
-		<option value="seller">seller</option>
+	<label >choose role</label>
 
-	</select>
-	<button type="submit">Sign up</button>
+			<div th:object="${role}" >
+
+			<input value="1" name="neighbor" type="radio"/>
+				<label >neighbor</label>
+
+			<input value="2" type="radio"   name="buyer"/>
+				<label >buyer</label>
+
+			<input   value="3" type="radio" name="seller"/>
+				<label >seller</label>
+
+			<button type="submit">Sign up</button>
+
+			</div>
+
+
+	<div>
+		<input type="radio" id="huey" name="role" value="huey"
+		       checked>
+		<label for="huey">Huey</label>
+	</div>
+
+	<div>
+		<input type="radio" id="dewey" name="role" value="dewey">
+		<label for="dewey">Dewey</label>
+	</div>
+
+	<div>
+		<input type="radio" id="louie" name="role" value="louie">
+		<label for="louie">Louie</label>
+	</div>
+
+
+
 </form>
 
 </body>

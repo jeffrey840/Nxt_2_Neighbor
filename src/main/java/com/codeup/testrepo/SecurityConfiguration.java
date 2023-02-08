@@ -47,8 +47,8 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
 
-                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
-//                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
+//                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
+                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
 
                 .permitAll()
                 /* Pages that require authentication */
@@ -61,7 +61,7 @@ public class SecurityConfiguration {
 //                        "/listings/neighbor-profile",
 //                        "/listings/{id}/neighbor-profile",// only authenticated users can create ads
 //                        "/listings/{id}/delete",
-                        "/listings/{id}"
+                        "/listings/{id}","/listings"
                 )
                 .authenticated();
         return http.build();

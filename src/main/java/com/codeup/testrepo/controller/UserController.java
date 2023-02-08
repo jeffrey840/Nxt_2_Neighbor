@@ -34,23 +34,24 @@ public class UserController {
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
-        model.addAttribute("role", new Roles());
+        model.addAttribute("buyer", new Roles());
         return "users/sign-up";
     }
 
-//    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
-//    public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
-////        if (result.hasErrors()) {
-////            return "users/sign-up";
-////        }
-//        // Save account ...
-////        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
-//
-//        String hash = passwordEncoder.encode(user.getPassword());
-//        user.setPassword(hash);
-//        userDao.save(user);
-//        return "redirect:/login";
-//    }
+    @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+    public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
+        if (result.hasErrors()) {
+            return "users/sign-up";
+        }
+        // Save account ...
+        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
+        String hash = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hash);
+//        Roles role;
+//        user.setRole(roles);
+        userDao.save(user);
+        return "redirect:/login";
+    }
 
 //🟩🟩🟩🟩🟩🟩🟩🟩 Extra feature recover password
 //
@@ -78,17 +79,15 @@ public class UserController {
 
 //🟩🟩🟩🟩🟩🟩🟩🟩
 
-    @PostMapping("/sign-up")
-    public String handle(
-            @ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles
-    ) {
-        Long role = Long.valueOf(String.valueOf(roles.getUser_role()));
-        String hash = passwordEncoder.encode(user.getPassword());
-        user.setPassword(hash);
-        user.setRole(role);
-        userDao.save(user);
-        return "redirect:/login";
-    }
+//    @PostMapping("/sign-up")
+//    public String handle(
+//            @ModelAttribute User user) {
+//        String hash = passwordEncoder.encode(user.getPassword());
+//        user.setPassword(hash);
+////        user.setRole(roles);
+//        userDao.save(user);
+//        return "redirect:/login";
+//    }
 
 
 
