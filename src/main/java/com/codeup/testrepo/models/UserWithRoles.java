@@ -38,4 +38,16 @@ public class UserWithRoles extends User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    private User user;
+
+    @Override
+    public Long getId() {
+        return user.getId();
+    }
+
+    @Override
+    public String getUsername() {
+        return user.getEmail();
+    }
 }
