@@ -55,12 +55,12 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers(
-//                        "/listings/seller-profile",
-//                        "/listings/{id}/seller-profile",// only authenticated users can create ads
-//                        "/seller-profile/{id}/delete",
-//                        "/listings/neighbor-profile",
-//                        "/listings/{id}/neighbor-profile",// only authenticated users can create ads
-//                        "/listings/{id}/delete",
+                        "/listings/seller-profile",
+                        "/listings/{id}/seller-profile",// only authenticated users can create ads
+                        "/seller-profile/{id}/delete",
+                        "/listings/neighbor-profile",
+                        "/listings/{id}/neighbor-profile",// only authenticated users can create ads
+                        "/listings/{id}/delete",
                         "/listings/{id}","/listings"
                 )
                 .authenticated();

@@ -42,11 +42,11 @@ public class UserController {
 
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
-//        if (result.hasErrors()) {
-//            return "users/sign-up";
-//        }
+        if (result.hasErrors()) {
+            return "users/sign-up";
+        }
 //         Save account ...
-//        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
+        redirectAttrs.addAttribute("id", user.getId()).addFlashAttribute("message", "Account created!");
         String hash = passwordEncoder.encode(user.getPassword());
         roles.setUser_role("buyer");
         user.setPassword(hash);
