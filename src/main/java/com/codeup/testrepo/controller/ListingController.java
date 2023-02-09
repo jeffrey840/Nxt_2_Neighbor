@@ -35,14 +35,14 @@ public class ListingController {
 //        model.addAttribute("title", "Home");
 //        return "/listings/home-not-logged";
 //    }
-    @PostMapping("/listings")
+    @GetMapping ("/listings")
     public String userHome(HttpServletRequest request) {
 
-//        User user = (User) request.getSession().getAttribute("role");
+        User user = (User) request.getSession().getAttribute("role");
 
 
-        System.out.println();
-        return "listings/seller-profile";
+//        System.out.println();
+//        return "listings/seller-profile";
 //        if (user.getRole().getId() == 1) {
 //            return "/listings/buyer-profile";
 //        } else if (user.getRole().getId() == 2) {
@@ -53,6 +53,7 @@ public class ListingController {
 //            return "/listings/home-not-logged";
 //        }
 //        return "redirect:/login";
+        return "listings/seller-profile";
     }
 
 //    @GetMapping("/listings")
@@ -135,14 +136,14 @@ public class ListingController {
         return "listings/neighbor-profile";
     }
 
-//    EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
+    //    EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
     @PostMapping(path = "listings/seller-profile")
     public String sellerCreate(@ModelAttribute Listings createdListing){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         createdListing.setUser(user);
-            emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
-            listDao.save(createdListing);
-            return "redirect:/listings/seller-profile";
+        emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
+        listDao.save(createdListing);
+        return "redirect:/listings/seller-profile";
     }
 
 
