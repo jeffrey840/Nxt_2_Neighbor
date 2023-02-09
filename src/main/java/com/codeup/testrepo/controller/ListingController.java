@@ -81,7 +81,6 @@ public class ListingController {
 //        return "listings/home-logged-in";
 //    }
 
-
     //MAPPING FOR EDIT POSTS ON SELLER PAGE
 //    @GetMapping(path = "/listings/{id}/seller-profile")
 //    public String getEditSeller(@PathVariable long id, Model model){
