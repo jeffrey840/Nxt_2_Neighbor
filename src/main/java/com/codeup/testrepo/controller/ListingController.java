@@ -28,7 +28,7 @@ public class ListingController {
         this.emailService = emailService;
     }
 
-    //MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
+//    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
 //    @GetMapping("/listings")
 //    public String homeNotLogged(Model model){
 //        model.addAttribute("listings", listDao.findAll());
@@ -36,23 +36,9 @@ public class ListingController {
 //        return "/listings/home-not-logged";
 //    }
     @GetMapping ("/listings")
-    public String userHome(HttpServletRequest request) {
-
-        User user = (User) request.getSession().getAttribute("role");
-
-
-//        System.out.println();
-//        return "listings/seller-profile";
-//        if (user.getRole().getId() == 1) {
-//            return "/listings/buyer-profile";
-//        } else if (user.getRole().getId() == 2) {
-//            return "/listings/seller-profile";
-//        } else if (user.getRole().getId() == 3) {
-//            return "/listings/neighbor-profile";
-//        } else {
-//            return "/listings/home-not-logged";
-//        }
-//        return "redirect:/login";
+    public String userHome(Model model) {
+//        User user = (User) request.getSession().getAttribute("username");
+        model.addAttribute("Users", userDao.findAll());
         return "listings/seller-profile";
     }
 
