@@ -34,7 +34,7 @@ function getListings() {
                         <p>OUTDOORS</p>
                         <p>INTROVERT</p>
                         <p>EXTROVERT</p>
-                        <a href="#" class="btn btn-primary">VIEW</a>
+                        <a href="#" class="btn btn-primary">EDIT</a>
                         </div>
                         </div>`
             $(appendHtml).append(html)
