@@ -1,6 +1,7 @@
 package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.Roles;
+import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
 import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
@@ -9,23 +10,27 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Controller
 public class ListingController {
 
     private final UserRepository userDao;
+    private final RolesRepository rolesDao;
     private final ListingRepository listDao;
     private final EmailService emailService;
-    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService) {
+    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.emailService = emailService;
+        this.rolesDao = rolesDao;
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
@@ -35,12 +40,25 @@ public class ListingController {
 //        model.addAttribute("title", "Home");
 //        return "/listings/home-not-logged";
 //    }
-    @GetMapping ("/listings")
-    public String userHome(Model model) {
-//        User user = (User) request.getSession().getAttribute("username");
-        model.addAttribute("Users", userDao.findAll());
-        return "listings/seller-profile";
+@GetMapping ("/listings")
+public String userHome() {
+////        User user = (User) request.getSession().getAttribute("username");
+//    System.out.println(id);
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String currentUser = authentication.getName();
+    User user1 = userDao.findByUsername(currentUser);
+    long id = user1.getId();
+    User user = userDao.getReferenceById(id);
+    Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
+    String roles = roles1.getUser_role();
+    if(Objects.equals(roles, "buyer")){
+        return "/listings/buyer-profile";
     }
+
+    System.out.println(roles);
+    System.out.println(id);
+    return "listings/seller-profile";
+}
 
 //    @GetMapping("/listings")
 //    public String createAd(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password,@RequestParam(name = "role") Roles role){

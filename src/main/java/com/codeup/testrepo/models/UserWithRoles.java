@@ -39,15 +39,15 @@ public class UserWithRoles extends User implements UserDetails {
         return true;
     }
 
-    private User user;
-
-    @Override
-    public Long getId() {
-        return user.getId();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getEmail();
-    }
+//    private User user;
+//
+//    @Override
+//    public Long getId() {
+//        return user.getId();
+//    }
+//
+//    @Override
+//    public String getUsername() {
+//        return user.getEmail();
+//    }
 }
