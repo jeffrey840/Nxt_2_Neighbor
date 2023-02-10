@@ -27,14 +27,13 @@ public class ListingController {
     private final ListingRepository listDao;
     private final EmailService emailService;
 
-    private final RolesRepository rolesDao;
 
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
-        this.rolesDao = rolesDao;
+
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
