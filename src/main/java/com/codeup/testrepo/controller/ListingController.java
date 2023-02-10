@@ -38,15 +38,14 @@ public class ListingController {
 //    public String homeNotLogged(Model model){
 //        model.addAttribute("listings", listDao.findAll());
 //        model.addAttribute("title", "Home");
-//        return "/listings/home-not-logged";
+//        return "redirect: /listings/home-logged";
 //    }
 @GetMapping ("/listings")
-public String userHome() {
-////        User user = (User) request.getSession().getAttribute("username");
-//    System.out.println(id);
+public String userHome(Model model) {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String currentUser = authentication.getName();
     User user1 = userDao.findByUsername(currentUser);
+    model.addAttribute("Users", user1);
     long id = user1.getId();
     User user = userDao.getReferenceById(id);
     Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
