@@ -2,7 +2,6 @@ package com.codeup.testrepo.models;
 import jakarta.persistence.*;
 
 
-import java.util.List;
 
 @Entity
 @Table(name="roles")
