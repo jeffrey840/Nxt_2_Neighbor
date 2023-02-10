@@ -59,7 +59,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
 //                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
-                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/listings/home-not-logged", "/about-us", "/users/about-us", "/sign-up") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
