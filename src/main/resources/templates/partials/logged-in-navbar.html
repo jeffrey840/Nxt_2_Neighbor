@@ -5,7 +5,9 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
         <div class="container-fluid">
 <!--            replace with logo ⬇️ -->
-            <a class="navbar-brand" href="/">Home</a>
+            <a class="navbar-brand" href="/home-logged-in.html">
+                <img src="img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
+            </a>
             <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -19,9 +21,9 @@
 <!--                        goes back to user profile regardless what page-->
                         <li><a class="dropdown-item" href="#" th:onclick="getProfile()">Profile</a></li>
                         <li class="dropdown-item">
-                            <a class="nav-link" href="#">Contact Us</a>
+                            <a class="nav-link" href="/contact-us">Contact Us</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li><a class="dropdown-item" href="/about-us">About</a></li>
                     </ul>
                 </li>
             </ul>
@@ -30,9 +32,8 @@
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <form th:action="@{/logout}" th:method="post">
-                <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center" style="margin-top: 8px">Logout</button>
+                <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center">Logout</button>
             </form>
-        </div>
         </div>
     </nav>
 

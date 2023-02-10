@@ -23,14 +23,18 @@ import java.util.Objects;
 public class ListingController {
 
     private final UserRepository userDao;
+    private final RolesRepository rolesDao;
     private final ListingRepository listDao;
     private final EmailService emailService;
+
     private final RolesRepository rolesDao;
+
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
+        this.rolesDao = rolesDao;
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
@@ -38,8 +42,9 @@ public class ListingController {
 //    public String homeNotLogged(Model model){
 //        model.addAttribute("listings", listDao.findAll());
 //        model.addAttribute("title", "Home");
-//        return "/listings/home-not-logged";
+//        return "redirect: /listings/home-logged";
 //    }
+
 
 //    @GetMapping ("/listings")
 //    public String userHome(Model model) {
@@ -72,6 +77,7 @@ public class ListingController {
         //        System.out.println(roles);
 //        System.out.println(id);
     }
+
 //    @GetMapping("/listings")
 //    public String createAd(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password,@RequestParam(name = "role") Roles role){
 //        User user = new User();
