@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>seller Profile</title>
@@ -47,12 +48,46 @@
 </nav>
 <h1>This is the Seller Profile</h1>
 
-<div th:each="a: ${Users}"  >
-<h1 class="text-center"> WELCOME, <span th:text="${a.getUsername()}"></span></h1>
+
+<div th:each="a: ${Users}">
+    role name: <span th:text="${a.getRole().getUser_role()}"></span><br>
+    role id <span th:text="${a.getRole().getId()}"></span><br>
+    Username: <span th:text="${a.getUsername()}"></span><br>
+    user id: <span th:text="${a.getId()}"></span><br>
+    <br>
 </div>
+
+<div sec:authorize="isAuthenticated()">
+    this show the user that is currently logged in
+    <span sec:authentication="name"></span>
+</div>
+
+
+<h1 class="text-center"> WELCOME, USERNAME</h1>
 <div class="listing-display" id="listing-display">
 
-
+    <form>
+        <label>
+            <h2>title</h2>
+            <input type="text" placeholder="title">
+        </label>
+        <br>
+        <label>
+            <h2>description</h2>
+            <input type="text" placeholder="description">
+        </label>
+        <label>
+            <h2>price</h2>
+            <input type="text" placeholder="price">
+        </label>
+        <br>
+        <label>
+            <h2>address</h2>
+            <input type="text" placeholder="address">
+        </label>
+        <br>
+        <button>CREATE LISTING</button>
+    </form>
 
 </div>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>

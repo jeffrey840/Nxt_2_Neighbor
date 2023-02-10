@@ -26,9 +26,13 @@ public class ListingController {
     private final RolesRepository rolesDao;
     private final ListingRepository listDao;
     private final EmailService emailService;
+
+    private final RolesRepository rolesDao;
+
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
+        this.rolesDao = rolesDao;
         this.emailService = emailService;
         this.rolesDao = rolesDao;
     }
@@ -40,24 +44,39 @@ public class ListingController {
 //        model.addAttribute("title", "Home");
 //        return "redirect: /listings/home-logged";
 //    }
-@GetMapping ("/listings")
-public String userHome(Model model) {
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    String currentUser = authentication.getName();
-    User user1 = userDao.findByUsername(currentUser);
-    model.addAttribute("Users", user1);
-    long id = user1.getId();
-    User user = userDao.getReferenceById(id);
-    Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
-    String roles = roles1.getUser_role();
-    if(Objects.equals(roles, "buyer")){
-        return "/listings/buyer-profile";
-    }
 
-    System.out.println(roles);
-    System.out.println(id);
-    return "listings/seller-profile";
-}
+
+//    @GetMapping ("/listings")
+//    public String userHome(Model model) {
+//        model.addAttribute("Users", userDao.findAll());
+////        model.addAttribute("roles", listDao.findAll());
+//        return "listings/Home-not";
+//    }
+
+    @GetMapping ("/listings")
+    public String userHome(Model model) {
+        model.addAttribute("Users", userDao.findAll());
+////        User user = (User) request.getSession().getAttribute("username");
+//    System.out.println(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUser = authentication.getName();
+        User user1 = userDao.findByUsername(currentUser);
+        long id = user1.getId();
+        User user = userDao.getReferenceById(id);
+        Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
+        String roles = roles1.getUser_role();
+        if(Objects.equals(roles, "buyer")){
+            return "/listings/buyer-profile";
+        } else if (Objects.equals(roles, "seller")) {
+            return "/listings/seller-profile";
+        } else if (Objects.equals(roles, "neighbor")) {
+            return "listings/neighbor-profile";
+        }
+        return "listings/home-not-logged";
+
+        //        System.out.println(roles);
+//        System.out.println(id);
+    }
 
 //    @GetMapping("/listings")
 //    public String createAd(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password,@RequestParam(name = "role") Roles role){
@@ -124,7 +143,6 @@ public String userHome(Model model) {
         return "redirect:/listings/neighbor-profile";
     }
 
-
     //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
 //    @GetMapping(path = "listings/seller-profile")
 //    public String sellerCreate(Model model){
@@ -178,7 +196,6 @@ public String userHome(Model model) {
 //        listDao.deleteById(id);
 //        return "redirect:/listings/neighbor-profile";
 //    }
-
 
     //DELETE MAPPING FOR ADMIN
     @GetMapping(path = "/listings/{id}")

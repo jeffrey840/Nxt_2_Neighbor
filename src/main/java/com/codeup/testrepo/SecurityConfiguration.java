@@ -1,15 +1,24 @@
 package com.codeup.testrepo;
 
 import com.codeup.testrepo.services.UserDetailsLoader;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import java.io.IOException;
+
 
 //which pages are available to who
 @Configuration
@@ -30,12 +39,15 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/listings",true) // user's home page, it can be any URL
                 .permitAll() // Anyone can go to the login page
                 /* Logout configuration */
@@ -46,10 +58,8 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-
 //                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
                 .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
-
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
@@ -63,7 +73,14 @@ public class SecurityConfiguration {
                         "/listings/{id}/delete",
                         "/listings/{id}","/listings"
                 )
+
+
                 .authenticated();
         return http.build();
     }
+
+
 }
+
+
+
