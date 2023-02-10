@@ -7,8 +7,6 @@ package com.codeup.testrepo.repositories;
 
 @Repository
 public interface RolesRepository extends JpaRepository<Roles, Long> {
-//    static Roles findByName() {
-//        return null;
-//    }
+//        Roles findByRole(Long role );
 
 }

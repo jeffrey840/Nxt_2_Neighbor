@@ -35,11 +35,12 @@ public class ListingController {
 //        model.addAttribute("title", "Home");
 //        return "/listings/home-not-logged";
 //    }
+
     @GetMapping ("/listings")
     public String userHome(Model model) {
-//        User user = (User) request.getSession().getAttribute("username");
         model.addAttribute("Users", userDao.findAll());
-        return "listings/seller-profile";
+//        model.addAttribute("roles", listDao.findAll());
+        return "listings/Home-not";
     }
 
 //    @GetMapping("/listings")
@@ -107,7 +108,6 @@ public class ListingController {
         return "redirect:/listings/neighbor-profile";
     }
 
-
     //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
 //    @GetMapping(path = "listings/seller-profile")
 //    public String sellerCreate(Model model){
@@ -161,7 +161,6 @@ public class ListingController {
 //        listDao.deleteById(id);
 //        return "redirect:/listings/neighbor-profile";
 //    }
-
 
     //DELETE MAPPING FOR ADMIN
     @GetMapping(path = "/listings/{id}")
