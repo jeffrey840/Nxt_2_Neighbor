@@ -1,6 +1,7 @@
 package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.Roles;
+import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
 import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
@@ -9,52 +10,54 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 @Controller
 public class ListingController {
 
     private final UserRepository userDao;
+    private final RolesRepository rolesDao;
     private final ListingRepository listDao;
     private final EmailService emailService;
-    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService) {
+    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.emailService = emailService;
+        this.rolesDao = rolesDao;
     }
 
-    //MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
+//    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
 //    @GetMapping("/listings")
 //    public String homeNotLogged(Model model){
 //        model.addAttribute("listings", listDao.findAll());
 //        model.addAttribute("title", "Home");
-//        return "/listings/home-not-logged";
+//        return "redirect: /listings/home-logged";
 //    }
-    @GetMapping ("/listings")
-    public String userHome(HttpServletRequest request) {
-
-        User user = (User) request.getSession().getAttribute("role");
-
-
-//        System.out.println();
-//        return "listings/seller-profile";
-//        if (user.getRole().getId() == 1) {
-//            return "/listings/buyer-profile";
-//        } else if (user.getRole().getId() == 2) {
-//            return "/listings/seller-profile";
-//        } else if (user.getRole().getId() == 3) {
-//            return "/listings/neighbor-profile";
-//        } else {
-//            return "/listings/home-not-logged";
-//        }
-//        return "redirect:/login";
-        return "listings/seller-profile";
+@GetMapping ("/listings")
+public String userHome(Model model) {
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    String currentUser = authentication.getName();
+    User user1 = userDao.findByUsername(currentUser);
+    model.addAttribute("Users", user1);
+    long id = user1.getId();
+    User user = userDao.getReferenceById(id);
+    Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
+    String roles = roles1.getUser_role();
+    if(Objects.equals(roles, "buyer")){
+        return "/listings/buyer-profile";
     }
+
+    System.out.println(roles);
+    System.out.println(id);
+    return "listings/seller-profile";
+}
 
 //    @GetMapping("/listings")
 //    public String createAd(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password,@RequestParam(name = "role") Roles role){
