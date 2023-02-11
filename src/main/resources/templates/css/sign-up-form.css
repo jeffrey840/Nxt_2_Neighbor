@@ -1,0 +1,26 @@
+html{
+    background: linear-gradient(#003333, #ccffcc);
+    height: 100%;
+}
+.navbar{
+    background-color: transparent;
+}
+body{
+    background-color: transparent;
+}
+.form-style{
+    background-image: linear-gradient(to right, #ccffcc, #ffffff);
+    height: 500px;
+    width: 600px;
+    padding: 10px;
+    border-radius: 40px;
+    align-content: center;
+}
+.form2{
+}
+
+input{
+    text-align: center;
+    align-content: center;
+}
+
