@@ -21,4 +21,15 @@ public class FragmentsController {
             return "redirect:/error";
         }
     }
+
+//    @GetMapping("/card")
+//    public String showCard(Model model) {
+//        model.addAttribute("new-listing-card", new CreateListing());
+//        return "new-listing-card";
+//    }
+//    @PostMapping("/card")
+//    public String updateCard(@ModelAttribute CreateListing card, Model model) {
+//        model.addAttribute("new-listing-card", card);
+//        return "new-listing-card";
+//    }
 }
