@@ -62,8 +62,8 @@
     <!--</form>-->
 
     <div class="row form-style">
-        <div class="col">
-            <label>Sign-Up</label>
+        <div class="col form">
+            <label class="sign-up">Sign-Up</label>
             <div class="form">
             <form class="form-group" th:action="@{/sign-up}" th:object="${user}" method="post">
                 <div class="form-group">
@@ -78,21 +78,21 @@
             </form>
             </div>
         </div>
-        <div class="col">
-            <label>choose role</label>
+        <div class="col form">
+            <label class="choose">choose role</label>
             <div class="form2">
             <div class="form-group">
-                <div>
-                    <input type="radio" id="seller" name="role" value="1" checked th:field="*{role}">
-                    <label for="seller">seller</label>
+                <div class="form-group">
+                    <input type="button" id="seller" name="role" value="SELLER" checked th:field="*{role}">
+                    <label for="seller"></label>
                 </div>
-                <div>
-                    <input type="radio" id="buyer" name="role" value="2" th:field="*{role}">
-                    <label for="buyer">buyer</label>
+                <div class="form-group">
+                    <input type="button" id="buyer" name="role" value="BUYER" th:field="*{role}">
+                    <label for="buyer"></label>
                 </div>
-                <div>
-                    <input type="radio" id="neighbor" name="role" value="3" th:field="*{role}">
-                    <label for="neighbor">neighbor</label>
+                <div class="form-group">
+                    <input type="button" id="neighbor" name="role" value="NEIGHBOR" th:field="*{role}">
+                    <label for="neighbor"></label>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>

@@ -14,13 +14,35 @@ body{
     width: 600px;
     padding: 10px;
     border-radius: 40px;
-    align-content: center;
-}
-.form2{
-}
+    justify-content: space-between;
+    align-items: center;
 
+}
 input{
     text-align: center;
     align-content: center;
+}
+.col.form{
+    height: 450px;
+}
+.form{
+   padding-top: 30px;
+}
+.form2{
+    padding-top: 30px;
+}
+.form-group{
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+
+}
+.sign-up{
+   display: flex;
+    justify-content: center;
+}
+.choose{
+    display: flex;
+    justify-content: center;
 }
 
