@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Buyer Profile</title>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/home-logged-in.css">
-<link rel="stylesheet" href="/css/buyer.css">
 
 <body>
 <nav th:fragment="logged-in-navbar">
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
         <div class="container-fluid">
             <!--            replace with logo ⬇️ -->
-            <a class="navbar-brand" href="/home-logged-in/html">
-                <img src="/img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
+
             </a>            <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/listings">Listings</a>
+                    <form th:action="@{/home-logged-in}" method="post">
+                    <button>Listings</button>
+                    </form>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,7 +26,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!--                        goes back to user profile regardless what page-->
-                        <li><a class="dropdown-item" href="/templates/listings/buyer-profile.html">Profile</a></li>
+                        <li><a class="dropdown-item" href="/templates/listings/buyer-profile">Profile</a></li>
+
                         <li class="dropdown-item">
                             <a class="nav-link" href="/contact-us">Contact Us</a>
                         </li>
@@ -70,6 +70,5 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 
-<script src="/js/buyer.js"></script>
 </body>
 </html>

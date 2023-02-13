@@ -19,87 +19,97 @@
         </a>
     </div>
 </nav>
-<div class="container">
-    <div class="row">
-        <div class="col hstack justify-content-end">
-            <label for="login">already a user?</label>
-            <form id="login" th:action="@{/login}">
-                <input value="login" type="submit"/>
-            </form>
-        </div>
-    </div>
-    <!--<form th:action="@{/sign-up}" method="POST" th:object="${user}">-->
-    <!--  <label for="username">Username</label>-->
-    <!--  <input id="username" th:field="*{username}" />-->
-
-    <!--  <label for="email">Email</label>-->
-    <!--  <input id="email" th:field="*{email}" />-->
-
-    <!--  <label for="password">Password</label>-->
-    <!--  <input id="password" type="password" th:field="*{password}" />-->
-
-    <!--	🟩🟩🟩 verifies password-->
-    <!--use javascript to verify password-->
-    <!--    <label for="password-confirmation">Confirm Password</label>-->
-    <!--    <input id="password-confirmation" type="password"  />-->
-    <!--	🟩🟩🟩-->
 
 
-    <!--	<label >choose role</label>-->
-
-    <!--			<div th:object="${role}" >-->
-
-    <!--			<input value="1" name="neighbor" type="radio"/>-->
-    <!--				<label >neighbor</label>-->
-
-    <!--			<input value="2" type="radio"   name="buyer"/>-->
-    <!--				<label >buyer</label>-->
-
-    <!--			<input   value="3" type="radio" name="seller"/>-->
-    <!--				<label >seller</label>-->
+<label for="login">already a user?</label>
+<form  id="login" th:action="@{/login}">
+	<input value="login" type="submit" />
+</form>
 
 
-    <!--</form>-->
 
-    <div class="row form-style">
-        <div class="col form">
-            <label class="sign-up">Sign-Up</label>
-            <div class="form">
-            <form class="form-group" th:action="@{/sign-up}" th:object="${user}" method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="username" name="username" placeholder="username" th:field="*{username}"/>
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="email" name="username" placeholder="email" th:field="*{email}"/>
-                </div>
-                <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="password" th:field="*{password}"/>
-                </div>
-            </form>
-            </div>
-        </div>
-        <div class="col form">
-            <label class="choose">choose role</label>
-            <div class="form2">
-            <div class="form-group">
-                <div class="form-group">
-                    <input type="button" id="seller" name="role" value="SELLER" checked th:field="*{role}">
-                    <label for="seller"></label>
-                </div>
-                <div class="form-group">
-                    <input type="button" id="buyer" name="role" value="BUYER" th:field="*{role}">
-                    <label for="buyer"></label>
-                </div>
-                <div class="form-group">
-                    <input type="button" id="neighbor" name="role" value="NEIGHBOR" th:field="*{role}">
-                    <label for="neighbor"></label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+<!--	<label >choose role</label>-->
+
+<!--			<div th:object="${role}" >-->
+
+<!--			<input value="1" name="neighbor" type="radio"/>-->
+<!--				<label >neighbor</label>-->
+
+<!--			<input value="2" type="radio"   name="buyer"/>-->
+<!--				<label >buyer</label>-->
+
+<!--			<input   value="3" type="radio" name="seller"/>-->
+<!--				<label >seller</label>-->
+
+
+<!--</form>-->
+
+
+<form th:action="@{/sign-up}" th:object="${user}" method="post">
+	<div class="form-group">
+		<label for="username">Username:</label>
+		<input type="text" class="form-control" id="username" name="username" th:field="*{username}"/>
+	</div>
+
+	<div class="form-group">
+		<label for="username">email:</label>
+		<input type="text" class="form-control" id="email" name="username" th:field="*{email}"/>
+	</div>
+
+	<div class="form-group">
+		<label >10 or more characters</label><br>
+		<label for="password">Password</label>
+		<input id="password" name="password" class="form-control" type="password" required pattern=".{1,}" title="10 or more characters" onkeyup='passConfirm();' th:field="*{password}">
+	</div>
+	<span id="Message" ></span>
+	<div class="form-group">
+		<label for="confirm_password">Confirm Password</label>
+		<input id="confirm_password" name="confirm_password" class="form-control" type="password" onkeyup='passConfirm();'>
+	</div>
+
+
+	<div class="form-group">
+		<label>choose role</label>
+
+
+		<div>
+			<input type="radio" id="seller" name="role" value="1" checked th:field="*{role}">
+			<label for="seller">seller</label>
+		</div>
+
+		<div>
+			<input type="radio" id="buyer" name="role" value="2" th:field="*{role}">
+			<label for="buyer">buyer</label>
+		</div>
+
+		<div>
+			<input type="radio" id="neighbor" name="role" value="3" th:field="*{role}">
+			<label for="neighbor">neighbor</label>
+		</div>
+
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
 
 </body>
+<!--<script src="../../static/password-alerts.js"></script>-->
+<script>
+
+	var passConfirm = function() {
+		if (document.getElementById("password").value ===
+			document.getElementById("confirm_password").value) {
+			document.getElementById("Message").style.color = "Green";
+			document.getElementById("Message").style.fontSize = "2vh";
+			document.getElementById("Message").innerHTML = "Passwords match!"
+		} else {
+			document.getElementById("Message").style.color = "Red";
+			document.getElementById("Message").style.fontSize = "2vh";
+			document.getElementById("Message").innerHTML = "Passwords do NOT match!"
+		}
+	}
+</script>
+
+
 </html>

@@ -6,8 +6,10 @@ import com.codeup.testrepo.repositories.UserRepository;
 import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
+import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -27,11 +30,18 @@ public class ListingController {
     private final ListingRepository listDao;
     private final EmailService emailService;
 
+
+    private ProductService service;
+
+
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
+
+
+
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
@@ -42,19 +52,18 @@ public class ListingController {
 //        return "redirect: /listings/home-logged";
 //    }
 
-
-//    @GetMapping ("/listings")
-//    public String userHome(Model model) {
-//        model.addAttribute("Users", userDao.findAll());
-////        model.addAttribute("roles", listDao.findAll());
-//        return "listings/Home-not";
+//    @RequestMapping("/")
+//    public String viewHomePage(Model model, @Param("keyword") String keyword) {
+//        List<Listings> listProducts = service.listAll(keyword);
+//        model.addAttribute("listProducts", listProducts);
+//        model.addAttribute("keyword", keyword);
+//
+//        return "index";
 //    }
 
     @GetMapping ("/listings")
     public String userHome(Model model) {
         model.addAttribute("Users", userDao.findAll());
-////        User user = (User) request.getSession().getAttribute("username");
-//    System.out.println(id);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUser = authentication.getName();
         User user1 = userDao.findByUsername(currentUser);
@@ -70,26 +79,17 @@ public class ListingController {
             return "listings/neighbor-profile";
         }
         return "listings/home-not-logged";
-
-        //        System.out.println(roles);
+//                System.out.println(roles);
 //        System.out.println(id);
     }
 
-    @GetMapping("/about-us")
-    public String showAboutUs() {
-        return "users/about-us";
+
+    @PostMapping("/home-logged-in")
+    public String postIndex(Model model){
+        model.addAttribute("posts", listDao.findAll());
+        return "listings/home-logged-in";
     }
 
-//    @GetMapping("/listings")
-//    public String createAd(@RequestParam(name = "username") String username,@RequestParam(name = "password") String password,@RequestParam(name = "role") Roles role){
-//        User user = new User();
-//        Roles roles = new Roles();
-//        user.setRole(roles);
-//        user.setPassword(password);
-//        user.setUsername(username);
-//        System.out.println();
-//        return "test: " + username;
-//    }
 
     //MAPPING FOR VIEWING LISTINGS BY ID
 //    @GetMapping(path = "/listings/{id}")
@@ -98,44 +98,44 @@ public class ListingController {
 //        model.addAttribute("listing", listDao.findById(id));
 //        Listings listing = (Listings) listDao.getReferenceById(id);
 //        User user = userDao.getReferenceById(listing.getUser().getId());
-//        model.addAttribute("postTitle", listing.getTitle());
-//        model.addAttribute("postBody", listing.getDescription());
-//        model.addAttribute("postID", listing.getId());
-//        model.addAttribute("userEmail", user.getEmail());
+////        model.addAttribute("postTitle", listing.getTitle());
+////        model.addAttribute("postBody", listing.getDescription());
+////        model.addAttribute("postID", listing.getId());
+////        model.addAttribute("userEmail", user.getEmail());
 //        model.addAttribute("user", user);
 //        return "listings/home-logged-in";
 //    }
 
     //MAPPING FOR EDIT POSTS ON SELLER PAGE
-//    @GetMapping(path = "/listings/{id}/seller-profile")
-//    public String getEditSeller(@PathVariable long id, Model model){
-//        model.addAttribute("title", "Edit Post");
-//        Listings listing = (Listings) listDao.getReferenceById(id);
-//        model.addAttribute("list", listing);
-//        return "listings/seller-profile";
-//    }
+    @GetMapping(path = "/listings/{id}/seller-profile")
+    public String getEditSeller(@PathVariable long id, Model model){
+        model.addAttribute("title", "Edit Post");
+        Listings listing = (Listings) listDao.getReferenceById(id);
+        model.addAttribute("list", listing);
+        return "listings/seller-profile";
+    }
 
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
-//    @PostMapping(path = "/listings/{id}/seller-profile")
-//    public String sellerEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
-//        Listings listing = (Listings) listDao.getReferenceById(id);
-//        listing.setTitle(title);
-//        listing.setDescription(body);
-//        listDao.save(listing);
-//        return "redirect:/listings/seller-profile";
-//    }
+    @PostMapping(path = "/listings/{id}/seller-profile")
+    public String sellerEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
+        Listings listing = (Listings) listDao.getReferenceById(id);
+        listing.setTitle(title);
+        listing.setDescription(body);
+        listDao.save(listing);
+        return "redirect:/listings/seller-profile";
+    }
 
     //MAPPING FOR EDIT POST ON NEIGHBOR-PAGE
-//    @GetMapping(path = "/listings/{id}/neighbor-profile")
-//    public String getEditNeighbor(@PathVariable long id, Model model){
-//        model.addAttribute("title", "Edit Post");
-//        Listings listing = (Listings) listDao.getReferenceById(id);
-//        model.addAttribute("list", listing);
-//        return "listings/neighbor-profile";
-//    }
+    @GetMapping(path = "/listings/{id}/neighbor-profile")
+    public String getEditNeighbor(@PathVariable long id, Model model){
+        model.addAttribute("title", "Edit Post");
+        Listings listing = (Listings) listDao.getReferenceById(id);
+        model.addAttribute("list", listing);
+        return "listings/neighbor-profile";
+    }
 
-    //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON NEIGHBOR PAGE
+//    TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON NEIGHBOR PAGE
     @PostMapping(path = "/listings/{id}/neighbor-profile")
     public String neighborEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
         Listings listing = (Listings) listDao.getReferenceById(id);
@@ -170,7 +170,7 @@ public class ListingController {
     }
 
 
-    //DELETE MAPPING FOR SELLER
+////
 //    @GetMapping(path = "/listings/{id}/seller-profile")
 //    public String sellerDelete(@PathVariable long id) {
 //        listDao.deleteById(id);
@@ -178,7 +178,6 @@ public class ListingController {
 //    }
 
     // DELETE MAPPING FOR BUYER
-
     @GetMapping(path = "/listings/{id}/buyer-profile")
     public String buyerDelete(@PathVariable long id) {
         listDao.deleteById(id);
@@ -200,11 +199,11 @@ public class ListingController {
 //    }
 
     //DELETE MAPPING FOR ADMIN
-    @GetMapping(path = "/listings/{id}")
-    public String adminDelete(@PathVariable long id) {
-        listDao.deleteById(id);
-
-        return "redirect:/listings/seller-profile";
-    }
+//    @GetMapping(path = "/listings/{id}")
+//    public String adminDelete(@PathVariable long id) {
+//        listDao.deleteById(id);
+//
+//        return "redirect:/listings/seller-profile";
+//    }
 
 }
