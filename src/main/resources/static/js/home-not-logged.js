@@ -26,30 +26,31 @@ function getListings() {
             console.log(propertyType);
 
             let html = `
-                        <div class="card mb-3">
+                        <div class="card mb-3" id="top-card">
                         <img class="card-img-top" src="${data.props[2].imgSrc}" alt="Card image cap">
                         <div class="card-body">
-                        <h5 class="card-title">Featured Home</h5>
+                        <h5 class="card-title">FEATURED HOME</h5>
+                        <hr>
                         <p class="card-text">${data.props[2].address}</p>
                         <p class="card-text"><small class="text-muted">${data.props[2].propertyType}</small></p>
                         </div>
                         </div>`
 
             let html2 = `<div class="card mb-3" id="btm-card">
-                        <img class="card-img-top" src="${data.props[8].imgSrc}" alt="Card image cap">
+                        <img class="card-img-top" src="${data.props[9].imgSrc}" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">Featured Home</h5>
-                        <p class="card-text">${data.props[8].address}</p>
-                        <p class="card-text"><small class="text-muted">${data.props[8].propertyType}</small></p>
+                        <p class="card-text-address">${data.props[9].address}</p>
+                        <p class="card-text-property"><small class="text-muted">${data.props[9].propertyType}</small></p>
                         </div>
                         </div>
 
                         <div class="card mb-3" id="btm-card">
-                        <img class="card-img-top" src="${data.props[3].imgSrc}" alt="Card image cap">
+                        <img class="card-img-top" src="${data.props[0].imgSrc}" alt="Card image cap">
                         <div class="card-body">
                         <h5 class="card-title">Featured Home</h5>
-                        <p class="card-text">${data.props[3].address}</p>
-                        <p class="card-text"><small class="text-muted">${data.props[3].propertyType}</small></p>
+                        <p class="card-text">${data.props[0].address}</p>
+                        <p class="card-text"><small class="text-muted">${data.props[0].propertyType}</small></p>
                         </div>
                         </div>
                            

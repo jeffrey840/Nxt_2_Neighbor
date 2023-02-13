@@ -30,13 +30,17 @@ public class ListingController {
     private final ListingRepository listDao;
     private final EmailService emailService;
 
+
     private ProductService service;
+
 
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
+
+
 
     }
 
@@ -79,11 +83,13 @@ public class ListingController {
 //        System.out.println(id);
     }
 
+
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
         model.addAttribute("posts", listDao.findAll());
         return "listings/home-logged-in";
     }
+
 
     //MAPPING FOR VIEWING LISTINGS BY ID
 //    @GetMapping(path = "/listings/{id}")

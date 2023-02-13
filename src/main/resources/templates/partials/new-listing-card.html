@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<div th:fragment="/card">-->
+<!--<h1>{{card.title}}</h1>-->
+<!--<p>{{card.bio}}</p>-->
+<!--<img src="{{card.image}}" />-->
+<!--<form method="post">-->
+<!--  <input type="text" name="title" value="{{card.title}}"/>-->
+<!--  <textarea name="bio">{{card.bio}}</textarea>-->
+<!--  <input type="file" name="image" />-->
+<!--  <button type="submit">Update</button>-->
+<!--</form>-->
+<!--</div>-->
+<body>
+<h1 id="title"></h1>
+<p id="bio"></p>
+<img id="image" />
+<form>
+  <input type="text" id="inputTitle" />
+  <textarea id="inputBio"></textarea>
+  <input type="file" id="inputImage" />
+  <button type="button" onclick="updateCard()">Update</button>
+</form>
+</body>
+<script>
+  function updateCard() {
+    document.getElementById("title").innerHTML = document.getElementById("inputTitle").value;
+    document.getElementById("bio").innerHTML = document.getElementById("inputBio").value;
+    document.getElementById("image").src = URL.createObjectURL(document.getElementById("inputImage").files[0]);
+  }
+</script>
+</html>
