@@ -23,23 +23,6 @@
 	<input value="login" type="submit" />
 </form>
 
-<!--<form th:action="@{/sign-up}" method="POST" th:object="${user}">-->
-<!--  <label for="username">Username</label>-->
-<!--  <input id="username" th:field="*{username}" />-->
-
-<!--  <label for="email">Email</label>-->
-<!--  <input id="email" th:field="*{email}" />-->
-
-<!--  <label for="password">Password</label>-->
-<!--  <input id="password" type="password" th:field="*{password}" />-->
-
-<!--	🟩🟩🟩 verifies password-->
-<!--use javascript to verify password-->
-<!--    <label for="password-confirmation">Confirm Password</label>-->
-<!--    <input id="password-confirmation" type="password"  />-->
-<!--	🟩🟩🟩-->
-
-
 
 
 
@@ -72,9 +55,17 @@
 	</div>
 
 	<div class="form-group">
-		<label for="password">Password:</label>
-		<input type="password" class="form-control" id="password" name="password" th:field="*{password}"/>
+		<label >10 or more characters</label><br>
+		<label for="password">Password</label>
+		<input id="password" name="password" class="form-control" type="password" required pattern=".{1,}" title="10 or more characters" onkeyup='passConfirm();' th:field="*{password}">
 	</div>
+	<span id="Message" ></span>
+	<div class="form-group">
+		<label for="confirm_password">Confirm Password</label>
+		<input id="confirm_password" name="confirm_password" class="form-control" type="password" onkeyup='passConfirm();'>
+	</div>
+
+
 	<div class="form-group">
 		<label>choose role</label>
 
@@ -99,4 +90,22 @@
 </form>
 
 </body>
+<!--<script src="../../static/password-alerts.js"></script>-->
+<script>
+
+	var passConfirm = function() {
+		if (document.getElementById("password").value ===
+			document.getElementById("confirm_password").value) {
+			document.getElementById("Message").style.color = "Green";
+			document.getElementById("Message").style.fontSize = "2vh";
+			document.getElementById("Message").innerHTML = "Passwords match!"
+		} else {
+			document.getElementById("Message").style.color = "Red";
+			document.getElementById("Message").style.fontSize = "2vh";
+			document.getElementById("Message").innerHTML = "Passwords do NOT match!"
+		}
+	}
+</script>
+
+
 </html>

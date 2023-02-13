@@ -39,8 +39,6 @@ public class SecurityConfiguration {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -58,8 +56,7 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-//                .requestMatchers("/", "/listings/home-not-logged", "/sign-up","/forgotMyPassword","updatePassword")
-                .requestMatchers("/", "/listings/home-not-logged", "/sign-up") // anyone can see the home and the ads pages
+                .requestMatchers("/", "/sign-up","/listings") // anyone can see the home and the ads pages
                 .permitAll()
                 /* Pages that require authentication */
                 .and()
@@ -71,7 +68,10 @@ public class SecurityConfiguration {
                         "/listings/neighbor-profile",
                         "/listings/{id}/neighbor-profile",// only authenticated users can create ads
                         "/listings/{id}/delete",
-                        "/listings/{id}","/listings"
+                        "/listings/{id}",
+                        "/home-logged-in",
+                        "/listings",
+                        "/home-logged-in"
                 )
 
 

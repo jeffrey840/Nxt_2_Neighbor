@@ -1,7 +1,11 @@
 package com.codeup.testrepo.models;
 
 
+import com.mysql.cj.jdbc.Blob;
 import jakarta.persistence.*;
+import org.hibernate.engine.jdbc.BlobImplementer;
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 
@@ -22,6 +26,9 @@ public class Listings {
 
     @Column(length = 100)
     private Long price;
+
+//    @Column(length = 255)
+//    private String img;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -81,4 +88,11 @@ public class Listings {
         this.address = address;
     }
 
+//    public String getImg() {
+//        return img;
+//    }
+//
+//    public void setImg(String img) {
+//        this.img = img;
+//    }
 }

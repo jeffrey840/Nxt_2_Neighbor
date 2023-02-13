@@ -5,7 +5,7 @@
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
         <div class="container-fluid">
 <!--            replace with logo ⬇️ -->
-            <a class="navbar-brand" href="/home-logged-in.html">
+            <a class="navbar-brand" href="/home-logged-in">
                 <img src="img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
             </a>
             <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
@@ -27,9 +27,12 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form th:action="@{/}">
+                Filter: <input type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required />
+                &nbsp;
+                <input type="submit" value="Search" />
+                &nbsp;
+                <input type="button" value="Clear" id="btnClear" onclick="clearSearch()" />
             </form>
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center">Logout</button>
@@ -37,8 +40,12 @@
         </div>
     </nav>
 
-    <script src="/templates/js/l" defer>
+    <script src="/templates/js/home-logged-in.js" defer type="text/javascript">
+            function clearSearch() {
+            window.location = "[[@{/}]]";
+        }
         alert("only showing buyer page")
+
     </script>
 
 </nav>

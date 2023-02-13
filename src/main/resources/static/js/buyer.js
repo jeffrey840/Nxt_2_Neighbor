@@ -34,7 +34,7 @@ function getListings() {
                           <a href="#" class="btn btn-primary">DELETE</a>
                           </div>
                           </div>
-                            
+
                           <div class="card" style="width: 18rem;">
                           <img class="card-img-top" src="${data.props[11].imgSrc}" alt="Card image cap">
                           <div class="card-body">
@@ -58,3 +58,4 @@ function getListings() {
         })
 }
 getListings();
+
