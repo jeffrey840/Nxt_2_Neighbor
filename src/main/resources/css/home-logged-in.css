@@ -1,0 +1,6 @@
+.results{
+    display: flex;!important;
+    flex-wrap: wrap;!important;
+    justify-content: space-between;
+    margin: 30px;
+}
