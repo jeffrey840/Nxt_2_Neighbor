@@ -39,9 +39,6 @@ public class ListingController {
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
-
-
-
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
