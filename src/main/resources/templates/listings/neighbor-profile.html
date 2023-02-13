@@ -37,6 +37,11 @@
             <form th:action="@{/logout}" th:method="post">
                 <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center" >Logout</button>
             </form>
+            <form th:action="@{/home-logged-in}" method="post">
+                <button>Listings</button>
+            </form>
+
+
 
         </div>
     </nav>
@@ -47,6 +52,21 @@
 <h1 class="text-center"> WELCOME, USERNAME</h1>
 <div class="listing-display text-center" id="listing-display">
 </div>
+
+<!--<div th:each="post : ${list}">-->
+<!--    <h2 th:text="${post.getTitle()}"></h2>-->
+<!--    <form name="view" th:action="${'/posts/' + post.getId()}" method="get">-->
+<!--        <button type="submit">View</button>-->
+<!--    </form>-->
+<!--    <form name="edit" th:action="${'/posts/' + post.getId() + '/edit'}" method="get">-->
+<!--        <button type="submit">Edit</button>-->
+<!--    </form>-->
+
+<!--    <form name="delete" th:action="${'/posts/' + post.getId() + '/delete'}" method="get">-->
+<!--        <button type="submit" class="btn ">Delete</button>-->
+<!--    </form>-->
+<!--</div>-->
+
 
 <footer class="navbar justify-content-end">
     <ul class="nav nav-pills">
