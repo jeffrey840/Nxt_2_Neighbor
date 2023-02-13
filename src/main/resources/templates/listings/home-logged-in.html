@@ -20,21 +20,21 @@
     <h1 class="text-center"> WELCOME, USERNAME</h1>
     <div id="results" class="results"></div>
 
-<!--    <div th:each="post : ${posts}">-->
-<!--        <h2 th:text="${post.getTitle()()}"></h2>-->
+    <div th:each="list : ${Listings}">
+        <h2 th:text="${list.getTitle()}"></h2>
 
-<!--        <form name="view" th:action="${'/posts/' + post.getId()}" method="get">-->
-<!--            <button type="submit">View</button>-->
-<!--        </form>-->
+        <form name="view" th:action="${'/listings/' + list.getId()}" method="get">
+            <button type="submit">View</button>
+        </form>
 
-<!--        <form name="edit" th:action="${'/posts/' + post.getId() + '/edit'}" method="get">-->
-<!--            <button type="submit">Edit</button>-->
-<!--        </form>-->
+        <form name="edit" th:action="${'/listings/' + list.getId() + '/edit'}" method="get">
+            <button type="submit">Edit</button>
+        </form>
 
-<!--        <form name="delete" th:action="${'/posts/' + post.getId() + '/delete'}" method="get">-->
-<!--            <button type="submit" class="btn ">Delete</button>-->
-<!--        </form>-->
-<!--    </div>-->
+        <form name="delete" th:action="${'/listings/' + list.getId() + '/delete'}" method="get">
+            <button type="submit" class="btn ">Delete</button>
+        </form>
+    </div>
 
     <footer class="navbar justify-content-end">
         <ul class="nav nav-pills">

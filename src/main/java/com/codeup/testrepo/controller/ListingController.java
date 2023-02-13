@@ -86,7 +86,7 @@ public class ListingController {
 
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
-        model.addAttribute("posts", listDao.findAll());
+        model.addAttribute("Listings", listDao.findAll());
         return "listings/home-logged-in";
     }
 
