@@ -19,7 +19,7 @@
                     </a>
                     <ul class="dropdown-menu">
 <!--                        goes back to user profile regardless what page-->
-                        <li><a class="dropdown-item" href="#" th:onclick="getProfile()">Profile</a></li>
+                        <li><a class="dropdown-item" href="/profile" >Profile</a></li>
                         <li class="dropdown-item">
                             <a class="nav-link" href="/contact-us">Contact Us</a>
                         </li>
@@ -40,7 +40,7 @@
         </div>
     </nav>
 
-    <script src="/templates/js/home-logged-in.js" defer type="text/javascript">
+    <script src="/js/home-logged-in.js" defer type="text/javascript">
             function clearSearch() {
             window.location = "[[@{/}]]";
         }

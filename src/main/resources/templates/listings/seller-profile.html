@@ -58,11 +58,12 @@
 
 <div sec:authorize="isAuthenticated()">
     this show the user that is currently logged in
-    <span sec:authentication="name"></span>
+<!--    <span sec:authentication="name"></span>-->
+    <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
 </div>
 
 
-<h1 class="text-center"> WELCOME, USERNAME</h1>
+<!--<h1 class="text-center"> WELCOME, USERNAME</h1>-->
 <div id="listings">
     <img src="" id="image" alt="">
     <h1 id="title"></h1>
@@ -71,6 +72,18 @@
     <h1 id="property"></h1>
 </div>
 <button id="create-listing-button">Create Listing</button>
+
+<!--<h1 class="text-center">Create New Post</h1>-->
+<!--<form  th:action="@{/listings/create}" th:method="post" th:object="${listing}">-->
+<!--    <label for="postTitle" >Title:</label>-->
+<!--    <input type="text" th:field="*{title}" id="postTitle">-->
+
+<!--    <label for="postBody" >Body:</label>-->
+<!--    <textarea th:field="*{listing}" id="postBody"></textarea>-->
+
+<!--    <button type="submit">Submit Post</button>-->
+<!--</form>-->
+
 <div id="listing-cards-container">
 </div>
 <div id="listing-form-modal" class="modal">
