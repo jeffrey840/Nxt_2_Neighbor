@@ -8,6 +8,7 @@ import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.mapping.List;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -92,28 +92,29 @@ public class ListingController {
 
 
     //MAPPING FOR VIEWING LISTINGS BY ID
-//    @GetMapping(path = "/listings/{id}")
-//    public String viewListings(@PathVariable long id, Model model){
-//        model.addAttribute("title", "Individual Post");
-//        model.addAttribute("listing", listDao.findById(id));
-//        Listings listing = (Listings) listDao.getReferenceById(id);
-//        User user = userDao.getReferenceById(listing.getUser().getId());
-////        model.addAttribute("postTitle", listing.getTitle());
-////        model.addAttribute("postBody", listing.getDescription());
-////        model.addAttribute("postID", listing.getId());
-////        model.addAttribute("userEmail", user.getEmail());
-//        model.addAttribute("user", user);
-//        return "listings/home-logged-in";
-//    }
-
-    //MAPPING FOR EDIT POSTS ON SELLER PAGE
-    @GetMapping(path = "/listings/{id}/seller-profile")
-    public String getEditSeller(@PathVariable long id, Model model){
-        model.addAttribute("title", "Edit Post");
+    @GetMapping(path = "/listings/{id}")
+    public String viewListings(@PathVariable long id, Model model){
+        model.addAttribute("title", "Individual Post");
+        model.addAttribute("listing", listDao.findById(id));
         Listings listing = (Listings) listDao.getReferenceById(id);
-        model.addAttribute("list", listing);
-        return "listings/seller-profile";
+        User user = userDao.getReferenceById(listing.getUser().getId());
+//        model.addAttribute("postTitle", listing.getTitle());
+//        model.addAttribute("postBody", listing.getDescription());
+//        model.addAttribute("postID", listing.getId());
+//        model.addAttribute("userEmail", user.getEmail());
+        model.addAttribute("user", user);
+        return "listings/home-logged-in";
     }
+
+    //    🟥 uncommenting this returns an error
+    //MAPPING FOR EDIT POSTS ON SELLER PAGE
+//    @GetMapping(path = "/listings/{id}/seller-profile")
+//    public String getEditSeller(@PathVariable long id, Model model){
+//        model.addAttribute("title", "Edit Post");
+//        Listings listing = (Listings) listDao.getReferenceById(id);
+//        model.addAttribute("list", listing);
+//        return "listings/seller-profile";
+//    }
 
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
@@ -126,14 +127,15 @@ public class ListingController {
         return "redirect:/listings/seller-profile";
     }
 
+//    🟥 uncommenting this returns an error
     //MAPPING FOR EDIT POST ON NEIGHBOR-PAGE
-    @GetMapping(path = "/listings/{id}/neighbor-profile")
-    public String getEditNeighbor(@PathVariable long id, Model model){
-        model.addAttribute("title", "Edit Post");
-        Listings listing = (Listings) listDao.getReferenceById(id);
-        model.addAttribute("list", listing);
-        return "listings/neighbor-profile";
-    }
+//    @GetMapping(path = "/listings/{id}/neighbor-profile")
+//    public String getEditNeighbor(@PathVariable long id, Model model){
+//        model.addAttribute("title", "Edit Post");
+//        Listings listing = (Listings) listDao.getReferenceById(id);
+//        model.addAttribute("list", listing);
+//        return "listings/neighbor-profile";
+//    }
 
 //    TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON NEIGHBOR PAGE
     @PostMapping(path = "/listings/{id}/neighbor-profile")
@@ -144,13 +146,14 @@ public class ListingController {
         listDao.save(listing);
         return "redirect:/listings/neighbor-profile";
     }
-
+    //    🟥 uncommenting this returns an error
     //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
 //    @GetMapping(path = "listings/seller-profile")
 //    public String sellerCreate(Model model){
 //        model.addAttribute("list", new Listings());
 //        return "listings/seller-profile";
 //    }
+
 
     //MAPPING ON NEIGHBOR PAGE TO CREATE A BIO SECTION ON PROFILE
     @GetMapping(path = "listings/neighbor-profile")
@@ -170,12 +173,11 @@ public class ListingController {
     }
 
 
-////
-//    @GetMapping(path = "/listings/{id}/seller-profile")
-//    public String sellerDelete(@PathVariable long id) {
-//        listDao.deleteById(id);
-//        return "redirect:/listings/seller-profile";
-//    }
+    @GetMapping(path = "/listings/{id}/seller-profile")
+    public String sellerDelete(@PathVariable long id) {
+        listDao.deleteById(id);
+        return "redirect:/listings/seller-profile";
+    }
 
     // DELETE MAPPING FOR BUYER
     @GetMapping(path = "/listings/{id}/buyer-profile")
@@ -192,11 +194,11 @@ public class ListingController {
     }
 
     //DELETE MAPPING FOR NEIGHBOR
-//    @GetMapping(path = "/listings/{id}/neighbor-profile")
-//    public String neighborDelete(@PathVariable long id) {
-//        listDao.deleteById(id);
-//        return "redirect:/listings/neighbor-profile";
-//    }
+    @GetMapping(path = "/listings/{id}/delete")
+    public String neighborDelete(@PathVariable long id) {
+        listDao.deleteById(id);
+        return "redirect:/listings/neighbor-profile";
+    }
 
     //DELETE MAPPING FOR ADMIN
 //    @GetMapping(path = "/listings/{id}")
@@ -204,6 +206,22 @@ public class ListingController {
 //        listDao.deleteById(id);
 //
 //        return "redirect:/listings/seller-profile";
+//    }
+
+//    @GetMapping(path = "/listings/create")
+//    public String getCreate(Model model){
+//        model.addAttribute("Listings", new Listings());
+//        return "redirect:/listings/neighbor-profile";
+//    }
+//
+//
+//    @PostMapping(path = "/listings/create")
+//    public String postCreate(@ModelAttribute Listings createdPost){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        createdPost.setUser(user);
+//        emailService.prepareAndSend(createdPost, "Your latest blog post: " + createdPost.getTitle(), "This is the body of your post!" + createdPost.getDescription());
+//        listDao.save(createdPost);
+//        return "redirect:/listings";
 //    }
 
 }

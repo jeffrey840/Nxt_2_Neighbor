@@ -32,4 +32,6 @@ public class FragmentsController {
 //        model.addAttribute("new-listing-card", card);
 //        return "new-listing-card";
 //    }
+
+
 }

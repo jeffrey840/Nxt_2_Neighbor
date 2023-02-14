@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,8 +18,25 @@
     <nav th:insert="partials/logged-in-navbar :: logged-in-navbar"></nav>
 
 
-    <h1 class="text-center"> WELCOME, USERNAME</h1>
+    <div sec:authorize="isAuthenticated()">
+        this show the user that is currently logged in
+        <!--    <span sec:authentication="name"></span>-->
+        <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
+    </div>
     <div id="results" class="results"></div>
+
+    <div class="container">
+        <form action="/search" method="POST">
+            <div class="form-group">
+                <label for="search">Search Ads</label>
+                <input id="search" name="search" class="form-control" type="text">
+            </div>
+            <div>
+                <input type="submit" class="btn btn-info btn-block" value="Search">
+            </div>
+        </form>
+    </div>
+
 
     <div th:each="list : ${Listings}">
         <h2 th:text="${list.getTitle()}"></h2>
@@ -57,5 +75,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <script src="/js/home-logged-in.js"></script>
+<script th:src="@{/../static/password-alerts.js}" defer></script>
+
 </body>
 </html>
