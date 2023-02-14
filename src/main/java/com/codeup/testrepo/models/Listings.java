@@ -1,10 +1,6 @@
 package com.codeup.testrepo.models;
-
-
-import com.mysql.cj.jdbc.Blob;
 import jakarta.persistence.*;
-import org.hibernate.engine.jdbc.BlobImplementer;
-import org.w3c.dom.Text;
+
 
 import java.util.List;
 
@@ -88,11 +84,4 @@ public class Listings {
         this.address = address;
     }
 
-//    public String getImg() {
-//        return img;
-//    }
-//
-//    public void setImg(String img) {
-//        this.img = img;
-//    }
 }

@@ -7,6 +7,7 @@ import com.codeup.testrepo.repositories.ListingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -19,5 +20,9 @@ public class ProductService {
             return repo.search(keyword);
         }
         return repo.findAll();
+    }
+    public interface ListingService{
+        Collection<Listings> getListing();
+        Listings addListing(Listings listings);
     }
 }

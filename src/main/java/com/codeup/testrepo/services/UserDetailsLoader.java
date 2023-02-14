@@ -12,25 +12,24 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserDetailsLoader implements UserDetailsService {
-    private final UserRepository users;
-    private final RolesRepository roles;
-    private final ListingRepository list;
+    private final UserRepository userRepository;
+    private final RolesRepository rolesRepository;
+    private final ListingRepository listingRepository;
 
-    public UserDetailsLoader(UserRepository users,RolesRepository roles,ListingRepository list) {
-        this.users = users;
-        this.list = list;
-        this.roles = roles;
+    public UserDetailsLoader(UserRepository userRepository ,RolesRepository rolesRepository, ListingRepository listingRepository) {
+        this.userRepository = userRepository;
+        this.listingRepository = listingRepository;
+        this.rolesRepository = rolesRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = users.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("No user found for " + username);
         }
         return new UserWithRoles(user);
     }
-
 //    @Override
 //    public UserDetails loadUserByListing(Long list) throws UsernameNotFoundException {
 //        User user = users.fi(list);
