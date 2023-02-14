@@ -17,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -30,7 +32,7 @@ public class ListingController {
     private final ListingRepository listDao;
     private final EmailService emailService;
 
-
+    private ProductService.ListingService listingService;
     private ProductService service;
 
 
@@ -57,6 +59,10 @@ public class ListingController {
 //
 //        return "index";
 //    }
+@GetMapping("/")
+public String welcomePage() {
+    return "listings/home-not-logged";
+}
 
     @GetMapping ("/listings")
     public String userHome(Model model) {
@@ -87,7 +93,11 @@ public class ListingController {
         return "listings/home-logged-in";
     }
 
-
+    @GetMapping("/listings/home-logged-in")
+    public String viewListings(Model model){
+        model.addAttribute("listings", listingService.getListing());
+        return "listings/home-logged-in";
+    }
     //MAPPING FOR VIEWING LISTINGS BY ID
 //    @GetMapping(path = "/listings/{id}")
 //    public String viewListings(@PathVariable long id, Model model){
@@ -111,7 +121,6 @@ public class ListingController {
         model.addAttribute("list", listing);
         return "listings/seller-profile";
     }
-
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
     @PostMapping(path = "/listings/{id}/seller-profile")
@@ -157,17 +166,6 @@ public class ListingController {
     }
 
     //    EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
-    @PostMapping(path = "listings/seller-profile")
-    public String sellerCreate(@ModelAttribute Listings createdListing){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        createdListing.setUser(user);
-        emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
-        listDao.save(createdListing);
-        return "redirect:/listings/seller-profile";
-    }
-
-
-////
 //    @GetMapping(path = "/listings/{id}/seller-profile")
 //    public String sellerDelete(@PathVariable long id) {
 //        listDao.deleteById(id);
@@ -182,10 +180,18 @@ public class ListingController {
     }
 
     //MAPPING ON SELLER PAGE TO CREATE NEW LISTING
-    @GetMapping(path = "listings/seller-profile")
+    @GetMapping(path = "/seller-profile")
     public String sellerCreate(Model model){
         model.addAttribute("list", new Listings());
         return "listings/seller-profile";
+    }
+    @PostMapping(path = "seller-profile")
+    public RedirectView addListing (@ModelAttribute("listing") Listings listings, RedirectAttributes redirectAttributes){
+        final RedirectView redirectView = new RedirectView("/listing/addListing", true);
+        Listings savedListing = listingService.addListing(listings);
+        redirectAttributes.addFlashAttribute("savedListing", savedListing);
+        redirectAttributes.addFlashAttribute("addListingSuccess", true);
+        return redirectView;
     }
 
     //DELETE MAPPING FOR NEIGHBOR
@@ -202,5 +208,6 @@ public class ListingController {
 //
 //        return "redirect:/listings/seller-profile";
 //    }
+
 
 }

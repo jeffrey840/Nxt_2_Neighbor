@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
+<html xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>seller Profile</title>
@@ -77,21 +76,21 @@
 <div id="listing-form-modal" class="modal">
     <div class="modal-content">
         <span id="close" class="close">&times;</span>
-        <form th:action="@{/listings/seller-profile}" method="post" th:object="${list}">
+        <form th:action="@{/listings/seller-profile}" method="post" th:each="l: ${list}">
             <label for="inputTitle">
-                <input placeholder="title" type="text" id="inputTitle" th:field="${title}" />
+                <input placeholder="title" type="text" id="inputTitle" th:field="${l.title}" />
             </label>
             <br>
             <label for="inputAddress">
-                <textarea placeholder="address" id="inputAddress" th:field="${address}"></textarea>
+                <textarea placeholder="address" id="inputAddress" th:field="${l.address}"></textarea>
             </label>
             <br>
             <label for="inputPrice">
-                <textarea placeholder="price" id="inputPrice" th:field="${price}"></textarea>
+                <textarea placeholder="price" id="inputPrice" th:field="${l.price}"></textarea>
             </label>
             <br>
             <label for="inputProperty">
-                <textarea placeholder="property" id="inputProperty" th:field="${description}"></textarea>
+                <textarea placeholder="property" id="inputProperty" th:field="${l.description}"></textarea>
             </label>
             <br>
             <input type="file" id="inputImage" />
