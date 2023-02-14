@@ -11,6 +11,21 @@ const options = {
 	}
 };
 
+// const button = document.getElementById('updatePic')
+// button.addEventListener('click', getimages)
+//
+// async function getimages() {
+// 	const response = await fetch(`https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=${document.getElementById("dateUserInput")}%2C%20Tx&page=1&status_type=RecentlySold&home_type=Houses&sort=Homes_for_You`, options)
+// 	const data = await response.json()
+// 	// const {props} = data
+// 	console.log(data.valueOf());
+
+		// addresses = props[1].address
+		// zpid = props[1]["zpid"]
+		// image = props[1]["imgSrc"]
+		// console.log(addresses,zpid,image)
+// }
+
 // Returns 3 houses that were recently sold
 // Each house has the address, img
 // These houses represent the neighbors
@@ -52,23 +67,24 @@ const options = {
 // they get recommended a house based on the house being sold, the neighbors will be tied to sold listings
 
 
+const button = document.getElementById('showMyListings')
+button.addEventListener('click', myFunction)
 
+// myFunction();
 
-myFunction();
-
-async function myFunction() {
-	let User_address = "houston"
+    async function myFunction() {
+	let User_address = document.getElementById("dateUserInput").value
 	// let User_address = document.getElementById("Uaddress").textContent
-	const response = await fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location='+`${User_address}`+'%20tx&page=1&status_type=ForSale&home_type=Houses&sort=Homes_for_You', options)
+	const response = await fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + `${User_address}` + '%20tx&page=1&status_type=ForSale&home_type=Houses&sort=Homes_for_You', options)
 	const data = await response.json();
 	const {props} = data
 
-	for(let i =0;i < 1;i++) {
+	for (let i = 0; i < 4; i++) {
 
 		addresses = props[i].address
 		zpid = props[i]["zpid"]
 		image = props[i]["imgSrc"]
-		console.log(addresses,zpid,image)
+		console.log(addresses, zpid, image)
 
 		// this will print out the zpid along with the
 		// const response2 = await fetch('https://zillow-com1.p.rapidapi.com/images?zpid=' + `${zpid}`, options)
@@ -81,6 +97,7 @@ async function myFunction() {
 		// }
 
 	}
-
 }
+
+
 

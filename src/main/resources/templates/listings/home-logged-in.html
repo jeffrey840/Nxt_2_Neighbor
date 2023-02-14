@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <nav th:insert="partials/logged-in-navbar :: logged-in-navbar"></nav>
+    <nav th:insert="/partials/logged-in-navbar :: logged-in-navbar"></nav>
 
 
     <div sec:authorize="isAuthenticated()">
@@ -26,15 +26,21 @@
     <div id="results" class="results"></div>
 
     <div class="container">
-        <form action="/search" method="POST">
+        <form  method="POST">
             <div class="form-group">
-                <label for="search">Search Ads</label>
-                <input id="search" name="search" class="form-control" type="text">
+                <label >Search listings</label>
+
+<!--                <input id="ui" name="search" class="form-control" type="text">-->
             </div>
             <div>
-                <input type="submit" class="btn btn-info btn-block" value="Search">
+<!--                <input id="searchBtn" type="submit" class="btn btn-info btn-block" value="Search">-->
             </div>
+
         </form>
+
+        <input  id="dateUserInput">
+        <button type="button" id="showMyListings">show selected city</button>
+
     </div>
 
 
@@ -52,6 +58,7 @@
         <form name="delete" th:action="${'/listings/' + list.getId() + '/delete'}" method="get">
             <button type="submit" class="btn ">Delete</button>
         </form>
+
     </div>
 
     <footer class="navbar justify-content-end">
@@ -74,8 +81,60 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
-<script src="/js/home-logged-in.js"></script>
-<script th:src="@{/../static/password-alerts.js}" defer></script>
+<!--<script src="/js/home-logged-in.js"></script>-->
+<!--<script th:src="@{/../static/password-alerts.js}" defer></script>-->
+
+<script>
+    // This returns houses that have recently been sold in the houston area
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '4b79262d6emsh7cc3f4048fc7718p12b945jsndb86ef3ab993',
+            'X-RapidAPI-Host': 'zillow-com1.p.rapidapi.com'
+        }
+    };
+    let imgSrc
+    let address
+    let propertyType
+    let listing
+    // const button = document.getElementById('searchBtn')
+    // button.addEventListener('click', getListings)
+    const button = document.getElementById('showMyListings')
+    button.addEventListener('click', getListings)
+    let appendHtml = document.getElementById("results")
+    function getListings() {
+        let User_address = document.getElementById("dateUserInput").value//link the button id to ths
+
+        fetch('https://zillow-com1.p.rapidapi.com/propertyExtendedSearch?location=' + `${User_address}` + '%20tx&page=1&status_type=ForSale&home_type=Houses&sort=Homes_for_You', options)
+                .then(response => response.json())
+                .then(data => {
+
+                    for(let i =0;i < 3;i++) {
+
+                        imgSrc = data.props[i].imgSrc
+                    address = data.props[i].address
+                    propertyType = data.props[i].propertyType
+                    // let userInput = document.getElementById("ui")
+                    console.log(imgSrc);
+                    console.log(address);
+                    console.log(propertyType);
+                    // console.log(userInput)
+                    let html = `
+                        <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="${data.props[i].imgSrc}" alt="Card image cap">
+                        <div class="card-body">
+                        <h6  class="card-title">${data.props[i].address}</h6>
+                        <p   class="card-text">${data.props[i].propertyType}</p>
+                        <p class="card-text">NEIGHBORS INTERESTS<br> 1. <br>2. <br>3</p>
+                        <a href="#" class="btn btn-primary">VIEW</a>
+                        </div>
+                        </div>`
+                    $(appendHtml).append(html)
+                    }
+                })
+    }
+    getListings();
+</script>
 
 </body>
 </html>
