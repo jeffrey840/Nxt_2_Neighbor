@@ -20,7 +20,7 @@ public class Roles {
     public Roles() {
     }
 
-    public Roles(long id, String user_role) {
+    public Roles(long id, String user_role){
         this.id = id;
         this.user_role = user_role;
     }

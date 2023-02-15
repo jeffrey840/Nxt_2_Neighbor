@@ -21,7 +21,7 @@ public class Listings {
     private String description;
 
     @Column(length = 100)
-    private Long price;
+    private Double price;
 
 //    @Column(length = 255)
 //    private String img;
@@ -37,6 +37,15 @@ public class Listings {
     )
     private List<Categories> categories;
 
+    public Listings(String title, String address, String description, Double price){
+        this.title = title;
+        this.address = address;
+        this.description = description;
+        this.price = price;
+    }
+
+    public Listings() {
+    }
 
     public Long getId() {
         return id;
@@ -69,10 +78,10 @@ public class Listings {
         this.user = user;
     }
 
-    public long getPrice(){
+    public Double getPrice(){
         return price;
     }
-    public void setPrice(long price){
+    public void setPrice(Double price){
         this.price = price;
     }
 

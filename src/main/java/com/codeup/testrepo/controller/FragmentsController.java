@@ -3,6 +3,7 @@ package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Roles;
 import com.codeup.testrepo.models.User;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -51,7 +52,17 @@ public class FragmentsController {
 
 
     }
-
+    @GetMapping("/profile/{userId}")
+    public String showProfilePage(@PathVariable Long userId, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null || !user.getId().equals(userId)) {
+            // The user is not authorized to view this profile
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+        // Add other profile information as needed
+        return "/profile";
+    }
 //    @GetMapping("/profile")
 //    public String nav(Model model) {
 ////        User user =(User) request.getSession().getAttribute("user");
