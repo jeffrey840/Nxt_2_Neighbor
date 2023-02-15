@@ -72,7 +72,9 @@
         <h3 th:text="${list.address}"></h3>
         <p th:text="${list.price}"></p>
         <p th:text="${list.description}"></p>
+        <form>
         <a th:href="@{/delete/{id}(id=${listings.id})}">Delete</a>
+        </form>
         <hr>
     </div>
 </div>

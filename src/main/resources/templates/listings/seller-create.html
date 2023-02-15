@@ -38,7 +38,7 @@
 <!--    </form>-->
 <!--  </div>-->
 <h1 class="p-2">CREATE LISTING</h1>
-<form form th:action="@{/listings/seller-create}" method="post" th:object="${listings}">
+<form  th:action="@{/listings/seller-create}" th:method="post" th:object="${listings}">
   <label>Title:</label>
   <br>
   <input placeholder="title" class="m-2" type="text" th:field="*{title}"  /><br>
@@ -48,6 +48,6 @@
   <input type="submit" value="Submit"/>
 </form>
 <script src="/static/js/seller.js"></script>
-</div>
+
 </body>
 </html>

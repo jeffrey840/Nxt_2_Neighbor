@@ -20,9 +20,17 @@ public class SellerCreateController {
         this.emailService = emailService;
     }
 //CREATE
+//    @GetMapping(path = "/seller-profile")
+//    public String getListing(Model model){
+//        Listings listings = new Listings();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        listings = listDao.findByUserId(user.getId());
+//        model.addAttribute("listings", listings);
+//        return "listings/seller-profile";
+//    }
     @GetMapping(path = "/seller-profile")
-    public String getListing(Model model){
-        Listings listings = new Listings();
+    public String getPost(Model model) {
+        List<Listings> listings = listDao.findAll();
         model.addAttribute("listings", listings);
         return "listings/seller-profile";
     }
@@ -45,15 +53,15 @@ public class SellerCreateController {
         return "redirect:/seller-profile";
     }
 //DELETE
-@PostMapping("/listing/seller-profile/delete")
-public String postDelete(@RequestParam(name = "delete") String id, Model model){
-    long postID = Long.parseLong(id);
-    listDao.deleteById(postID);
-    return "redirect:/seller-profile";
-}
-    @GetMapping(path="/listings/seller-profile/{id}/delete")
-    public String listingDelete(@PathVariable long id){
-        listDao.deleteById(id);
-        return "redirect:/seller-profile";
-    }
+//@PostMapping("/listing/seller-profile/delete")
+//public String postDelete(@RequestParam(name = "delete") String id, Model model){
+//    long postID = Long.parseLong(id);
+//    listDao.deleteById(postID);
+//    return "redirect:/seller-profile";
+//}
+//    @GetMapping(path="/listings/seller-profile/{id}/delete")
+//    public String listingDelete(@PathVariable long id){
+//        listDao.deleteById(id);
+//        return "redirect:/seller-profile";
+//    }
 }
