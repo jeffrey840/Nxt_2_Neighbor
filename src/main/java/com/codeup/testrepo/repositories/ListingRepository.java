@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ListingRepository extends CrudRepository<Listings, Long> {
+public interface ListingRepository extends JpaRepository<Listings, Long> {
     @Query("SELECT p FROM Listings p WHERE CONCAT(p.address, ' ', p.description, ' ', p.title, ' ', p.price) LIKE %?1%")
     public List<Listings> search(String keyword);
 
@@ -20,5 +20,4 @@ public interface ListingRepository extends CrudRepository<Listings, Long> {
     Listings findByPrice(Long price);
     Listings findById(long id);
 
-    Listings getReferenceById(long l);
 }

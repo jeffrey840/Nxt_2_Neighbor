@@ -28,7 +28,7 @@ public class SellerCreateController {
     }
     @GetMapping("/seller-profile/{id}")
     public String getIndividualListing(@PathVariable long id, Model model) {
-        Listings currentPost = listDao.getReferenceById(1L);
+        Listings currentPost = listDao.findById(id);
         model.addAttribute("listings", currentPost);
         return "listings/seller-profile";
     }
