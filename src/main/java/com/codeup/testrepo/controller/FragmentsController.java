@@ -52,26 +52,26 @@ public class FragmentsController {
 
     }
 
-    @GetMapping("/profile")
-    public String nav(Model model) {
-//        User user =(User) request.getSession().getAttribute("user");
-//        model.addAttribute("Users", userDao.findAll());
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUser = authentication.getName();
-        User user1 = userDao.findByUsername(currentUser);
-        long id = user1.getId();
-        User user = userDao.getReferenceById(id);
-        Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
-        String roles = roles1.getUser_role();
-        if(Objects.equals(roles, "buyer")){
-            return "/listings/buyer-profile";
-        } else if (Objects.equals(roles, "seller")) {
-            return "/listings/seller-profile";
-        } else if (Objects.equals(roles, "neighbor")) {
-            return "listings/neighbor-profile";
-        }
-        return "listings/home-not-logged";
-    }
+//    @GetMapping("/profile")
+//    public String nav(Model model) {
+////        User user =(User) request.getSession().getAttribute("user");
+////        model.addAttribute("Users", userDao.findAll());
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentUser = authentication.getName();
+//        User user1 = userDao.findByUsername(currentUser);
+//        long id = user1.getId();
+//        User user = userDao.getReferenceById(id);
+//        Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
+//        String roles = roles1.getUser_role();
+//        if(Objects.equals(roles, "buyer")){
+//            return "/listings/buyer-profile";
+//        } else if (Objects.equals(roles, "seller")) {
+//            return "/listings/seller-profile";
+//        } else if (Objects.equals(roles, "neighbor")) {
+//            return "listings/neighbor-profile";
+//        }
+//        return "listings/home-not-logged";
+//    }
 
     @GetMapping("/about-us")
     public String aboutUs() {
