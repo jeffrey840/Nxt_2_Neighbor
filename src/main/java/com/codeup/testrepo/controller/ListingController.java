@@ -8,7 +8,6 @@ import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.mapping.List;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -79,22 +79,28 @@ public String welcomePage() {
             return "listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
             model.addAttribute("user", user);
+            List<Listings> listings = listDao.findAll();
+            model.addAttribute("listings", listings);
             return "listings/seller-profile";
         } else if (Objects.equals(roles, "neighbor")) {
             model.addAttribute("user", user);
             return "listings/neighbor-profile";
         }
         return "listings/home-not-logged";
-//                System.out.println(roles);
-//        System.out.println(id);
     }
-
-
+    @GetMapping("/home-logged-in")
+    public String viewListings(Model model){
+        model.addAttribute("listings", listDao.findAll());
+        model.addAttribute("neighbors", rolesDao.findAll());
+        model.addAttribute("users", userDao.findAll());
+        return "listings/home-logged-in";
+    }
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", user);
         model.addAttribute("Listings", listDao.findAll());
+
         return "listings/home-logged-in";
     }
 
@@ -102,10 +108,12 @@ public String welcomePage() {
     @GetMapping("/listings/home-logged-in")
     public String viewListings(Model model){
         model.addAttribute("listings", listingService.getListing());
+        model.addAttribute("neighbors", rolesDao.findAll());
+        model.addAttribute("users", userDao.findAll());
         return "listings/home-logged-in";
     }
     //MAPPING FOR VIEWING LISTINGS BY ID
-    @GetMapping(path = "/listings/{id}")
+    @GetMapping(path = "/listings/{id}/home-logged-in")
     public String viewListings(@PathVariable long id, Model model){
         model.addAttribute("title", "Individual Post");
         model.addAttribute("listing", listDao.findById(id));
@@ -118,6 +126,7 @@ public String welcomePage() {
         model.addAttribute("user", user);
         return "listings/home-logged-in";
     }
+
 
 
     //    🟥 uncommenting this returns an error

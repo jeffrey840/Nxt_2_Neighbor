@@ -68,15 +68,30 @@ public class SecurityConfiguration {
                         "/listings/buyer-profile",
                         "/listings/{id}/seller-profile",// only authenticated users can create ads
                         "/seller-profile/{id}/delete",
+                        "/listings/seller-create",
+                        "/listings/seller-show",
                         "/listings/neighbor-profile",
                         "/listings/{id}/neighbor-profile",// only authenticated users can create ads
                         "/listings/{id}/delete",
                         "/listings/{id}",
-                        "/home-logged-in",
                         "/listings",
                         "/home-logged-in",
-                        "/profile/{id}"
-                ).authenticated();
+                        "/profile/{id}",
+                        "/seller-create",
+                        "/seller-profile",
+                        "/seller-show",
+                        "/listing/seller-profile/delete",
+                        "/listing/seller-profile/update",
+                        "/seller-update",
+                        "/listings/seller-profile/update",
+                        "/listings/seller-update",
+                        "/listings/{id}/seller-update",
+                        "/viewListingsBuyer",
+                        "/listings/viewListingsBuyer",
+                        "/buyer-redirect"
+                )
+                .authenticated();
+
         return http.build();
     }
 }
