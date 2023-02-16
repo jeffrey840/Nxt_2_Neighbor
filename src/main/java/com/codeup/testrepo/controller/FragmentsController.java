@@ -55,8 +55,8 @@ public class FragmentsController {
 
     @GetMapping("/profile/{Id}")
     public String showProfilePage(@PathVariable Long Id, HttpSession session, Model model) {
-        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) session.getAttribute("user");
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 //        if (user == null || !user.getId().equals(Id)) {
 //            // The user is not authorized to view this profile
 //            return "redirect:/";
