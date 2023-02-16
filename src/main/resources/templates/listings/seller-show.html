@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Seller Show</title>
@@ -7,6 +7,11 @@
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
 </head>
+<div sec:authorize="isAuthenticated()">
+  this show the user that is currently logged in
+  <!--    <span sec:authentication="name"></span>-->
+  <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
+</div>
 <body style="background-color: black; color: white">
 <nav th:insert="~{partials/navbar :: navbar}"></nav>
 <div class="container mt-5 text-center">

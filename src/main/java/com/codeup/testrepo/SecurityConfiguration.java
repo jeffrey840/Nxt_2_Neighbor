@@ -75,7 +75,9 @@ public class SecurityConfiguration {
                         "/listings",
                         "/home-logged-in",
                         "/seller-create",
-                        "/seller-profile"
+                        "/seller-profile",
+                        "/seller-show",
+                        "/listing/seller-profile/delete"
                 )
 
 

@@ -8,7 +8,6 @@ import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.mapping.List;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
@@ -77,6 +77,8 @@ public String welcomePage() {
         if(Objects.equals(roles, "buyer")){
             return "listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
+            List<Listings> listings = listDao.findAll();
+            model.addAttribute("listings", listings);
             return "listings/seller-profile";
         } else if (Objects.equals(roles, "neighbor")) {
             return "listings/neighbor-profile";
