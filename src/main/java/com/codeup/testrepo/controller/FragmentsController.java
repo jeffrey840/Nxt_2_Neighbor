@@ -115,5 +115,10 @@ public class FragmentsController {
         return "users/contact-us";
     }
 
-
+//    @PostMapping("/home-logged-in")
+//    public String userInfo(Model model){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        model.addAttribute("user", user);
+//        return "listings/home-logged-in";
+//    }
 }
