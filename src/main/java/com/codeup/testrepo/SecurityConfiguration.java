@@ -65,6 +65,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/listings/seller-profile",
+                        "/listings/buyer-profile",
                         "/listings/{id}/seller-profile",// only authenticated users can create ads
                         "/seller-profile/{id}/delete",
                         "/listings/neighbor-profile",
