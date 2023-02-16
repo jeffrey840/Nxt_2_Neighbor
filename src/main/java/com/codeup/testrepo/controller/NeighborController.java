@@ -30,7 +30,6 @@ public class NeighborController {
         this.rolesDao = rolesDao;
         this.emailService = emailService;
     }
-
     @GetMapping(path = "/listings/{id}/delete")
     public String neighborDelete(@PathVariable long id) {
         listDao.deleteById(id);

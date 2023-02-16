@@ -84,20 +84,19 @@ public String welcomePage() {
             return "listings/neighbor-profile";
         }
         return "listings/home-not-logged";
-//                System.out.println(roles);
-//        System.out.println(id);
+    }
+    @GetMapping("/home-logged-in")
+    public String viewListings(Model model){
+        model.addAttribute("listings", listDao.findAll());
+        model.addAttribute("neighbors", rolesDao.findAll());
+        model.addAttribute("users", userDao.findAll());
+        return "listings/home-logged-in";
     }
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
         model.addAttribute("Listings", listDao.findAll());
-        return "listings/home-logged-in";
-    }
-
-
-
-    @GetMapping("/listings/home-logged-in")
-    public String viewListings(Model model){
-        model.addAttribute("listings", listingService.getListing());
+        model.addAttribute("neighbors", rolesDao.findAll());
+        model.addAttribute("users", userDao.findAll());
         return "listings/home-logged-in";
     }
     //MAPPING FOR VIEWING LISTINGS BY ID

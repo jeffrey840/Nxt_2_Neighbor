@@ -49,19 +49,20 @@
 <h1>This is the Seller Profile</h1>
 
 
-<!--<div th:each="a: ${Users}">-->
-<!--    role name: <span th:text="${a.getRole().getUser_role()}"></span><br>-->
-<!--    role id <span th:text="${a.getRole().getId()}"></span><br>-->
-<!--    Username: <span th:text="${a.getUsername()}"></span><br>-->
-<!--    user id: <span th:text="${a.getId()}"></span><br>-->
-<!--    <br>-->
-<!--</div>-->
+<div th:each="a: ${Users}">
+    role name: <span th:text="${a.getRole().getUser_role()}"></span><br>
+    role id <span th:text="${a.getRole().getId()}"></span><br>
+    Username: <span th:text="${a.getUsername()}"></span><br>
+    user id: <span th:text="${a.getId()}"></span><br>
+    <br>
+</div>
 
 <div sec:authorize="isAuthenticated()">
     this show the user that is currently logged in
     <!--    <span sec:authentication="name"></span>-->
     <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
 </div>
+
 
 
 <!--<h1 class="text-center"> WELCOME, USERNAME</h1>-->
