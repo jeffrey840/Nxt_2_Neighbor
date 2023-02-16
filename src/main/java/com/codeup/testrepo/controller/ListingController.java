@@ -78,8 +78,10 @@ public String welcomePage() {
             model.addAttribute("user", user);
             return "listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
+            model.addAttribute("user", user);
             return "listings/seller-profile";
         } else if (Objects.equals(roles, "neighbor")) {
+            model.addAttribute("user", user);
             return "listings/neighbor-profile";
         }
         return "listings/home-not-logged";
@@ -90,9 +92,12 @@ public String welcomePage() {
 
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         model.addAttribute("Listings", listDao.findAll());
         return "listings/home-logged-in";
     }
+
 
     @GetMapping("/listings/home-logged-in")
     public String viewListings(Model model){
@@ -129,7 +134,7 @@ public String welcomePage() {
 
     //TO EDIT THE POSTS, GRABBING PARAMETERS, SAVING NEW LISTING ON SELLER PAGE
     @PostMapping(path = "/listings/{id}/seller-profile")
-    public String sellerEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
+    public String sellerEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body, Model model){
         Listings listing = (Listings) listDao.getReferenceById(id);
         listing.setTitle(title);
         listing.setDescription(body);
@@ -175,8 +180,9 @@ public String welcomePage() {
     //    EMAIL SERVICE NOTIFYING OF A NEW LISTING CREATED "POST MAPPING" ON SELLER PAGE
 
     @PostMapping(path = "listings/seller-profile")
-    public String sellerCreate(@ModelAttribute Listings createdListing){
+    public String sellerCreate(@ModelAttribute Listings createdListing, Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         createdListing.setUser(user);
         emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
         listDao.save(createdListing);
