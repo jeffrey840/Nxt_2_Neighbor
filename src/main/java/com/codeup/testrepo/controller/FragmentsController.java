@@ -54,13 +54,13 @@ public class FragmentsController {
     }
 
     @GetMapping("/profile/{Id}")
-    public String showProfilePage(@PathVariable Long userId, HttpSession session, Model model) {
+    public String showProfilePage(@PathVariable Long Id, HttpSession session, Model model) {
         SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = (User) session.getAttribute("user");
-        if (user == null || !user.getId().equals(userId)) {
-            // The user is not authorized to view this profile
-            return "redirect:/";
-        }
+//        if (user == null || !user.getId().equals(Id)) {
+//            // The user is not authorized to view this profile
+//            return "redirect:/";
+//        }
         model.addAttribute("user", user);
         // Add other profile information as needed
         if(user.getRole().getId() == 2){

@@ -67,9 +67,9 @@ public String welcomePage() {
     @GetMapping ("/listings")
     public String userHome(Model model) {
         model.addAttribute("Users", userDao.findAll());
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String currentUser = authentication.getName();
-        User user1 = userDao.findByUsername(currentUser);
+        User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentUsername = currentUser.getUsername();
+        User user1 = userDao.findByUsername(currentUsername);
         long id = user1.getId();
         User user = userDao.getReferenceById(id);
         Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());

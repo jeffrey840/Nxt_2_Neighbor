@@ -74,7 +74,8 @@ public class SecurityConfiguration {
                         "/listings/{id}",
                         "/home-logged-in",
                         "/listings",
-                        "/home-logged-in"
+                        "/home-logged-in",
+                        "/profile/{id}"
                 ).authenticated();
         return http.build();
     }
