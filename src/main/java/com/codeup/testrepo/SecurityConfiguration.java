@@ -71,16 +71,18 @@ public class SecurityConfiguration {
                         "/listings/{id}/neighbor-profile",// only authenticated users can create ads
                         "/listings/{id}/delete",
                         "/listings/{id}",
-//                        "/home-logged-in",
                         "/listings",
                         "/home-logged-in",
                         "/seller-create",
                         "/seller-profile",
                         "/seller-show",
-                        "/listing/seller-profile/delete"
+                        "/listing/seller-profile/delete",
+                        "/listing/seller-profile/update",
+                        "/seller-update",
+                        "/listings/seller-profile/update",
+                        "/listings/seller-update",
+                        "/listings/{id}seller-update"
                 )
-
-
                 .authenticated();
         return http.build();
     }

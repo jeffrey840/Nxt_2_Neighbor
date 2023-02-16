@@ -17,7 +17,7 @@ public interface ListingRepository extends JpaRepository<Listings, Long> {
     Listings findByTitle(String title);
     Listings findByAddress(String address);
     Listings findByDescription(String description);
-    Listings findByPrice(Long price);
+    Listings findByPrice(double price);
     Listings findById(long id);
 
     Listings findByUserId(long id);

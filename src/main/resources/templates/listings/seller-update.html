@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Update</title>
+</head>
+<body>
+<h1 class="p-2">UPDATE LISTING</h1>
+<form th:action="@{/listings/seller-update}" method="post" th:object="${listings}">
+    <label>Title:</label>
+    <br>
+    <input placeholder="title" class="m-2" type="text" th:field="*{title}"  /><br>
+    <input placeholder="address" class="m-2" th:field="*{address}"><br>
+    <input placeholder="price" class="m-2" th:field="*{price}"><br>
+    <input placeholder="description" class="m-2" th:field="*{description}"><br>
+    <input type="submit" value="Update"/>
+</form>
+<script src="/static/js/seller.js"></script>
+
+</body>
+</html>

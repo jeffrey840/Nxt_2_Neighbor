@@ -3,6 +3,7 @@ package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
+import com.codeup.testrepo.repositories.UserRepository;
 import com.codeup.testrepo.services.EmailService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,11 +16,14 @@ import java.util.List;
 public class SellerCreateController {
     private final ListingRepository listDao;
 
+    private final UserRepository userDao;
+
     private final EmailService emailService;
 
-    public SellerCreateController(ListingRepository listDao, EmailService emailService) {
+    public SellerCreateController(ListingRepository listDao, EmailService emailService, UserRepository userDao) {
         this.listDao = listDao;
         this.emailService = emailService;
+        this.userDao = userDao;
     }
 
     //CREATE
@@ -54,9 +58,23 @@ public class SellerCreateController {
 
     //DELETE
     @PostMapping("/listing/seller-profile/delete")
-    public String postDelete(@RequestParam(name = "delete") long id) {
+    public String listingsDelete(@RequestParam(name = "delete") long id) {
         listDao.deleteById(id);
         return "redirect:/seller-profile";
     }
-
+    //UPDATE
+    @GetMapping("/listings/{id}/seller-update")
+    public String showUpdateForm(@PathVariable long id, Model model) {
+        Listings currentListings = listDao.getReferenceById(id);
+        System.out.println("currentListing  = " + currentListings);
+        model.addAttribute("listings", currentListings);
+        return "listings/seller-update";
+    }
+    @PostMapping("/listing/seller-update")
+    public String editListing(@ModelAttribute Listings listings) {
+        User user = userDao.findAll().get(0);
+        listings.setUser(user);
+        listDao.save(listings);
+        return "redirect:/seller-profile";
+    }
 }
