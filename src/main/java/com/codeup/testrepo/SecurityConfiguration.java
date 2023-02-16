@@ -85,7 +85,10 @@ public class SecurityConfiguration {
                         "/seller-update",
                         "/listings/seller-profile/update",
                         "/listings/seller-update",
-                        "/listings/{id}/seller-update"
+                        "/listings/{id}/seller-update",
+                        "/viewListingsBuyer",
+                        "/listings/viewListingsBuyer",
+                        "/buyer-redirect"
                 )
                 .authenticated();
 
