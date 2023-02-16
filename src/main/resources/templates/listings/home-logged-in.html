@@ -23,17 +23,6 @@
         <!--    <span sec:authentication="name"></span>-->
         <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
     </div>
-
-    <div id="results" class="results"></div>
-    <div th:each="list : ${Listings}">
-        <h2 th:text="${list.getTitle()}"></h2>
-        <h2 th:text="${list.getPrice()}"></h2>
-        <h2 th:text="${list.getDescription()}"></h2>
-    </div>
-    <hr>
-    <div th:each="list : ${Listings}">
-        <h2 th:text="${list.getUser().getUsername()}"></h2>
-    </div>
     <hr>
     <div th:each="user : ${users}">
         <div th:if="${user.getRole().getId() == 3}">

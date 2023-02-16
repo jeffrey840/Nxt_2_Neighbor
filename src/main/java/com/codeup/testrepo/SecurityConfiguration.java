@@ -76,7 +76,7 @@ public class SecurityConfiguration {
                         "/listings/{id}",
                         "/listings",
                         "/home-logged-in",
-
+                        "/profile/{id}",
                         "/seller-create",
                         "/seller-profile",
                         "/seller-show",
@@ -88,9 +88,6 @@ public class SecurityConfiguration {
                         "/listings/{id}/seller-update"
                 )
                 .authenticated();
-
-                        "/profile/{id}"
-                ).authenticated();
 
         return http.build();
     }
