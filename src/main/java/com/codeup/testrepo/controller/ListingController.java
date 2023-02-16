@@ -3,7 +3,7 @@ import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.Roles;
 import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
-import com.codeup.testrepo.services.EmailService;
+//import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
@@ -30,17 +30,17 @@ public class ListingController {
     private final UserRepository userDao;
     private final RolesRepository rolesDao;
     private final ListingRepository listDao;
-    private final EmailService emailService;
+//    private final EmailService emailService;
 
     private ProductService.ListingService listingService;
     private ProductService service;
 
 
-    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
+    public ListingController(UserRepository userDao, ListingRepository listDao, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
-        this.emailService = emailService;
+//        this.emailService = emailService; SEE JEFFREY
     }
 
 //    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
@@ -177,7 +177,7 @@ public String welcomePage() {
     public String sellerCreate(@ModelAttribute Listings createdListing){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         createdListing.setUser(user);
-        emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
+//        emailService.prepareAndSend(createdListing, "Your newest listing: " + createdListing.getTitle(),  ", " + createdListing.getDescription());
         listDao.save(createdListing);
         return "redirect:/listings/seller-profile";
     }
