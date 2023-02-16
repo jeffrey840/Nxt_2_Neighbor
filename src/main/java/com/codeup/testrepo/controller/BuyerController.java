@@ -35,7 +35,7 @@ public class BuyerController {
 //    }
     @GetMapping(path = "/buyer-redirect")
     public String buyerViewListings(){
-       return "redirect:listings/viewListingsBuyer";
+       return "/listings/viewListingsBuyer";
     }
 
 }
