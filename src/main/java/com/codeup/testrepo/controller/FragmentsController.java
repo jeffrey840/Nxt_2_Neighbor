@@ -52,6 +52,7 @@ public class FragmentsController {
 
 
     }
+
     @GetMapping("/profile/{userId}")
     public String showProfilePage(@PathVariable Long userId, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
@@ -80,9 +81,28 @@ public class FragmentsController {
 //            return "/listings/seller-profile";
 //        } else if (Objects.equals(roles, "neighbor")) {
 //            return "listings/neighbor-profile";
+
+
+    @GetMapping("/profile/{Id}")
+    public String showProfilePage(@PathVariable Long Id, HttpSession session, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+//        if (user == null || !user.getId().equals(Id)) {
+//            // The user is not authorized to view this profile
+//            return "redirect:/";
+
 //        }
-//        return "listings/home-not-logged";
-//    }
+        model.addAttribute("user", user);
+        // Add other profile information as needed
+        if(user.getRole().getId() == 2){
+            return "listings/buyer-profile";
+        } else if (user.getRole().getId() == 1) {
+            return "listings/seller-profile";
+        } else if (user.getRole().getId() == 3) {
+            return "listings/neighbor-profile";
+        }
+        return "listings/home-not-logged";
+    }
 
     @GetMapping("/about-us")
     public String aboutUs() {

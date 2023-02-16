@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -42,6 +43,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 /* Login configuration */
                 .formLogin()
                 .loginPage("/login")
@@ -63,6 +65,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(
                         "/listings/seller-profile",
+                        "/listings/buyer-profile",
                         "/listings/{id}/seller-profile",// only authenticated users can create ads
                         "/seller-profile/{id}/delete",
                         "/listings/seller-create",
@@ -73,6 +76,7 @@ public class SecurityConfiguration {
                         "/listings/{id}",
                         "/listings",
                         "/home-logged-in",
+
                         "/seller-create",
                         "/seller-profile",
                         "/seller-show",
@@ -84,9 +88,10 @@ public class SecurityConfiguration {
                         "/listings/{id}/seller-update"
                 )
                 .authenticated();
+
+                        "/profile/{id}"
+                ).authenticated();
+
         return http.build();
     }
 }
-
-
-

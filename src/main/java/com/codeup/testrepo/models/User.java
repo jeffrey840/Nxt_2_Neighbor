@@ -44,7 +44,7 @@ public class User {
         email = copy.email;
         username = copy.username;
         password = copy.password;
-//        role = copy.role;
+        role = copy.role;
     }
 
     public User(long id, String username, String email, String password, Roles role) {
@@ -94,6 +94,7 @@ public class User {
     public void setRole(Roles role) {
         this.role = role;
     }
+
 
     public List<Listings> getListings() {
         return homeListings;
