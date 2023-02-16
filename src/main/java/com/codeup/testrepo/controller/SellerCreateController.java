@@ -70,7 +70,7 @@ public class SellerCreateController {
         model.addAttribute("listings", currentListings);
         return "listings/seller-update";
     }
-    @PostMapping("/listing/seller-update")
+    @PostMapping("/listings/seller-update")
     public String editListing(@ModelAttribute Listings listings) {
         User user = userDao.findAll().get(0);
         listings.setUser(user);
