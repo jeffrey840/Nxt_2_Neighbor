@@ -3,6 +3,7 @@ package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Roles;
 import com.codeup.testrepo.models.User;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -52,26 +53,25 @@ public class FragmentsController {
 
     }
 
-//    @GetMapping("/profile")
-//    public String nav(Model model) {
-////        User user =(User) request.getSession().getAttribute("user");
-////        model.addAttribute("Users", userDao.findAll());
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String currentUser = authentication.getName();
-//        User user1 = userDao.findByUsername(currentUser);
-//        long id = user1.getId();
-//        User user = userDao.getReferenceById(id);
-//        Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
-//        String roles = roles1.getUser_role();
-//        if(Objects.equals(roles, "buyer")){
-//            return "/listings/buyer-profile";
-//        } else if (Objects.equals(roles, "seller")) {
-//            return "/listings/seller-profile";
-//        } else if (Objects.equals(roles, "neighbor")) {
-//            return "listings/neighbor-profile";
-//        }
-//        return "listings/home-not-logged";
-//    }
+    @GetMapping("/profile/{Id}")
+    public String showProfilePage(@PathVariable Long userId, HttpSession session, Model model) {
+        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) session.getAttribute("user");
+        if (user == null || !user.getId().equals(userId)) {
+            // The user is not authorized to view this profile
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+        // Add other profile information as needed
+        if(user.getRole().getId() == 2){
+            return "listings/buyer-profile";
+        } else if (user.getRole().getId() == 1) {
+            return "listings/seller-profile";
+        } else if (user.getRole().getId() == 3) {
+            return "listings/neighbor-profile";
+        }
+        return "listings/home-not-logged";
+    }
 
     @GetMapping("/about-us")
     public String aboutUs() {

@@ -75,6 +75,7 @@ public String welcomePage() {
         Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
         String roles = roles1.getUser_role();
         if(Objects.equals(roles, "buyer")){
+            model.addAttribute("user", user);
             return "listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
             return "listings/seller-profile";

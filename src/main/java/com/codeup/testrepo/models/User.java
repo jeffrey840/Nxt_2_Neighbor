@@ -95,6 +95,7 @@ public class User {
         this.role = role;
     }
 
+
     public List<Listings> getListings() {
         return homeListings;
     }
