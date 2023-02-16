@@ -56,7 +56,13 @@ public class SecurityConfiguration {
                 /* Pages that can be viewed without having to log in */
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/sign-up","/listings","/js/**","/css/**","/img/**", "/contact-us", "/about-us","/listings/seller-profile",
+                .requestMatchers("/", "/sign-up","/listings","/js/**","/css/**","/img/**", "/contact-us", "/about-us") // anyone can see the home and the ads pages
+                .permitAll()
+                /* Pages that require authentication */
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers(
+                        "/listings/seller-profile",
                         "/listings/{id}/seller-profile",// only authenticated users can create ads
                         "/seller-profile/{id}/delete",
                         "/listings/neighbor-profile",
@@ -65,13 +71,9 @@ public class SecurityConfiguration {
                         "/listings/{id}",
                         "/home-logged-in",
                         "/listings",
-                        "/home-logged-in") // anyone can see the home and the ads pages
-                .permitAll();
-                /* Pages that require authentication */
-
+                        "/home-logged-in"
+                )
+                .authenticated();
         return http.build();
     }
 }
-
-
-
