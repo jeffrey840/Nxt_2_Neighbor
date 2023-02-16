@@ -1,194 +1,194 @@
-<html xmlns:th="http://www.thymeleaf.org" lang="">
-<!--<div th:fragment="/card">-->
-<!--<h1>{{card.title}}</h1>-->
-<!--<p>{{card.bio}}</p>-->
-<!--<img src="{{card.image}}" />-->
-<!--<form method="post">-->
-<!--  <input type="text" name="title" value="{{card.title}}"/>-->
-<!--  <textarea name="bio">{{card.bio}}</textarea>-->
-<!--  <input type="file" name="image" />-->
-<!--  <button type="submit">Update</button>-->
-<!--</form>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="">-->
+<!--&lt;!&ndash;<div th:fragment="/card">&ndash;&gt;-->
+<!--&lt;!&ndash;<h1>{{card.title}}</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;<p>{{card.bio}}</p>&ndash;&gt;-->
+<!--&lt;!&ndash;<img src="{{card.image}}" />&ndash;&gt;-->
+<!--&lt;!&ndash;<form method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="text" name="title" value="{{card.title}}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;  <textarea name="bio">{{card.bio}}</textarea>&ndash;&gt;-->
+<!--&lt;!&ndash;  <input type="file" name="image" />&ndash;&gt;-->
+<!--&lt;!&ndash;  <button type="submit">Update</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--<style>-->
+<!--  .modal {-->
+<!--    display: none;-->
+<!--    position: fixed;-->
+<!--    z-index: 1;-->
+<!--    left: 0;-->
+<!--    top: 0;-->
+<!--    width: 100%;-->
+<!--    height: 100%;-->
+<!--    overflow: auto;-->
+<!--    background-color: rgb(0, 0, 0);-->
+<!--    background-color: rgba(0, 0, 0, 0.4);-->
+<!--  }-->
+
+<!--  .modal-content {-->
+<!--    background-color: #fefefe;-->
+<!--    margin: 15% auto;-->
+<!--    padding: 20px;-->
+<!--    border: 1px solid #888;-->
+<!--    width: 80%;-->
+<!--  }-->
+
+<!--  .close {-->
+<!--    color: #aaa;-->
+<!--    float: right;-->
+<!--    font-size: 28px;-->
+<!--    font-weight: bold;-->
+<!--  }-->
+
+<!--  .close:hover,-->
+<!--  .close:focus {-->
+<!--    color: black;-->
+<!--    text-decoration: none;-->
+<!--    cursor: pointer;-->
+<!--  }-->
+
+<!--</style>-->
+<!--<body>-->
+<!--<div id="listings">-->
+<!--  <img src="" id="image" alt="">-->
+<!--  <h1 id="title"></h1>-->
+<!--  <h1 id="address"></h1>-->
+<!--  <h1 id="price"></h1>-->
+<!--  <h1 id="property"></h1>-->
 <!--</div>-->
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+<!--<button id="create-listing-button">Create Listing</button>-->
+<!--<div id="listing-cards-container">-->
+<!--</div>-->
+<!--<div id="listing-form-modal" class="modal">-->
+<!--  <div class="modal-content">-->
+<!--    <span id="close" class="close">&times;</span>-->
+<!--    <form>-->
+<!--      <label for="inputTitle">-->
+<!--        <input placeholder="title" type="text" id="inputTitle" />-->
+<!--      </label>-->
+<!--      <br>-->
+<!--      <label for="inputAddress">-->
+<!--        <textarea placeholder="address" id="inputAddress"></textarea>-->
+<!--      </label>-->
+<!--      <br>-->
+<!--      <label for="inputPrice">-->
+<!--        <textarea placeholder="price" id="inputPrice"></textarea>-->
+<!--      </label>-->
+<!--      <br>-->
+<!--      <label for="inputProperty">-->
+<!--        <textarea placeholder="property" id="inputProperty"></textarea>-->
+<!--      </label>-->
+<!--      <br>-->
+<!--      <input type="file" id="inputImage" />-->
+<!--      <br>-->
+<!--      <button type="button" onclick="createOrUpdateListing()">Create</button>-->
+<!--      <button type="button" onclick="createOrUpdateListing()">Update</button>-->
+<!--      <button type="button" onclick="deleteListing()">Delete</button>-->
+<!--      <button id="save" type="button">Save</button>-->
+<!--    </form>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--<script>-->
+<!--  let listing = {};-->
 
-  .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-  }
+<!--  function createOrUpdateListing() {-->
+<!--    listing.title = document.getElementById("inputTitle").value;-->
+<!--    listing.address = document.getElementById("inputAddress").value;-->
+<!--    listing.price = document.getElementById("inputPrice").value;-->
+<!--    listing.porperty = document.getElementById("inputProperty").value-->
+<!--    listing.image = document.getElementById("inputImage").files[0];-->
+<!--    updateCard();-->
+<!--  }-->
 
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
+<!--  function updateCard() {-->
+<!--    document.getElementById("title").innerHTML = listing.title;-->
+<!--    document.getElementById("address").innerHTML = listing.address;-->
+<!--    document.getElementById("price").innerHTML = listing.price;-->
+<!--    document.getElementById("property").innerHTML = listing.porperty-->
+<!--    document.getElementById("image").src = URL.createObjectURL(listing.image);-->
+<!--  }-->
 
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
+<!--  function deleteListing() {-->
+<!--    listing = {};-->
+<!--    document.getElementById("title").innerHTML = "";-->
+<!--    document.getElementById("address").innerHTML = "";-->
+<!--    document.getElementById("price").innerHTML = "";-->
+<!--    document.getElementById("property").innerHTML = "";-->
+<!--    document.getElementById("image").src = "";-->
+<!--  }-->
+<!--  let listings = [];-->
+<!--  let currentListingIndex = -1;-->
+<!--  let modal = document.getElementById("listing-form-modal");-->
+<!--  let closeButton = document.getElementById("close");-->
+<!--  let saveButton = document.getElementById("save");-->
+<!--  let createListingButton = document.getElementById("create-listing-button");-->
 
-</style>
-<body>
-<div id="listings">
-  <img src="" id="image" alt="">
-  <h1 id="title"></h1>
-  <h1 id="address"></h1>
-  <h1 id="price"></h1>
-  <h1 id="property"></h1>
-</div>
-<button id="create-listing-button">Create Listing</button>
-<div id="listing-cards-container">
-</div>
-<div id="listing-form-modal" class="modal">
-  <div class="modal-content">
-    <span id="close" class="close">&times;</span>
-    <form>
-      <label for="inputTitle">
-        <input placeholder="title" type="text" id="inputTitle" />
-      </label>
-      <br>
-      <label for="inputAddress">
-        <textarea placeholder="address" id="inputAddress"></textarea>
-      </label>
-      <br>
-      <label for="inputPrice">
-        <textarea placeholder="price" id="inputPrice"></textarea>
-      </label>
-      <br>
-      <label for="inputProperty">
-        <textarea placeholder="property" id="inputProperty"></textarea>
-      </label>
-      <br>
-      <input type="file" id="inputImage" />
-      <br>
-      <button type="button" onclick="createOrUpdateListing()">Create</button>
-      <button type="button" onclick="createOrUpdateListing()">Update</button>
-      <button type="button" onclick="deleteListing()">Delete</button>
-      <button id="save" type="button">Save</button>
-    </form>
-  </div>
-</div>
-</body>
-<script>
-  let listing = {};
+<!--  createListingButton.addEventListener("click", function () {-->
+<!--    currentListingIndex = -1;-->
+<!--    modal.style.display = "block";-->
+<!--  });-->
 
-  function createOrUpdateListing() {
-    listing.title = document.getElementById("inputTitle").value;
-    listing.address = document.getElementById("inputAddress").value;
-    listing.price = document.getElementById("inputPrice").value;
-    listing.porperty = document.getElementById("inputProperty").value
-    listing.image = document.getElementById("inputImage").files[0];
-    updateCard();
-  }
+<!--  closeButton.addEventListener("click", function () {-->
+<!--    modal.style.display = "none";-->
+<!--  });-->
 
-  function updateCard() {
-    document.getElementById("title").innerHTML = listing.title;
-    document.getElementById("address").innerHTML = listing.address;
-    document.getElementById("price").innerHTML = listing.price;
-    document.getElementById("property").innerHTML = listing.porperty
-    document.getElementById("image").src = URL.createObjectURL(listing.image);
-  }
+<!--  window.addEventListener("click", function (event){-->
+<!--          if(event.target === modal){-->
+<!--            modal.style.display = "none";-->
+<!--          }-->
+<!--  })-->
 
-  function deleteListing() {
-    listing = {};
-    document.getElementById("title").innerHTML = "";
-    document.getElementById("address").innerHTML = "";
-    document.getElementById("price").innerHTML = "";
-    document.getElementById("property").innerHTML = "";
-    document.getElementById("image").src = "";
-  }
-  let listings = [];
-  let currentListingIndex = -1;
-  let modal = document.getElementById("listing-form-modal");
-  let closeButton = document.getElementById("close");
-  let saveButton = document.getElementById("save");
-  let createListingButton = document.getElementById("create-listing-button");
+<!--  saveButton.addEventListener("click", function () {-->
+<!--    if (currentListingIndex === -1) {-->
+<!--      listings.push(listing);-->
+<!--    } else {-->
+<!--      listings[currentListingIndex] = listing;-->
+<!--    }-->
+<!--    localStorage.setItem("listings", JSON.stringify(listings));-->
+<!--    console.log(saveButton);-->
+<!--  });-->
+<!--  window.onload = function () {-->
+<!--    let storedListings = localStorage.getItem("listings");-->
+<!--    if (storedListings) {-->
+<!--      listings = JSON.parse(storedListings);-->
+<!--    }-->
+<!--  };-->
+<!--  class Listing {-->
+<!--    constructor(title, description) {-->
+<!--      this.title = title;-->
+<!--      this.description = description;-->
+<!--    }-->
+<!--  }-->
 
-  createListingButton.addEventListener("click", function () {
-    currentListingIndex = -1;
-    modal.style.display = "block";
-  });
+<!--  class ListingManager {-->
+<!--    constructor() {-->
+<!--      this.listings = [];-->
+<!--    }-->
 
-  closeButton.addEventListener("click", function () {
-    modal.style.display = "none";
-  });
+<!--    addListing(listing) {-->
+<!--      this.listings.push(listing);-->
+<!--    }-->
 
-  window.addEventListener("click", function (event){
-          if(event.target === modal){
-            modal.style.display = "none";
-          }
-  })
+<!--    displayListings() {-->
+<!--      for (const listing of this.listings) {-->
+<!--        console.log(`Title: ${listing.title}\nDescription: ${listing.description}\n`);-->
+<!--      }-->
+<!--    }-->
+<!--  }-->
 
-  saveButton.addEventListener("click", function () {
-    if (currentListingIndex === -1) {
-      listings.push(listing);
-    } else {
-      listings[currentListingIndex] = listing;
-    }
-    localStorage.setItem("listings", JSON.stringify(listings));
-    console.log(saveButton);
-  });
-  window.onload = function () {
-    let storedListings = localStorage.getItem("listings");
-    if (storedListings) {
-      listings = JSON.parse(storedListings);
-    }
-  };
-  class Listing {
-    constructor(title, description) {
-      this.title = title;
-      this.description = description;
-    }
-  }
+<!--  const manager = new ListingManager();-->
 
-  class ListingManager {
-    constructor() {
-      this.listings = [];
-    }
+<!--  manager.addListing(new Listing("Listing 1", "Description 1"));-->
+<!--  manager.addListing(new Listing("Listing 2", "Description 2"));-->
+<!--  manager.addListing(new Listing("Listing 3", "Description 3"));-->
 
-    addListing(listing) {
-      this.listings.push(listing);
-    }
-
-    displayListings() {
-      for (const listing of this.listings) {
-        console.log(`Title: ${listing.title}\nDescription: ${listing.description}\n`);
-      }
-    }
-  }
-
-  const manager = new ListingManager();
-
-  manager.addListing(new Listing("Listing 1", "Description 1"));
-  manager.addListing(new Listing("Listing 2", "Description 2"));
-  manager.addListing(new Listing("Listing 3", "Description 3"));
-
-  manager.displayListings();
+<!--  manager.displayListings();-->
 
 
-</script>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-<script src="/js/seller.js"></script>
-</html>
+<!--</script>-->
+<!--<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="/js/seller.js"></script>-->
+<!--</html>-->

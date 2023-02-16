@@ -13,13 +13,15 @@ import java.util.List;
 @Service
 public class ProductService {
     @Autowired
-    private ListingRepository repo;
-
+    private ListingRepository listDao;
+public ProductService(ListingRepository listDao){
+    this.listDao = listDao;
+}
     public List<Listings> listAll(String keyword) {
         if (keyword != null) {
-            return repo.search(keyword);
+            return listDao.search(keyword);
         }
-        return repo.findAll();
+        return listDao.findAll();
     }
     public interface ListingService{
         Collection<Listings> getListing();

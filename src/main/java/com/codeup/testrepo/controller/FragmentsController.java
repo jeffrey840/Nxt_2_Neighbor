@@ -53,6 +53,36 @@ public class FragmentsController {
 
     }
 
+    @GetMapping("/profile/{userId}")
+    public String showProfilePage(@PathVariable Long userId, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null || !user.getId().equals(userId)) {
+            // The user is not authorized to view this profile
+            return "redirect:/";
+        }
+        model.addAttribute("user", user);
+        // Add other profile information as needed
+        return "/profile";
+    }
+//    @GetMapping("/profile")
+//    public String nav(Model model) {
+////        User user =(User) request.getSession().getAttribute("user");
+////        model.addAttribute("Users", userDao.findAll());
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String currentUser = authentication.getName();
+//        User user1 = userDao.findByUsername(currentUser);
+//        long id = user1.getId();
+//        User user = userDao.getReferenceById(id);
+//        Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
+//        String roles = roles1.getUser_role();
+//        if(Objects.equals(roles, "buyer")){
+//            return "/listings/buyer-profile";
+//        } else if (Objects.equals(roles, "seller")) {
+//            return "/listings/seller-profile";
+//        } else if (Objects.equals(roles, "neighbor")) {
+//            return "listings/neighbor-profile";
+
+
     @GetMapping("/profile/{Id}")
     public String showProfilePage(@PathVariable Long Id, HttpSession session, Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -60,6 +90,7 @@ public class FragmentsController {
 //        if (user == null || !user.getId().equals(Id)) {
 //            // The user is not authorized to view this profile
 //            return "redirect:/";
+
 //        }
         model.addAttribute("user", user);
         // Add other profile information as needed
