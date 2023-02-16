@@ -81,7 +81,7 @@ public class SecurityConfiguration {
                         "/seller-update",
                         "/listings/seller-profile/update",
                         "/listings/seller-update",
-                        "/listings/{id}seller-update"
+                        "/listings/{id}/seller-update"
                 )
                 .authenticated();
         return http.build();

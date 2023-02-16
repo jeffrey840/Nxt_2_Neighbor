@@ -77,7 +77,8 @@
             <input type="hidden" th:name="delete" id="delete" th:value="${list.id}">
         <button type="submit" class="btn">Delete</button>
         </form>
-        <a class="nav-link" href="/listings/seller-update">Update</a>
+
+        <a class="nav-link" th:href="@{/listings/{id}/seller-update(id=${list.id})}">Update</a>
 
         <hr>
     </div>
