@@ -1,5 +1,7 @@
 package com.codeup.testrepo.controller;
 
+import com.codeup.testrepo.models.Listings;
+import com.codeup.testrepo.models.User;
 import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.repositories.RolesRepository;
 import com.codeup.testrepo.repositories.UserRepository;
@@ -10,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class BuyerController {
@@ -36,6 +40,14 @@ public class BuyerController {
     @GetMapping(path = "/buyer-redirect")
     public String buyerViewListings(){
        return "/listings/viewListingsBuyer";
+    }
+
+    @PostMapping ("/save-listings")
+    public String listingsDelete(@RequestParam(name = "address") String address,
+                                 @RequestParam(name = "propType") String prop){
+        System.out.println(address);
+        System.out.println(prop);
+        return "/listings/viewListingsBuyer";
     }
 
 }

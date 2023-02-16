@@ -66,6 +66,7 @@
                     console.log(propertyType);
                     // console.log(userInput)
                     let html = `
+
                         <div class="card" style="width: 18rem;">
                         <img class="card-img-top" src="${data.props[i].imgSrc}" alt="Card image cap">
                         <div class="card-body">
@@ -73,10 +74,15 @@
                         <p   class="card-text">${data.props[i].propertyType}</p>
                         <p   class="card-text">${data.props[i].propertyType}</p>
                         <a href="#" class="btn btn-primary">VIEW</a>
+                        <form method="post" action="/save-listings">
 
-                        <a href="#" class="btn btn-primary">SAVE</a>
+                        <input type="hidden" name="address" id="address" value="${data.props[i].address}">
+                        <input type="hidden" name="propType" id="propType" value="${data.props[i].propertyType}">
+                        <button  type="submit" class="btn btn-primary">SAVE</button>
+                        </form>
                         </div>
-                        </div>`
+                        </div>
+                        `
                     $(appendHtml).append(html)
                 }
             })
