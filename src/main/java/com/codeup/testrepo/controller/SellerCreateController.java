@@ -45,7 +45,7 @@ public class SellerCreateController {
     @GetMapping(path = "/seller-create")
     public String showCreateForm(Model model) {
         model.addAttribute("listings", new Listings());
-        return "/listings/seller-create";
+        return "listings/seller-create";
     }
 
     @PostMapping(path = "/listings/seller-create")
