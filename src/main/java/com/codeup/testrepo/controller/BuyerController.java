@@ -75,6 +75,6 @@ public class BuyerController {
     public String listingsDelete(@RequestParam(name = "delete") long id) {
         listDao.deleteById(id);
         System.out.println(id);
-        return "/listings/buyer-profile";
+        return "redirect:/listings";
     }
 }
