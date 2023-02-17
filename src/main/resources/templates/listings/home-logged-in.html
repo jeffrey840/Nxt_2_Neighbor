@@ -27,10 +27,10 @@
     <div th:each="user : ${users}">
         <div th:if="${user.getRole().getId() == 3}">
             <h2 th:text="${user.getUsername()}">role name: </h2>
+            <form th:method="get" th:action="@{/buyer-redirect}">
+                <button type="submit" value="neighbors">VIEW LISTINGS</button>
+            </form>
         </div>
-        <form th:method="get" th:action="@{/buyer-redirect}">
-        <button type="submit" value="neighbors">VIEW LISTINGS</button>
-        </form>
     </div>
     <hr>
 
