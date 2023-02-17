@@ -8,7 +8,54 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/home-logged-in.css">
     <link rel="stylesheet" href="/css/seller.css">
+<style>
+    body{
+        background-color: #CCFFCC;
+        font-family: monospace;
+        color: #003333;
+    }
+    nav{
+        background-color: #003333;
+    }
+    .nav-item{
+        background-color: #CCCC66;
+        padding: 10px;
+        align-items: center;
+        text-align: center;
+        border-radius: 30px;
+        height: 40px;
+    }
+    .dropdown-item{
+        background-color: transparent;
+    }
+    li{
+        background-color: transparent;
+    }
+    .card {
+        background-color: white;
+    }
+    form{
+        text-align: center;
+    }
+    .create {
+        border-style: none;
+        background-color: #FF6699;
+        border-radius: 30px;
+        width: 200px;
+        color: #CCFFCC;
+        height: 40px;
+        font-size: 12px;
+        font-weight: bold;
+    }
 
+    .create:hover {
+        color: #CCCC66;
+        box-shadow: 0 0 50px 15px #CCCC66;
+    }
+    h1{
+        text-align: center;
+    }
+</style>
 </head>
 <body>
 <nav th:fragment="logged-in-navbar">
@@ -42,10 +89,9 @@
         </div>
     </nav>
 </nav>
-<h1>This is the Seller Profile</h1>
+<h1>Seller Profile</h1>
 
 <div sec:authorize="isAuthenticated()">
-    this show the user that is currently logged in
     <!--    <span sec:authentication="name"></span>-->
     <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
 </div>
@@ -53,7 +99,7 @@
 <div class="container mt-5 text-center">
     <h1 class="p-2">HERE ARE YOUR LISTINGS</h1>
     <hr>
-    <div th:each="list: ${listings}">
+    <div class="card" th:each="list: ${listings}">
         <img th:src="@{list.img}" alt="house">
         <p th:text="${list.title}"></p>
         <h3 th:text="${list.address}"></h3>
@@ -70,7 +116,7 @@
     </div>
 </div>
 <form th:action="@{/seller-create}">
-    <button>create</button>
+    <button class="create">create</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
