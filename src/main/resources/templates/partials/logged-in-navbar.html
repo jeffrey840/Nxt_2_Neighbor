@@ -21,7 +21,10 @@
                     </a>
                     <ul class="dropdown-menu">
 <!--                        goes back to user profile regardless what page-->
-                        <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>
+<!--                        <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>-->
+                        <li><a class="dropdown-item" th:href="@{/listings}">Profile</a></li>
+
+
                         <li class="dropdown-item">
                             <a class="nav-link" href="/contact-us">Contact Us</a>
                         </li>
