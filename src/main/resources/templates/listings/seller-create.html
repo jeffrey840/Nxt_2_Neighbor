@@ -5,9 +5,112 @@
   <meta charset="UTF-8">
   <title>Seller Create</title>
 </head>
+<style>
+  body, html {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(#003333, #CCFFCC);
+    background-size: 100%;
+    font-family: monospace;
+  }
+  nav {
+    background-color: transparent;
+  !important;
+  }
+
+  form {
+    width: 300px;
+    margin: 20px;
+    align-content: center;
+    flex-direction: column;
+  }
+
+  .alignForm {
+    margin-top: 150px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  !important;
+  }
+
+  input{
+    background-color: #003333;
+    border-radius: 30px;
+    border-style: none;
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+  }
+
+  input::placeholder {
+    color: #CCFFCC;
+    align-items: center;
+  }
+
+  input#username:focus {
+    color: #CCFFCC;
+    align-items: center;
+  }
+
+  input#password {
+    background-color: #003333;
+    border-radius: 30px;
+    border-style: none;
+    height: 30px;
+    width: 300px;
+  }
+
+  input#password::placeholder {
+    color: #CCFFCC;
+    align-items: center;
+  }
+
+  input#password:focus {
+    color: #CCFFCC;
+    align-items: center;
+  }
+
+  label {
+    padding: 8px;
+    color: #CCFFCC;
+  }
+  .button{
+    background-color: #FF6699;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 30px;
+  }
+  .button:hover{
+    color: #CCCC66;
+    box-shadow: 0 0 50px 15px #CCCC66;
+  }
+  h1{
+    text-align: center;
+    color: #CCFFCC;
+  }
+</style>
 <body>
 
 <h1 class="p-2">CREATE LISTING</h1>
+<div class="alignForm">
+<form  th:action="@{/listings/seller-create}" th:method="post" th:object="${listings}">
+  <label>Title:</label>
+  <br>
+  <input th:src="" type="file">
+  <br>
+  <br>
+  <input placeholder="title" class="m-2" type="text" th:field="*{title}"  /><br>
+  <br>
+  <input placeholder="address" class="m-2" th:field="*{address}"><br>
+  <br>
+  <input placeholder="price" class="m-2" th:field="*{price}"><br>
+  <br>
+  <input placeholder="description" class="m-2" th:field="*{description}"><br>
+  <br>
+  <input class="button" type="submit" value="Submit"/>
+</form>
+
 <!--<form  th:action="@{/listings/seller-create}" th:method="post" th:object="${listings}🟥 ">-->
 <!--  <label>Title:</label>-->
 <!--  <br>-->
@@ -20,7 +123,8 @@
 
 <!--//🟥 2023-02-17T06:17:38.089Z ERROR 11 -&#45;&#45; [nio-5000-exec-7] org.thymeleaf.TemplateEngine             : [THYMELEAF][http-nio-5000-exec-7] Exception processing template "/listings/seller-create": Error resolving template [/listings/seller-create], template might not exist or might not be accessible by any of the configured Template Resolvers-->
 <!--2023-02-17T06:17:38.096796860Z app[web.1]://🟥 -->
-<script src="/static/js/seller.js"></script>
 
+<script src="/static/js/seller.js"></script>
+</div>
 </body>
 </html>
