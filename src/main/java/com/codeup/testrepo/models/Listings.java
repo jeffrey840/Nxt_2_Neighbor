@@ -14,7 +14,7 @@ public class Listings {
 
     @Column(length = 200)
     private String address;
-    @Column(unique = true, length = 50, nullable = false)
+    @Column(unique = true, nullable = false)
     private String title;
 
     @Column(nullable = false, length = 1000)
