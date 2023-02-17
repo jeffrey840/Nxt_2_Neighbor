@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="container">
-    <nav th:insert="~{/partials/logged-in-navbar :: logged-in-navbar}"></nav>
+<!--    <nav th:insert="~{/partials/logged-in-navbar :: logged-in-navbar}"></nav>//🟥 caused issue when seller pressed this button, 403 error-->
 
 
     <div sec:authorize="isAuthenticated()">
