@@ -7,21 +7,23 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark" style="background-color: #CCFFCC !important;">
     <div class="container-fluid">
         <!--            replace with logo ⬇️ -->
+        <a class="navbar-brand" href="/home-logged-in">
+            <img src="/static/img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
+        </a>
 
-        </a>            <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="nav justify-content-start me-auto">
             <li class="nav-item">
                 <form th:action="@{/home-logged-in}" method="post">
-                    <button>Listings</button>
+                    <button type="button" class="btn btn-outline-success">Listings</button>
                 </form>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-success dropdown-toggle" href="#" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Options
-                </a>
+                </button>
                 <ul class="dropdown-menu">
                     <!--                        goes back to user profile regardless what page-->
                     <!--                        <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>-->
@@ -33,12 +35,8 @@
                 </ul>
             </li>
         </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
         <form th:action="@{/logout}" th:method="post">
-            <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center" style="margin-top: 8px">Logout</button>
+            <button class="btn btn-outline-dark" >Logout</button>
         </form>
     </div>
 </nav>
