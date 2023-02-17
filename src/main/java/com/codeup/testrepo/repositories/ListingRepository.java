@@ -3,6 +3,7 @@ package com.codeup.testrepo.repositories;
 
 import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.Roles;
+import com.codeup.testrepo.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,4 +22,6 @@ public interface ListingRepository extends JpaRepository<Listings, Long> {
     Listings findById(long id);
 
     Listings findByUserId(long id);
+
+    List<Listings> findAllByUser(User user);
 }

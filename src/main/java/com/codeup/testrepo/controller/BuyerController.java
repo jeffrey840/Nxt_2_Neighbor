@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 public class BuyerController {
@@ -61,11 +63,18 @@ public class BuyerController {
         System.out.println(currentUser);
         return "/listings/buyer-profile";
     }
+    @GetMapping("/save-listings")
+    public String viewAllSavedListings(Model model){
+        List<Listings> listings = listDao.findAll();
+        model.addAttribute("listings", listings);
+        return "/listings/buyer-profile";
+    }
 
     //DELETE
     @PostMapping("/listing/buyer-profile/delete")
     public String listingsDelete(@RequestParam(name = "delete") long id) {
         listDao.deleteById(id);
-        return "redirect:/buyer-profile";
+        System.out.println(id);
+        return "/listings/buyer-profile";
     }
 }
