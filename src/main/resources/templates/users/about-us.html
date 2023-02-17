@@ -9,26 +9,21 @@
 </head>
 <body>
 <nav th:fragment="logged-in-navbar">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-lg bg-success" data-bs-theme="dark" style="background-color: #CCFFCC !important;">
     <div class="container-fluid">
       <!--            replace with logo ⬇️ -->
       <a class="navbar-brand" href="/home-logged-in">
         <img src="/static/img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
       </a>
       <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <form th:action="@{/home-logged-in}" method="post">
-            <button>Listings</button>
-          </form>
-        </li>
+      <ul class="navbar-nav me-auto">
 <!--                               <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>&ndash;&gt;-->
-            <li><a class="dropdown-item" th:href="@{/listings}">Profile</a></li>
+            <li><a class="btn btn-outline-success" th:href="@{/listings}">Profile</a></li>
 
       </ul>
 
       <form th:action="@{/logout}" th:method="post">
-        <button class="btn-link btn nav nav-pills flex-column flex-sm-row justify-content-center">Logout</button>
+        <button class="btn btn-outline-dark" >Logout</button>
       </form>
     </div>
   </nav>
