@@ -72,9 +72,11 @@ public class SellerCreateController {
         return "listings/seller-update";
     }
     @PostMapping("/listings/seller-update")
-    public String editListing(@ModelAttribute Listings listings) {
-        User user = userDao.findAll().get(0);
+    public String editListing(@RequestParam(name = "listingId")String id, @ModelAttribute Listings listings) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         listings.setUser(user);
+        listings.setId(Long.parseLong(id));
+        System.out.println(id);
         listDao.save(listings);
         return "redirect:/seller-profile";
     }
