@@ -52,28 +52,17 @@
 </nav>
 <h1>This is the Seller Profile</h1>
 
-
-<!--<div th:each="a: ${Users}">-->
-<!--🟩    role name: <span th:text="${a.getRole().getUser_role()}"></span><br>-->
-<!--    role id <span th:text="${a.getRole().getId()}"></span><br>-->
-<!--    Username: <span th:text="${a.getUsername()}"></span><br>-->
-<!--    user id: <span th:text="${a.getId()}"></span><br>-->
-<!--    <br>-->
-<!--</div>-->
-
 <div sec:authorize="isAuthenticated()">
     this show the user that is currently logged in
     <!--    <span sec:authentication="name"></span>-->
     <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
 </div>
 
-
-
-<!--<h1 class="text-center"> WELCOME, USERNAME</h1>-->
 <div class="container mt-5 text-center">
     <h1 class="p-2">HERE ARE YOUR LISTINGS</h1>
     <hr>
     <div th:each="list: ${listings}">
+        <img th:src="@{list.img}" alt="house">
         <p th:text="${list.title}"></p>
         <h3 th:text="${list.address}"></h3>
         <p th:text="${list.price}"></p>
@@ -91,19 +80,6 @@
 <form th:action="@{/seller-create}">
     <button>create</button>
 </form>
-
-
-<!--<h1 class="text-center">Create New Post</h1>-->
-<!--<form  th:action="@{/listings/create}" th:method="post" th:object="${listing}">-->
-<!--    <label for="postTitle" >Title:</label>-->
-<!--    <input type="text" th:field="*{title}" id="postTitle">-->
-
-<!--    <label for="postBody" >Body:</label>-->
-<!--    <textarea th:field="*{listing}" id="postBody"></textarea>-->
-
-<!--    <button type="submit">Submit Post</button>-->
-<!--</form>-->
-
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

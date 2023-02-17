@@ -23,8 +23,8 @@ public class Listings {
     @Column(length = 100)
     private double price;
 
-//    @Column(length = 255)
-//    private String img;
+    @Column(length = 255)
+    private String img;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -37,11 +37,12 @@ public class Listings {
     )
     private List<Categories> categories;
 
-    public Listings(String title, String address, String description, double price){
+    public Listings(String title, String address, String description, double price, String img){
         this.title = title;
         this.address = address;
         this.description = description;
         this.price = price;
+        this.img =img;
     }
 
     public Listings() {
@@ -92,4 +93,10 @@ public class Listings {
         this.address = address;
     }
 
+    public String getImg() {
+        return img;
+    }
+    public void setImg(String img) {
+        this.img = img;
+    }
 }
