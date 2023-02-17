@@ -40,7 +40,7 @@ public class BuyerController {
     public String buyerViewListings(Model model) {
         List<Listings> allDataListings = listDao.findAll();
         model.addAttribute("listings", allDataListings);
-        return "/listings/viewListingsBuyer";
+        return "listings/viewListingsBuyer";
     }
 
     //SAVE
@@ -69,7 +69,7 @@ public class BuyerController {
     public String viewAllSavedListings(Model model){
         List<Listings> listings = listDao.findAll();
         model.addAttribute("listings", listings);
-        return "/listings/buyer-profile";
+        return "listings/buyer-profile";
     }
 
     //DELETE

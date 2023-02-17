@@ -86,7 +86,7 @@ public class SecurityConfiguration {
                         "/listings/seller-profile/update",
                         "/listings/seller-update",
                         "/listings/{id}/seller-update",
-                        "/viewListingsBuyer",
+                        "/viewL istingsBuyer",
                         "/listings/viewListingsBuyer",
                         "/buyer-redirect",
                         "/save-listings",
