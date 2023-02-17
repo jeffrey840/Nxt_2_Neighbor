@@ -72,12 +72,13 @@
                         <div class="card-body">
                         <h6  class="card-title">${data.props[i].address}</h6>
                         <p   class="card-text">${data.props[i].propertyType}</p>
-                        <p   class="card-text">${data.props[i].propertyType}</p>
+                        <p   class="card-text">${data.props[i].price}</p>
                         <a href="#" class="btn btn-primary">VIEW</a>
                         <form method="post" action="/save-listings">
-
+                        <input type="hidden" name="title" id="title" value="${data.props[i].country}">
                         <input type="hidden" name="address" id="address" value="${data.props[i].address}">
                         <input type="hidden" name="propType" id="propType" value="${data.props[i].propertyType}">
+                         <input type="hidden" name="price" id="price" value="${data.props[i].price}">
                         <button  type="submit" class="btn btn-primary">SAVE</button>
                         </form>
                         </div>
