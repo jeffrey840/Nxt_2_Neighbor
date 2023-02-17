@@ -29,9 +29,10 @@ public class SellerCreateController {
     //CREATE
     @GetMapping(path = "/seller-profile")
     public String getPost(Model model) {
-        List<Listings> listings = listDao.findAll();
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<Listings> listings = listDao.findAllByUser(user);
         model.addAttribute("listings", listings);
-        return "listings/seller-profile";
+        return "redirect:/listings";
     }
 
     @GetMapping("/seller-profile/{id}")

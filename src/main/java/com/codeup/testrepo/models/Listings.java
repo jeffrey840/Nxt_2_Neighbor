@@ -46,7 +46,6 @@ public class Listings {
 
     public Listings() {
     }
-
     public Long getId() {
         return id;
     }

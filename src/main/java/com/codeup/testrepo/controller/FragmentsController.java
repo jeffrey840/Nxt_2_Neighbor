@@ -61,6 +61,7 @@ public class FragmentsController {
         model.addAttribute("user", user);
         // Add other profile information as needed
         if(user.getRole().getId() == 2){
+
             return "listings/buyer-profile";
         } else if (user.getRole().getId() == 1) {
             return "listings/seller-profile";
