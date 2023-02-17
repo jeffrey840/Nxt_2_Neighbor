@@ -37,7 +37,9 @@ public class BuyerController {
     }
 
     @GetMapping(path = "/buyer-redirect")
-    public String buyerViewListings() {
+    public String buyerViewListings(Model model) {
+        List<Listings> allDataListings = listDao.findAll();
+        model.addAttribute("listings", allDataListings);
         return "/listings/viewListingsBuyer";
     }
 
