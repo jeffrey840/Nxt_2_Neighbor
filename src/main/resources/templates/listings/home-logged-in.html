@@ -10,8 +10,30 @@
     <title>Home Logged in users</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/home-logged-in.css">
+    <style>
+        body{
+            background-color: #003333;
+            color: #CCFFCC;
+            font-family: monospace;
+        }
+        .authorized{
+            font-size: 50px;
+            letter-spacing: 5px;
+        }
+        button{
+            background-color: #FF6699;
+            width: 200px;
+            height: 40px;
+            border: none;
+            border-radius: 30px;
+        }
+        button:hover{
+            color: #CCCC66;
+            box-shadow: 0 0 50px 15px #CCCC66;
+        }
 
+
+    </style>
 </head>
 <body>
 <div class="container">
@@ -19,33 +41,18 @@
 
 
     <div sec:authorize="isAuthenticated()">
-        <!--    <span sec:authentication="name"></span>-->
         <h1 class="authorized text center" id="authorized" > Welcome, <span sec:authentication="name"></span></h1>
     </div>
     <hr>
     <div th:each="user : ${users}">
         <div th:if="${user.getRole().getId() == 3}">
-            <h2 th:text="${user.getUsername()}">role name: </h2>
+            <h2 class="user" th:text="${user.getUsername()}"></h2>
             <form th:method="get" th:action="@{/buyer-redirect}">
                 <button type="submit" value="neighbors">VIEW LISTINGS</button>
             </form>
         </div>
     </div>
     <hr>
-
-    <footer class="navbar justify-content-end">
-        <ul class="nav nav-pills">
-            <li class="nav-item">
-                <a class="nav-link active" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-        </ul>
-    </footer>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
