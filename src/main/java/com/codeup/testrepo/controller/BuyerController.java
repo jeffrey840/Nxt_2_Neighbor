@@ -33,31 +33,28 @@ public class BuyerController {
         this.rolesDao = rolesDao;
         this.emailService = emailService;
     }
-//    @GetMapping(path = "/listings/{id}/buyer-profile")
-//    public String buyerDelete(@PathVariable long id) {
-//        listDao.deleteById(id);
-//        return "redirect:/listings/buyer-profile";
-//    }
+
     @GetMapping(path = "/buyer-redirect")
-    public String buyerViewListings(){
-       return "/listings/viewListingsBuyer";
+    public String buyerViewListings() {
+        return "/listings/viewListingsBuyer";
     }
 
-    @PostMapping ("/save-listings")
+    //SAVE
+    @PostMapping("/save-listings")
     public String listingSave(@RequestParam(name = "address") String address,
-                                 @RequestParam(name = "propType") String prop,
-                                 @RequestParam (name = "price") double price,
-                                    @RequestParam(name = "title") String title){
+                              @RequestParam(name = "propType") String prop,
+                              @RequestParam(name = "price") double price,
+                              @RequestParam(name = "title") String title, Model model) {
+
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Listings listings = new Listings();
+        model.addAttribute("listings", listings);
         listings.setAddress(address);
         listings.setDescription(prop);
         listings.setPrice(price);
         listings.setTitle(title);
-
         listings.setUser(currentUser);
         listDao.save(listings);
-
         System.out.println(address);
         System.out.println(prop);
         System.out.println(listings);
@@ -65,4 +62,10 @@ public class BuyerController {
         return "/listings/buyer-profile";
     }
 
+    //DELETE
+    @PostMapping("/listing/buyer-profile/delete")
+    public String listingsDelete(@RequestParam(name = "delete") long id) {
+        listDao.deleteById(id);
+        return "redirect:/buyer-profile";
+    }
 }

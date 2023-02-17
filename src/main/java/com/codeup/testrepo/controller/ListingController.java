@@ -76,6 +76,8 @@ public class ListingController {
         String roles = roles1.getUser_role();
         if(Objects.equals(roles, "buyer")){
             model.addAttribute("user", user);
+            List<Listings> listings = listDao.findAll();
+            model.addAttribute("listings", listings);
             return "listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
             model.addAttribute("user", user);

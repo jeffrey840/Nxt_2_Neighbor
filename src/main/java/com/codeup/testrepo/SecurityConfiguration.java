@@ -89,7 +89,10 @@ public class SecurityConfiguration {
                         "/viewListingsBuyer",
                         "/listings/viewListingsBuyer",
                         "/buyer-redirect",
-                        "/save-listings"
+                        "/save-listings",
+                        "/listing/buyer-profile/delete",
+                        "/buyer-profile",
+                        "/listings/buyer-profile"
                 )
                 .authenticated();
 
