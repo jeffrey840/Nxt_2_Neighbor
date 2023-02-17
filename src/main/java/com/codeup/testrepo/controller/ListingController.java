@@ -1,11 +1,9 @@
 package com.codeup.testrepo.controller;
 import com.codeup.testrepo.models.Listings;
 import com.codeup.testrepo.models.Roles;
-import com.codeup.testrepo.repositories.RolesRepository;
-import com.codeup.testrepo.repositories.UserRepository;
+import com.codeup.testrepo.repositories.*;
 import com.codeup.testrepo.services.EmailService;
 import com.codeup.testrepo.models.User;
-import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Conditional;
@@ -32,33 +30,22 @@ public class ListingController {
     private final ListingRepository listDao;
     private final EmailService emailService;
 
+    private final InterestRepository interestDao;
+
+    private final CategoryRepository categoryDao;
+
     private ProductService.ListingService listingService;
     private ProductService service;
 
 
-    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
+    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao, InterestRepository interestDao, CategoryRepository categoryDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
         this.emailService = emailService;
+        this.interestDao = interestDao;
+        this.categoryDao = categoryDao;
     }
-
-//    MAPPING TO VIEW LISTINGS AS A NON REGISTERED USER
-//    @GetMapping("/listings")
-//    public String homeNotLogged(Model model){
-//        model.addAttribute("listings", listDao.findAll());
-//        model.addAttribute("title", "Home");
-//        return "redirect: /listings/home-logged";
-//    }
-
-    //    @RequestMapping("/")
-//    public String viewHomePage(Model model, @Param("keyword") String keyword) {
-//        List<Listings> listProducts = service.listAll(keyword);
-//        model.addAttribute("listProducts", listProducts);
-//        model.addAttribute("keyword", keyword);
-//
-//        return "index";
-//    }
     @GetMapping("/")
     public String welcomePage() {
         return "listings/home-not-logged";
@@ -74,6 +61,15 @@ public class ListingController {
         User user = userDao.getReferenceById(id);
         Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
         String roles = roles1.getUser_role();
+        StringBuilder interestsList = new StringBuilder();
+        interestsList.append("<div>");
+        user.getCategories().forEach(category -> {
+            category.getInterests().forEach(interest -> {
+                interestsList.append(interest.getName()).append("</div> <div>");
+            });
+        });
+        interestsList.append("</div>");
+        model.addAttribute("interestList", interestsList.toString());
         if(Objects.equals(roles, "buyer")){
             model.addAttribute("user", user);
             List<Listings> listings = listDao.findAllByUser(user);
@@ -115,10 +111,6 @@ public class ListingController {
         model.addAttribute("listing", listDao.findById(id));
         Listings listing = (Listings) listDao.getReferenceById(id);
         User user = userDao.getReferenceById(listing.getUser().getId());
-//        model.addAttribute("postTitle", listing.getTitle());
-//        model.addAttribute("postBody", listing.getDescription());
-//        model.addAttribute("postID", listing.getId());
-//        model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("user", user);
         return "listings/home-logged-in";
     }

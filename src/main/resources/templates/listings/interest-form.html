@@ -22,7 +22,7 @@
 </nav>
 <div class="container">
 
-    <form action="@{/listings/neighbor-profile}" method="post" th:object="{categories}">
+    <form th:action="@{/listings/interests}" th:method="post" th:object="${interests}">
         <div class="form-group">
             <label for="exampleFormControlSelect1">PHYSICAL/OUTDOORS</label>
             <select class="form-control" id="exampleFormControlSelect1">
