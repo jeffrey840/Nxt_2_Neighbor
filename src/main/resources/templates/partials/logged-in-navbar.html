@@ -11,8 +11,8 @@
             <!--			<div class="collapse navbar-collapse" id="navbarSupportedContent">-->
             <ul class="nav justify-content-start me-auto">
                 <li class="nav-item">
-                    <form th:action="@{/home-logged-in}" method="post">
-                        <button type="button" class="btn btn-outline-success">Listings</button>
+                    <form th:method="get" th:action="@{/buyer-redirect}">
+                        <button class="btn btn-outline-success" type="submit" value="neighbors">LISTINGS</button>
                     </form>
                 </li>
                 <li class="dropdown">

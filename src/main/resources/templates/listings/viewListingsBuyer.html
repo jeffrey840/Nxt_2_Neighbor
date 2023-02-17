@@ -46,11 +46,8 @@
                         <a class="nav-link" href="/contact-us">Contact Us</a>
                     </li>
                     <li><a class="dropdown-item" href="/about-us">About</a></li>
-                    <li class="nav-item">
-                        <form th:action="@{/home-logged-in}" method="post">
-                            <a>Listings</a>
-                        </form>
-                    </li>
+                    <li><a class="dropdown-item" th:href="@{/listings}">Profile</a></li>
+
                 </ul>
             </li>
         </ul>
