@@ -88,8 +88,11 @@ public class ListingController {
         }
         return "listings/home-not-logged";
     }
+   //this controls the listing page
     @GetMapping("/home-logged-in")
     public String viewListings(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         model.addAttribute("listings", listDao.findAll());
         model.addAttribute("neighbors", rolesDao.findAll());
         model.addAttribute("users", userDao.findAll());
@@ -97,6 +100,7 @@ public class ListingController {
     }
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
+        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         model.addAttribute("Listings", listDao.findAll());
         model.addAttribute("neighbors", rolesDao.findAll());
         model.addAttribute("users", userDao.findAll());
