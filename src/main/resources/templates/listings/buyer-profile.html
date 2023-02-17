@@ -4,11 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Buyer Profile</title>
+    <style>
+        *{
+            font-family: monospace;
+            color: #CCCC66;
+            text-decoration: none;!important;
+        }
+
+    </style>
 </head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 
-<body>
+<body style="background-color: #003333;!important;">
 <nav th:fragment="logged-in-navbar">
     <nav class="navbar navbar-expand-lg bg-body-tertiary bg-success" data-bs-theme="dark" style="background-color: #CCFFCC !important;">
         <div class="container-fluid">
@@ -18,8 +26,8 @@
             </a>
             <ul class="nav justify-content-start me-auto">
                 <li class="nav-item">
-                    <form th:action="@{/home-logged-in}" method="post">
-                    <button type="button" class="btn btn-outline-success" >Listings</button>
+                    <form th:method="get" th:action="@{/buyer-redirect}">
+                        <button class="btn btn-outline-success" type="submit" value="neighbors">LISTINGS</button>
                     </form>
                 </li>
                 <li class="dropdown">
@@ -46,12 +54,13 @@
 </nav>
 
 <div sec:authorize="isAuthenticated()">
-    this show the user that is currently logged in
     <!--    <span sec:authentication="name"></span>-->
     <h1 class="text-center"> WELCOME, <span sec:authentication="name"></span></h1>
 </div>
-<h1>This is the Buyer Profile</h1>
-<!--<h1 class="text-center"> WELCOME, USERNAME</h1>-->
+
+<div class="row justify-content-center">
+    <h3 class="text-center">Add listings here!</h3>
+</div>
 <div class="listing-display" id="listing-display"></div>
 <div th:each="list: ${listings}">
     <p th:text="${list.title}"></p>
@@ -60,22 +69,9 @@
     <p th:text="${list.description}"></p>
     <form th:name="deleteId" id="deleteId" th:action="@{/listing/buyer-profile/delete}" th:method="post">
         <input type="hidden" th:name="delete" id="delete" th:value="${list.id}">
-        <button type="submit" class="btn">Delete</button>
+        <button type="submit" class="btn btn-outline-danger">Delete</button>
     </form>
 </div>
-<footer class="navbar justify-content-end">
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-        </li>
-    </ul>
-</footer>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
