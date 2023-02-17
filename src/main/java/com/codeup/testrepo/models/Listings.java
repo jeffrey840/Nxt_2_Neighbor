@@ -12,19 +12,21 @@ public class Listings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Lob
     @Column(length = 200)
     private String address;
+    @Lob
     @Column(unique = true, length = 50, nullable = false)
     private String title;
-
+    @Lob
     @Column(nullable = false, length = 1000)
     private String description;
-
+    @Lob
     @Column(length = 100)
     private double price;
 
-    @Column(length = 255)
-    private String img;
+//    @Column(length = 50)
+//    private String img;
 
     @ManyToOne
     @JoinColumn (name = "user_id")
@@ -37,12 +39,11 @@ public class Listings {
     )
     private List<Categories> categories;
 
-    public Listings(String title, String address, String description, double price, String img){
+    public Listings(String title, String address, String description, double price){
         this.title = title;
         this.address = address;
         this.description = description;
         this.price = price;
-        this.img =img;
     }
 
     public Listings() {
@@ -93,10 +94,4 @@ public class Listings {
         this.address = address;
     }
 
-    public String getImg() {
-        return img;
-    }
-    public void setImg(String img) {
-        this.img = img;
-    }
 }
