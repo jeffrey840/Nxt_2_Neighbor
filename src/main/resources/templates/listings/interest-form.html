@@ -22,77 +22,103 @@
 </nav>
 <div class="container">
 
-    <form action="@{/listings/neighbor-profile}" method="post" th:object="{categories}">
+    <form th:action="@{/listings/interests}" th:method="post" th:object="${interests}">
+<!--        <div class="form-group">-->
+<!--            <label for="interests">PHYSICAL/OUTDOORS</label>-->
+<!--            <select class="form-control" name="name" id="interests">-->
+<!--                <option th:field="*{name}" th:value="running">RUNNING</option>-->
+<!--                <option th:field="*{name}" th:value="hiking">HIKING</option>-->
+<!--                <option th:field="*{name}" th:value="biking">BIKING</option>-->
+<!--                <option th:field="*{name}" th:value="climbing">CLIMBING</option>-->
+<!--                <option th:field="*{name}" th:value="swimming">SWIMMING</option>-->
+<!--            </select>-->
+<!--        </div>-->
         <div class="form-group">
-            <label for="exampleFormControlSelect1">PHYSICAL/OUTDOORS</label>
-            <select class="form-control" id="exampleFormControlSelect1">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">RUNNING</option>
-                <option th:field="{name}">HIKING</option>
-                <option th:field="{name}">BIKING</option>
-                <option th:field="{name}">CLIMBING</option>
-                <option th:field="{name}">SWIMMING</option>
-            </select>
+            <label>Choose Interests</label>
+
+
+            <div>
+                <input type="checkbox" id="running" name="interests" value="running,physical/outdoors">
+                <label for="running">Running</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="hiking" name="interests" value="hiking,physical/outdoors">
+                <label for="hiking">Hiking</label>
+            </div>
+
+            <div>
+                <input type="checkbox" id="biking" name="interests" value="biking,physical/outdoors">
+                <label for="biking">Biking</label>
+            </div>
+
         </div>
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">MENTAL/WELLNESS</label>
-            <select class="form-control" id="exampleFormControlSelect2">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">YOGA</option>
-                <option th:field="{name}">WELLNESS GROUP</option>
-                <option th:field="{name}">GUIDED JOURNALING</option>
-                <option th:field="{name}">MEDITATION/SPA</option>
-                <option th:field="{name}">LEARNING NEW SKILLS</option>
-            </select>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="exampleFormControlSelect2">MENTAL/WELLNESS</label>-->
+<!--            <select class="form-control" id="exampleFormControlSelect2">-->
+<!--                <option th:field="*{name}">SELECT</option>-->
+<!--                <option th:field="*{name}">YOGA</option>-->
+<!--                <option th:field="*{name}">WELLNESS GROUP</option>-->
+<!--                <option th:field="*{name}">GUIDED JOURNALING</option>-->
+<!--                <option th:field="*{name}">MEDITATION/SPA</option>-->
+<!--                <option th:field="*{name}">LEARNING NEW SKILLS</option>-->
+<!--            </select>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">SOCIAL</label>
-            <select class="form-control" id="exampleFormControlSelect3">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">NIGHT OUT</option>
-                <option th:field="{name}">LIVE ENTERTAINMENT</option>
-                <option th:field="{name}">HOSTING PARTIES/EVENTS</option>
-                <option th:field="{name}">RELIGIOUS GATHERINGS</option>
-                <option th:field="{name}">JOINING SOCIAL GROUPS</option>
-            </select>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="exampleFormControlSelect3">SOCIAL</label>-->
+<!--            <select class="form-control" id="exampleFormControlSelect3">-->
+<!--                <option th:field="*{name}">SELECT</option>-->
+<!--                <option th:field="*{name}">NIGHT OUT</option>-->
+<!--                <option th:field="*{name}">LIVE ENTERTAINMENT</option>-->
+<!--                <option th:field="*{name}">HOSTING PARTIES/EVENTS</option>-->
+<!--                <option th:field="*{name}">RELIGIOUS GATHERINGS</option>-->
+<!--                <option th:field="*{name}">JOINING SOCIAL GROUPS</option>-->
+<!--            </select>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">LEISURE</label>
-            <select class="form-control" id="exampleFormControlSelect4">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">GAMING</option>
-                <option th:field="{name}">CONCERTS</option>
-                <option th:field="{name}">PAINTING</option>
-                <option th:field="{name}">BOOK CLUBS</option>
-            </select>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="exampleFormControlSelect4">LEISURE</label>-->
+<!--            <select class="form-control" id="exampleFormControlSelect4">-->
+<!--                <option th:field="*{name}">SELECT</option>-->
+<!--                <option th:field="*{name}">GAMING</option>-->
+<!--                <option th:field="*{name}">CONCERTS</option>-->
+<!--                <option th:field="*{name}">PAINTING</option>-->
+<!--                <option th:field="*{name}">BOOK CLUBS</option>-->
+<!--            </select>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">OCCUPATIONAL</label>
-            <select class="form-control" id="exampleFormControlSelect5">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">WORKAHOLIC</option>
-                <option th:field="{name}">STAY AT HOME</option>
-                <option th:field="{name}">ALWAYS TRAVELING</option>
-            </select>
-        </div>
+<!--        <div class="form-group">-->
+<!--            <label for="exampleFormControlSelect5">OCCUPATIONAL</label>-->
+<!--            <select class="form-control" id="exampleFormControlSelect5">-->
+<!--                <option th:field="*{name}">SELECT</option>-->
+<!--                <option th:field="*{name}">WORKAHOLIC</option>-->
+<!--                <option th:field="*{name}">STAY AT HOME</option>-->
+<!--                <option th:field="*{name}">ALWAYS TRAVELING</option>-->
+<!--            </select>-->
+<!--        </div>-->
 
-        <div class="form-group">
-            <label for="exampleFormControlSelect1">EXTRA</label>
-            <select class="form-control" id="exampleFormControlSelect6">
-                <option th:field="{name}">SELECT</option>
-                <option th:field="{name}">FAMILY ORIENTED</option>
-                <option th:field="{name}">PET LOVER</option>
-                <option th:field="{name}">INTROVERT</option>
-                <option th:field="{name}">EXTROVERT</option>
-                <option th:field="{name}">SINGLE FAMILY</option>
-            </select>
-        </div>
-    </form>
-    <button type="submit">SUBMIT</button>
+<!--        <div class="form-group">-->
+<!--            <label for="exampleFormControlSelect6">EXTRA</label>-->
+<!--            <select class="form-control" id="exampleFormControlSelect6">-->
+<!--                <option th:field="*{name}">SELECT</option>-->
+<!--                <option th:field="*{name}">FAMILY ORIENTED</option>-->
+<!--                <option th:field="*{name}">PET LOVER</option>-->
+<!--                <option th:field="*{name}">INTROVERT</option>-->
+<!--                <option th:field="*{name}">EXTROVERT</option>-->
+<!--                <option th:field="*{name}">SINGLE FAMILY</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </form>-->
+
+<!--    <form th:action="@{/listings/interests}" th:object="${Categories}" method="post">-->
+<!--        <div class="form-group">-->
+<!--            <label for="categories">Physical/Outdoors</label>-->
+<!--            <input type="radio" id="categories" name="categories" checked value="physical/outdoors" th:field="*{name}">-->
+<!--        </div>-->
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>

@@ -14,6 +14,9 @@ public class Interests {
     @Column(nullable = false, length = 50)
     private String name;
 
+//    @Column(nullable = false, length = 100)
+//    private String categories;
+
     @ManyToOne
     @JoinColumn (name = "category_id")
     private Categories categories;
@@ -41,4 +44,12 @@ public class Interests {
     public void setCategories(Categories categories) {
         this.categories = categories;
     }
+
+//    public String getCategories() {
+//        return categories;
+//    }
+//
+//    public void setCategories(String categories) {
+//        this.categories = categories;
+//    }
 }

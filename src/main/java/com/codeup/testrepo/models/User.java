@@ -102,4 +102,12 @@ public class User {
     public void setPosts(List<Listings> listings) {
         this.homeListings = homeListings;
     }
+
+    public List<Categories> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Categories> categories) {
+        this.categories = categories;
+    }
 }

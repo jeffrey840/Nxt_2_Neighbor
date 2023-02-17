@@ -31,13 +31,14 @@ function getListings() {
                         <h5 class="card-title">YOUR NEIGHBOR</h5>
                         <p>${data.props[0].propertyType}</p>
                         <p class="card-text">NEIGHBORS INTERESTS<br>
-                        <p>OUTDOORS</p>
-                        <p>INTROVERT</p>
-                        <p>EXTROVERT</p>
+                        <div class="view-interests"></div>
                         <a href="#" class="btn btn-primary">EDIT</a>
                         </div>
                         </div>`
             $(appendHtml).append(html)
+            $(".view-interests").html($("#interestList").val())
         })
 }
+
 getListings();
+

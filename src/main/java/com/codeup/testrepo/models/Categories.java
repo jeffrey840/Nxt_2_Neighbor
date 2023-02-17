@@ -26,6 +26,17 @@ public class Categories {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categories")
     private List<Interests> interests;
 
+    public Categories() {
+    }
+
+    public Categories(long id, String name, List<Listings> listing, User user, List<Interests> interests) {
+        this.id = id;
+        this.name = name;
+        this.listing = listing;
+        this.user = user;
+        this.interests = interests;
+    }
+
     public long getId() {
         return id;
     }
@@ -52,6 +63,10 @@ public class Categories {
 
     public User getUser(){
         return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Interests> getInterests() {

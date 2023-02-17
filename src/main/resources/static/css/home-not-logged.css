@@ -21,7 +21,7 @@
     flex-wrap: wrap;
 }
 .slogan-img{
-    background-image: url("/templates/img/web_home_not_logged.png");
+    background-image: url("/static/img/web_home_not_logged.png");
 }
 .slogan{
     font-family: "Helvetica Neue", serif;

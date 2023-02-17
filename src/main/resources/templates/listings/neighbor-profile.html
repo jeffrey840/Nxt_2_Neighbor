@@ -76,12 +76,14 @@
         <button type="submit" class="btn ">Delete</button>
     </form>
 </div>
+<!--<div class="view-interests"></div>-->
+<!--<div class="view-interests" th:utext="${interestList}"></div>-->
 
 
 <footer class="navbar justify-content-end">
     <ul class="nav nav-pills">
         <li class="nav-item">
-            <a class="nav-link active" href="#">Active</a>
+            <a class="nav-link active" href="/interests">Interests</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
@@ -96,5 +98,18 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
 <script src="/js/neighbor.js"></script>
+<input type="hidden" th:value="${interestList}" id="interestList"/>
+<!--<script>-->
+<!--    console.log($("#interestList").val());-->
+<!--    function displayInterests(){-->
+
+<!--        let interest = "${interestList}"-->
+<!--        for(let i = 0; i <= interest.length - 1; i++) {-->
+<!--            console.log(interest[i]);-->
+<!--            $(".view-interests").append("<div>" + interest[i].name + "</div>")-->
+<!--    }-->
+<!--}-->
+<!--    displayInterests();-->
+<!--</script>-->
 </body>
 </html>

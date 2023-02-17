@@ -1,13 +1,10 @@
 package com.codeup.testrepo.controller;
-import com.codeup.testrepo.models.Listings;
-import com.codeup.testrepo.models.Roles;
-import com.codeup.testrepo.repositories.RolesRepository;
-import com.codeup.testrepo.repositories.UserRepository;
+import com.codeup.testrepo.models.*;
+import com.codeup.testrepo.repositories.*;
 import com.codeup.testrepo.services.EmailService;
-import com.codeup.testrepo.models.User;
-import com.codeup.testrepo.repositories.ListingRepository;
 import com.codeup.testrepo.services.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
+import jdk.jfr.Category;
 import org.hibernate.mapping.List;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.data.repository.query.Param;
@@ -21,8 +18,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Objects;
+
 
 @Controller
 public class ListingController {
@@ -30,16 +30,21 @@ public class ListingController {
     private final UserRepository userDao;
     private final RolesRepository rolesDao;
     private final ListingRepository listDao;
+    private final InterestRepository interestDao;
+    private final CategoryRepository categoryDao;
     private final EmailService emailService;
 
     private ProductService.ListingService listingService;
     private ProductService service;
 
 
-    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
+    public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao,
+                             InterestRepository interestDao, CategoryRepository categoryDao) {
         this.userDao = userDao;
         this.listDao = listDao;
         this.rolesDao = rolesDao;
+        this.interestDao = interestDao;
+        this.categoryDao = categoryDao;
         this.emailService = emailService;
     }
 
@@ -74,6 +79,19 @@ public String welcomePage() {
         User user = userDao.getReferenceById(id);
         Roles roles1 = rolesDao.getReferenceById(user.getRole().getId());
         String roles = roles1.getUser_role();
+        StringBuilder interestsList = new StringBuilder();
+        interestsList.append("<div>");
+        user.getCategories().forEach(category -> {
+           category.getInterests().forEach(interest -> {
+               interestsList.append(interest.getName()).append("</div> <div>");
+            });
+        });
+        interestsList.append("</div>");
+        model.addAttribute("interestList", interestsList.toString());
+
+
+
+
         if(Objects.equals(roles, "buyer")){
             return "/listings/buyer-profile";
         } else if (Objects.equals(roles, "seller")) {
@@ -111,6 +129,39 @@ public String welcomePage() {
 //        model.addAttribute("userEmail", user.getEmail());
         model.addAttribute("user", user);
         return "listings/home-logged-in";
+    }
+
+    @GetMapping("/interests")
+    public String getInterests(Model model){
+        Interests interest = new Interests();
+        model.addAttribute("interests", interest);
+        return "listings/interest-form";
+    }
+    @PostMapping(path = "/listings/interests")
+    public String handle(@RequestParam("interests") String[] x) {
+////
+        System.out.println(x.toString());
+        User currentUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        for(int i =0; i <= x.length - 1; i++ ){
+            String interestName = x[i].split(",")[0];
+            String categoryName =  x[i].split(",")[1];
+
+
+            if(categoryDao.findByUserIdAndName(currentUser.getId(), categoryName) == null){
+                Categories category = new Categories();
+                category.setName(categoryName);
+                category.setUser(currentUser);
+                categoryDao.save(category);
+            }
+
+            Interests interest = new Interests();
+            interest.setName(interestName);
+            interest.setCategories(categoryDao.findByUserIdAndName(currentUser.getId(), categoryName));
+            interestDao.save(interest);
+            System.out.println(interest);
+        }
+        return "redirect:/listings/neighbor-profile";
+
     }
 
 
