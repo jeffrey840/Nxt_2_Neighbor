@@ -19,11 +19,11 @@
                 <img src="/static/img/next2neighbor_circle_black.svg" alt="logo" width="30" height="24">
             </a>            <!--         <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <form th:action="@{/home-logged-in}" method="post">
-                        <button>Listings</button>
-                    </form>
-                </li>
+<!--                <li class="nav-item">-->
+<!--                    <form th:action="@{/home-logged-in}" method="post">-->
+<!--                        <button>Listings</button>-->
+<!--                    </form>-->
+<!--                </li>-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
@@ -32,8 +32,8 @@
                     <ul class="dropdown-menu">
                         <!--                        goes back to user profile regardless what page-->
 
-                        <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>
-
+<!--                        <li><a class="dropdown-item" th:href="@{/profile/{userId}(userId = ${user.id})}">Profile</a></li>-->
+                        <li><a class="dropdown-item" th:href="@{/listings}">Profile</a></li>
                         <li class="dropdown-item">
                             <a class="nav-link" href="/contact-us">Contact Us</a>
                         </li>
