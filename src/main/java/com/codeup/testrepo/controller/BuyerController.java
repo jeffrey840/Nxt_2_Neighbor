@@ -61,7 +61,7 @@ public class BuyerController {
         System.out.println(prop);
         System.out.println(listings);
         System.out.println(currentUser);
-        return "/listings/buyer-profile";
+        return "redirect:/listings";
     }
     @GetMapping("/save-listings")
     public String viewAllSavedListings(Model model){
