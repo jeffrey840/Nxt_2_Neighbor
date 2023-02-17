@@ -47,9 +47,11 @@ public class BuyerController {
     public String listingSave(@RequestParam(name = "address") String address,
                                  @RequestParam(name = "propType") String prop,
                                  @RequestParam (name = "price") double price,
-                                    @RequestParam(name = "title") String title){
+                                    @RequestParam(name = "title") String title, Model model){
+
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Listings listings = new Listings();
+        model.addAttribute("listings", listings);
         listings.setAddress(address);
         listings.setDescription(prop);
         listings.setPrice(price);
