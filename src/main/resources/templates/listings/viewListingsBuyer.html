@@ -129,6 +129,7 @@
                         <p   class="card-text">${data.props[i].price}</p>
                         <a href="#" class="btn btn-primary">VIEW</a>
                         <form method="post" action="/save-listings">
+                         <input type="hidden" name="title" id="title" value="${data.props[i].imgSrc}">
                         <input type="hidden" name="title" id="title" value="${data.props[i].country}">
                         <input type="hidden" name="address" id="address" value="${data.props[i].address}">
                         <input type="hidden" name="propType" id="propType" value="${data.props[i].propertyType}">

@@ -6,40 +6,12 @@
   <title>Seller Create</title>
 </head>
 <body>
-<!--<div id="listing-cards-container">-->
-<!--</div>-->
-<!--<button id="create-listing-button">Create Listing</button>-->
-<!--<div id="listing-form-modal" class="modal">-->
-<!--  <div class="modal-content">-->
-<!--    <span id="close" class="close">&times;</span>-->
-<!--    <form th:action="@{/listings/seller-profile/create}" method="post" th:object="${list}">-->
-<!--      <label for="inputTitle">-->
-<!--        <input placeholder="title" type="text" id="inputTitle" th:field="${list.title}" />-->
-<!--      </label>-->
-<!--      <br>-->
-<!--      <label for="inputAddress">-->
-<!--        <textarea placeholder="address" id="inputAddress" th:field="${list.address}"></textarea>-->
-<!--      </label>-->
-<!--      <br>-->
-<!--      <label for="inputPrice">-->
-<!--        <textarea placeholder="price" id="inputPrice" th:field="${list.price}"></textarea>-->
-<!--      </label>-->
-<!--      <br>-->
-<!--      <label for="inputProperty">-->
-<!--        <textarea placeholder="property" id="inputProperty" th:field="${list.description}"></textarea>-->
-<!--      </label>-->
-<!--      <br>-->
-<!--      <input type="file" id="inputImage" />-->
-<!--      <br>-->
-<!--      <button type="button" id="create" onclick="createListing()">Create</button>-->
-<!--      <button type="button" id="update"onclick="updateCard()">Update</button>-->
-<!--      <button type="button" id="delete" onclick="deleteListing()">Delete</button>-->
-<!--      <button id="save"  type="button">Save</button>-->
-<!--    </form>-->
-<!--  </div>-->
+
 <h1 class="p-2">CREATE LISTING</h1>
 <form  th:action="@{/listings/seller-create}" th:method="post" th:object="${listings}">
   <label>Title:</label>
+  <br>
+  <input th:src="*{img}" type="file">
   <br>
   <input placeholder="title" class="m-2" type="text" th:field="*{title}"  /><br>
   <input placeholder="address" class="m-2" th:field="*{address}"><br>
