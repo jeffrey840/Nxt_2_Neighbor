@@ -30,16 +30,19 @@ public class NeighborController {
         this.rolesDao = rolesDao;
         this.emailService = emailService;
     }
+    // Route to delete a listing by ID
     @GetMapping(path = "/listings/{id}/delete")
     public String neighborDelete(@PathVariable long id) {
         listDao.deleteById(id);
         return "redirect:/listings/neighbor-profile";
     }
+    // Route to display the form for creating a new listing
     @GetMapping(path = "listings/neighbor-profile")
     public String neighborCreate(Model model){
         model.addAttribute("list", new Listings());
         return "listings/neighbor-profile";
     }
+    // Route to update an existing listing by ID
     @PostMapping(path = "/listings/{id}/neighbor-profile")
     public String neighborEdit(@PathVariable long id, @RequestParam String title, @RequestParam String body){
         Listings listing = (Listings) listDao.getReferenceById(id);

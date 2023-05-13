@@ -8,22 +8,23 @@ import java.util.List;
 @Table(name="categories")
 public class Categories {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
+    @Id // Specifies that the following field is the primary key for this entity.
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Specifies the strategy for generating primary key values.
+    @Column(nullable = false) // Specifies that the following field maps to a column in the database table, and it cannot be null.
     private long id;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 50) // Specifies that the following field maps to a column in the database table, and it cannot be null. It also sets the maximum length for the column.
     private String name;
 
-    @ManyToMany(mappedBy = "categories")
+    @ManyToMany(mappedBy = "categories") // Specifies a many-to-many relationship with the "Listings" entity,
+    // and the "categories" field in the "Listings" entity is the owning side.
     private List<Listings> listing;
 
-    @ManyToOne
-    @JoinColumn (name = "user_id")
+    @ManyToOne // Specifies a many-to-one relationship with the "User" entity.
+    @JoinColumn (name = "user_id") // Specifies the foreign key column name that references the primary key of the "User" entity.
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categories")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categories") // Specifies a one-to-many relationship with the "Interests" entity, and the "categories" field in the "Interests" entity is the owning side.
     private List<Interests> interests;
 
     public long getId() {
