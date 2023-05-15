@@ -1,3 +1,4 @@
+// Import necessary classes and packages
 package com.codeup.testrepo.controller;
 
 import com.codeup.testrepo.models.Listings;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
-
+// Define BuyerController class
 @Controller
 public class BuyerController {
+    // Declare and initialize necessary repositories and services
     private final UserRepository userDao;
     private final RolesRepository rolesDao;
     private final ListingRepository listDao;
@@ -28,7 +30,7 @@ public class BuyerController {
     private ProductService.ListingService listingService;
     private ProductService service;
 
-
+    // BuyerController constructor
     public BuyerController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao) {
         this.userDao = userDao;
         this.listDao = listDao;
@@ -36,6 +38,7 @@ public class BuyerController {
         this.emailService = emailService;
     }
 
+    // Display all listings for the buyer
     @GetMapping(path = "/buyer-redirect")
     public String buyerViewListings(Model model) {
         List<Listings> allDataListings = listDao.findAll();
@@ -43,7 +46,7 @@ public class BuyerController {
         return "listings/viewListingsBuyer";
     }
 
-    //SAVE
+    // Save a new listing
     @PostMapping("/save-listings")
     public String listingSave(@RequestParam(name = "address") String address,
                               @RequestParam(name = "propType") String prop,
@@ -65,6 +68,8 @@ public class BuyerController {
         System.out.println(currentUser);
         return "redirect:/listings";
     }
+
+    // View all saved listings
     @GetMapping("/save-listings")
     public String viewAllSavedListings(Model model){
         List<Listings> listings = listDao.findAll();
@@ -72,7 +77,7 @@ public class BuyerController {
         return "listings/buyer-profile";
     }
 
-    //DELETE
+    // Delete a listing
     @PostMapping("/listing/buyer-profile/delete")
     public String listingsDelete(@RequestParam(name = "delete") long id) {
         listDao.deleteById(id);

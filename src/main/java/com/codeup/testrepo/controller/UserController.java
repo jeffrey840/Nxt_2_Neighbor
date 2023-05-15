@@ -17,9 +17,12 @@ import javax.management.relation.Role;
 
 @Controller
 public class UserController {
+
+    // UserRepository and PasswordEncoder are injected via the constructor
     private final UserRepository userDao;
     private final PasswordEncoder passwordEncoder;
 
+    // UserController constructor
     public UserController(UserRepository userDao, PasswordEncoder passwordEncoder) {
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
@@ -33,6 +36,7 @@ public class UserController {
 //        return "redirect:/login";
 //    }
 
+    // This endpoint returns the sign-up form to the client
     @GetMapping("/sign-up")
     public String showSignupForm(Model model){
         model.addAttribute("user", new User());
@@ -40,6 +44,7 @@ public class UserController {
         return "users/sign-up";}
 
 
+    // This endpoint handles the POST request from the sign-up form
     @RequestMapping(value = "/sign-up", method = RequestMethod.POST)
     public String handle(@ModelAttribute User user, BindingResult result, RedirectAttributes redirectAttrs,@ModelAttribute Roles roles) {
         if (result.hasErrors()) {
