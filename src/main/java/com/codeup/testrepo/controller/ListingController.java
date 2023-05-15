@@ -38,6 +38,7 @@ public class ListingController {
     private ProductService service;
 
 
+    // Constructor for dependency injection
     public ListingController(UserRepository userDao, ListingRepository listDao, EmailService emailService, RolesRepository rolesDao, InterestRepository interestDao, CategoryRepository categoryDao) {
         this.userDao = userDao;
         this.listDao = listDao;
@@ -46,11 +47,13 @@ public class ListingController {
         this.interestDao = interestDao;
         this.categoryDao = categoryDao;
     }
+    // Welcome page for non-logged-in users
     @GetMapping("/")
     public String welcomePage() {
         return "listings/home-not-logged";
     }
 
+    // User home page based on role
     @GetMapping ("/listings")
     public String userHome(Model model) {
         model.addAttribute("Users", userDao.findAll());
@@ -70,6 +73,7 @@ public class ListingController {
         });
         interestsList.append("</div>");
         model.addAttribute("interestList", interestsList.toString());
+        // Determine the user's role and display the appropriate view
         if(Objects.equals(roles, "buyer")){
             model.addAttribute("user", user);
             List<Listings> listings = listDao.findAllByUser(user);
@@ -86,7 +90,8 @@ public class ListingController {
         }
         return "listings/home-not-logged";
     }
-   //this controls the listing page
+
+    // Listings page for logged-in users
     @GetMapping("/home-logged-in")
     public String viewListings(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -96,6 +101,7 @@ public class ListingController {
         model.addAttribute("users", userDao.findAll());
         return "listings/home-logged-in";
     }
+    // Listings page for logged-in users after form submission
     @PostMapping("/home-logged-in")
     public String postIndex(Model model){
         model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -104,7 +110,7 @@ public class ListingController {
         model.addAttribute("users", userDao.findAll());
         return "listings/home-logged-in";
     }
-    //MAPPING FOR VIEWING LISTINGS BY ID
+    // View individual listing by ID
     @GetMapping(path = "/listings/{id}/home-logged-in")
     public String viewListings(@PathVariable long id, Model model){
         model.addAttribute("title", "Individual Post");
